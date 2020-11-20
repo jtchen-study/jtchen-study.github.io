@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -427,6 +427,11 @@
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    2 分
+                </div>
+                
 
                 
             </div>
@@ -466,7 +471,7 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
         return dp[n];
     &#125;
 &#125;</code></pre>
-<h2 id="2、一次可以跳一个台阶、两个台阶或者三个台阶"><a href="#2、一次可以跳一个台阶、两个台阶或者三个台阶" class="headerlink" title="2、一次可以跳一个台阶、两个台阶或者三个台阶"></a>2、一次可以跳一个台阶、两个台阶或者三个台阶</h2><pre><code class="txt">一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶，还可以跳上3级台阶。
+<h2 id="2、一次可以跳一个台阶、两个台阶或者三个台阶"><a href="#2、一次可以跳一个台阶、两个台阶或者三个台阶" class="headerlink" title="2、一次可以跳一个台阶、两个台阶或者三个台阶"></a>2、一次可以跳一个台阶、两个台阶或者三个台阶</h2><pre class=" language-txt"><code class="language-txt">一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶，还可以跳上3级台阶。
 求该青蛙跳上一个 n级的台阶总共有多少种跳法。</code></pre>
 <pre><code>思路：
 最后一步可能是从第n-1阶往上走1阶、从n-2阶往上走2阶，或从第n-3阶往上走3阶。
@@ -953,14 +958,17 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
             <br>
             <span id="sitetime"></span>
-
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">529</span>&nbsp;字
             
             
             
             
             
             
-            <!-- <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_container_site_pv">
                 |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
                     class="white-color"></span>&nbsp;次
             </span>
@@ -969,7 +977,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <span id="busuanzi_container_site_uv">
                 |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
                     class="white-color"></span>&nbsp;人
-            </span> -->
+            </span>
             
             <br>
             
@@ -977,7 +985,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/jt-chen-study/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/jtchen-study/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
