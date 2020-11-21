@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="SpringBoot整合log4j输出日志, Java,Spring,Mybatis,SpringBoot,HTML,CSS,数据结构与算法">
+    <meta name="keywords" content="Spring中的事务传播机制, Java,Spring,Mybatis,SpringBoot,HTML,CSS,数据结构与算法">
     <meta name="description" content="Whatever you do, do it as professional">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>SpringBoot整合log4j输出日志 | 陈少</title>
+    <title>Spring中的事务传播机制 | 陈少</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Yafine/cdn@2.6/source/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -203,12 +203,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">SpringBoot整合log4j输出日志</h1>
+                    <h1 class="description center-align post-title">Spring中的事务传播机制</h1>
                 </div>
             </div>
         </div>
@@ -325,8 +325,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/SpringBoot/">
-                                <span class="chip bg-color">SpringBoot</span>
+                            <a href="/tags/Spring/">
+                                <span class="chip bg-color">Spring</span>
                             </a>
                         
                     </div>
@@ -337,8 +337,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/SpringBoot/" class="post-category">
-                                SpringBoot
+                            <a href="/categories/Spring/" class="post-category">
+                                Spring
                             </a>
                         
                     </div>
@@ -359,14 +359,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    315
+                    2.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    11 分
                 </div>
                 
 
@@ -381,50 +381,665 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1、首先剔除springboot自带的logging日志，因为其内容包含的太多。"><a href="#1、首先剔除springboot自带的logging日志，因为其内容包含的太多。" class="headerlink" title="1、首先剔除springboot自带的logging日志，因为其内容包含的太多。"></a>1、首先剔除springboot自带的logging日志，因为其内容包含的太多。</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/50f1b4d49f0c450b887bbb2df050c88a~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusions</span><span class="token punctuation">></span></span> // 剔除springboot自带的logging
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusion</span><span class="token punctuation">></span></span>
-           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-logging<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusion</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusions</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<p>剔除后再启动项目，可以发现控制台的输出，缺少日志，并且无端口号之类的信息.<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a7c5054094be45218054a5784ff385fe~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<h2 id="2、加入日志相关依赖"><a href="#2、加入日志相关依赖" class="headerlink" title="2、加入日志相关依赖"></a>2、加入日志相关依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token comment" spellcheck="true">&lt;!-- 日志相关 抽象层及实现层 --></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>slf4j-api<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.7.21<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>slf4j-log4j12<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.7.21<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<p>效果图:<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5ea618ec6f0444e6a60d0ba9ac2914dc~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<h2 id="3、编写相关配置文件log4j-properties"><a href="#3、编写相关配置文件log4j-properties" class="headerlink" title="3、编写相关配置文件log4j.properties"></a>3、编写相关配置文件log4j.properties</h2><pre class=" language-xml"><code class="language-xml">log4j.rootLogger=DEBUG,stdout,file
-log4j.additivity.org.apache=true
+                <h2 id="1、一次可以跳一个台阶或者两个台阶"><a href="#1、一次可以跳一个台阶或者两个台阶" class="headerlink" title="1、一次可以跳一个台阶或者两个台阶"></a>1、一次可以跳一个台阶或者两个台阶</h2><h2 id="1、以下是事物的传播机制："><a href="#1、以下是事物的传播机制：" class="headerlink" title="1、以下是事物的传播机制："></a>1、以下是事物的传播机制：</h2><pre><code>@Transactional(propagation=Propagation.REQUIRED)
+如果有事务, 那么加入事务, 没有的话新建一个(默认情况下)
+换句话说，使用当前的事务，如果当前没有事务，则自己新建一个事务，
+子方法是必须运行在一个事务中的，如果当前存在事务，则加入这个事务，成为一个整体
+@Transactional(propagation=Propagation.SUPPORTS)
+如果当前有事务，则使用事务，如果当前没有事务，则不使用事务
+@Transactional(propagation=Propagation.MANDATORY)
+必须在一个已有的事务中执行,否则抛出异常
+@Transactional(propagation=Propagation.REQUIRES_NEW)
+不管是否存在事务,都创建一个新的事务,原来的挂起,新的执行完毕,继续执行老的事务
+@Transactional(propagation=Propagation.NOT_SUPPORTED)
+容器不为这个方法开启事务
+@Transactional(propagation=Propagation.NEVER)
+必须在一个没有的事务中执行,否则抛出异常(与Propagation.MANDATORY相反)</code></pre>
+<h2 id="2、代码验证说明："><a href="#2、代码验证说明：" class="headerlink" title="2、代码验证说明："></a>2、代码验证说明：</h2><h3 id="2-1-无任何事务"><a href="#2-1-无任何事务" class="headerlink" title="2.1 无任何事务"></a>2.1 无任何事务</h3><pre><code>// service层
+public interface StuService &#123;
+    public void saveParent();
+    public void saveChildren();
+&#125;
+// service实现类
+@Service
+public class StuServiceImpl implements StuService &#123;
+    @Autowired
+    private StuMapper stuMapper;
 
-log4j.appender.stdout=org.apache.log4j.ConsoleAppender
-log4j.appender.stdout.threshold=INFO
-log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
-log4j.appender.stdout.layout.ConversionPattern=%-5p %c<span class="token entity" title="&#123;">&amp;#123;</span>1<span class="token entity" title="&#125;">&amp;#125;</span>:%L - %m%n
+    @Override
+    public void saveParent()&#123;
+        Stu stu = new Stu();
+        stu.setAge(19);
+        stu.setName(&quot;parent&quot;);
+        stuMapper.insert(stu);
+    &#125;
+    @Override
+    public void saveChildren()&#123;
+        saveChild1();
+        int a = 1/0;
+        saveChild2();
+    &#125;
 
-log4j.appender.file=org.apache.log4j.DailyRollingFileAppender
-log4j.appender.file.layout=org.apache.log4j.PatternLayout
-log4j.appender.file.DatePattern='.'yyyy-MM-dd-HH-mm
-log4j.appender.file.layout.ConversionPattern=%d<span class="token entity" title="&#123;">&amp;#123;</span>yyyy-MM-dd HH:mm:ss<span class="token entity" title="&#125;">&amp;#125;</span> %-5p %c<span class="token entity" title="&#123;">&amp;#123;</span>1<span class="token entity" title="&#125;">&amp;#125;</span>::%L - %m%n
-log4j.appender.file.Threshold=INFO
-log4j.appender.file.append=true
-log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
-</code></pre>
-<p>效果图:</p>
-<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/56c1835ece22498ab520fec2904671dd~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<h2 id="4、项目中的使用"><a href="#4、项目中的使用" class="headerlink" title="4、项目中的使用"></a>4、项目中的使用</h2><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/152078da697143ce85f031930ee32a5f~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<p>注意Logger是 org.slf4j包下的。</p>
+    public void saveChild1()&#123;
+        Stu stu1 = new Stu();
+        stu1.setName(&quot;child-1&quot;);
+        stu1.setAge(11);
+        stuMapper.insert(stu1);
+    &#125;
+
+    public void saveChild2()&#123;
+        Stu stu2 = new Stu();
+        stu2.setName(&quot;child-2&quot;);
+        stu2.setAge(22);
+        stuMapper.insert(stu2);
+    &#125;
+
+&#125;</code></pre>
+<pre><code>//测试service接口及实现类
+
+public interface TransTest &#123;
+    public void testPropagationTrans();
+&#125;
+
+
+@Service
+public class TransTestImpl implements TransTest &#123;
+    @Autowired
+    private StuService stuService;
+
+    @Override
+    public void testPropagationTrans() &#123;
+        stuService.saveParent();
+        stuService.saveChildren();
+    &#125;
+&#125;</code></pre>
+<pre><code>// 单元测试
+
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class)  //配置启动类
+public class Test &#123;
+    @Autowired
+    private TransTest transTest;
+    @org.junit.Test
+    public void myTest()&#123;
+        transTest.testPropagationTrans();
+    &#125;
+&#125;</code></pre>
+<p>结果：</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cfc2a4bf478b4cc9994717b5f651a0ca~tplv-k3u1fbpfcp-watermark.image"></p>
+<h3 id="2-2-测试Propagation-REQUIRED"><a href="#2-2-测试Propagation-REQUIRED" class="headerlink" title="2.2 测试Propagation.REQUIRED"></a>2.2 测试Propagation.REQUIRED</h3><h4 id="2-2-1-父方法有Propagation-REQUIRED"><a href="#2-2-1-父方法有Propagation-REQUIRED" class="headerlink" title="2.2.1 父方法有Propagation.REQUIRED"></a>2.2.1 父方法有Propagation.REQUIRED</h4><pre><code>@Service
+public class StuServiceImpl implements StuService &#123;
+    @Autowired
+    private StuMapper stuMapper;
+
+    @Override
+    public void saveParent()&#123;
+        Stu stu = new Stu();
+        stu.setAge(19);
+        stu.setName(&quot;parent&quot;);
+        stuMapper.insert(stu);
+    &#125;
+    @Override
+    public void saveChildren()&#123;
+        saveChild1();
+        int a = 1/0;
+        saveChild2();
+    &#125;
+
+    public void saveChild1()&#123;
+        Stu stu1 = new Stu();
+        stu1.setName(&quot;child-1&quot;);
+        stu1.setAge(11);
+        stuMapper.insert(stu1);
+    &#125;
+
+    public void saveChild2()&#123;
+        Stu stu2 = new Stu();
+        stu2.setName(&quot;child-2&quot;);
+        stu2.setAge(22);
+        stuMapper.insert(stu2);
+    &#125;
+
+&#125;</code></pre>
+<pre><code>@Service
+public class TransTestImpl implements TransTest &#123;
+    @Autowired
+    private StuService stuService;
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void testPropagationTrans() &#123;
+        stuService.saveParent();
+        stuService.saveChildren();
+    &#125;
+&#125;</code></pre>
+<p>结果：<br>数据库未新增任何数据。</p>
+<h4 id="2-2-2-子方法有Propagation-REQUIRED"><a href="#2-2-2-子方法有Propagation-REQUIRED" class="headerlink" title="2.2.2 子方法有Propagation.REQUIRED"></a>2.2.2 子方法有Propagation.REQUIRED</h4><pre><code>@Service
+public class StuServiceImpl implements StuService &#123;
+    @Autowired
+    private StuMapper stuMapper;
+
+    @Override
+    public void saveParent()&#123;
+        Stu stu = new Stu();
+        stu.setAge(19);
+        stu.setName(&quot;parent&quot;);
+        stuMapper.insert(stu);
+    &#125;
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void saveChildren()&#123;
+        saveChild1();
+        int a = 1/0;
+        saveChild2();
+    &#125;
+
+    public void saveChild1()&#123;
+        Stu stu1 = new Stu();
+        stu1.setName(&quot;child-1&quot;);
+        stu1.setAge(11);
+        stuMapper.insert(stu1);
+    &#125;
+
+    public void saveChild2()&#123;
+        Stu stu2 = new Stu();
+        stu2.setName(&quot;child-2&quot;);
+        stu2.setAge(22);
+        stuMapper.insert(stu2);
+    &#125;
+
+&#125;</code></pre>
+<pre><code>@Service
+public class TransTestImpl implements TransTest &#123;
+    @Autowired
+    private StuService stuService;
+
+    @Override
+    public void testPropagationTrans() &#123;
+        stuService.saveParent();
+        stuService.saveChildren();
+    &#125;
+&#125;</code></pre>
+<p>结果：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/46285d8259ba45c792eeaab1f567875a~tplv-k3u1fbpfcp-watermark.image"></p>
+<h3 id="2-3-Propagation-SUPPORTS"><a href="#2-3-Propagation-SUPPORTS" class="headerlink" title="2.3 Propagation.SUPPORTS"></a>2.3 Propagation.SUPPORTS</h3><h4 id="2-3-1子方法SUPPORTS-父方法无事务"><a href="#2-3-1子方法SUPPORTS-父方法无事务" class="headerlink" title="2.3.1子方法SUPPORTS,父方法无事务"></a>2.3.1子方法SUPPORTS,父方法无事务</h4><pre><code>@Service
+public class StuServiceImpl implements StuService &#123;
+    @Autowired
+    private StuMapper stuMapper;
+
+    @Override
+    public void saveParent()&#123;
+        Stu stu = new Stu();
+        stu.setAge(19);
+        stu.setName(&quot;parent&quot;);
+        stuMapper.insert(stu);
+    &#125;
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void saveChildren()&#123;
+        saveChild1();
+        int a = 1/0;
+        saveChild2();
+    &#125;
+
+    public void saveChild1()&#123;
+        Stu stu1 = new Stu();
+        stu1.setName(&quot;child-1&quot;);
+        stu1.setAge(11);
+        stuMapper.insert(stu1);
+    &#125;
+
+    public void saveChild2()&#123;
+        Stu stu2 = new Stu();
+        stu2.setName(&quot;child-2&quot;);
+        stu2.setAge(22);
+        stuMapper.insert(stu2);
+    &#125;
+
+&#125;</code></pre>
+<pre><code>@Service
+public class TransTestImpl implements TransTest &#123;
+    @Autowired
+    private StuService stuService;
+
+    @Override
+    public void testPropagationTrans() &#123;
+        stuService.saveParent();
+        stuService.saveChildren();
+    &#125;
+&#125;</code></pre>
+<p>结果：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef1462ba34a844d39e29dd518262f6d5~tplv-k3u1fbpfcp-watermark.image"></p>
+<h4 id="2-3-2-子方法SUPPORTS-父方法REQUIRD"><a href="#2-3-2-子方法SUPPORTS-父方法REQUIRD" class="headerlink" title="2.3.2 子方法SUPPORTS,父方法REQUIRD"></a>2.3.2 子方法SUPPORTS,父方法REQUIRD</h4><pre><code>@Service
+public class StuServiceImpl implements StuService &#123;
+    @Autowired
+    private StuMapper stuMapper;
+
+    @Override
+    public void saveParent()&#123;
+        Stu stu = new Stu();
+        stu.setAge(19);
+        stu.setName(&quot;parent&quot;);
+        stuMapper.insert(stu);
+    &#125;
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void saveChildren()&#123;
+        saveChild1();
+        int a = 1/0;
+        saveChild2();
+    &#125;
+
+    public void saveChild1()&#123;
+        Stu stu1 = new Stu();
+        stu1.setName(&quot;child-1&quot;);
+        stu1.setAge(11);
+        stuMapper.insert(stu1);
+    &#125;
+
+    public void saveChild2()&#123;
+        Stu stu2 = new Stu();
+        stu2.setName(&quot;child-2&quot;);
+        stu2.setAge(22);
+        stuMapper.insert(stu2);
+    &#125;
+
+&#125;</code></pre>
+<pre><code>@Service
+public class TransTestImpl implements TransTest &#123;
+    @Autowired
+    private StuService stuService;
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRD)
+    public void testPropagationTrans() &#123;
+        stuService.saveParent();
+        stuService.saveChildren();
+    &#125;
+&#125;</code></pre>
+<p>结果：<br>数据库无任何新增。</p>
+<h3 id="2-4-Propagation-MANDATORY"><a href="#2-4-Propagation-MANDATORY" class="headerlink" title="2.4 Propagation.MANDATORY"></a>2.4 Propagation.MANDATORY</h3><h4 id="2-4-1-子方法有MANDATORY，父方法无事务"><a href="#2-4-1-子方法有MANDATORY，父方法无事务" class="headerlink" title="2.4.1 子方法有MANDATORY，父方法无事务"></a>2.4.1 子方法有MANDATORY，父方法无事务</h4><pre><code>@Service
+public class StuServiceImpl implements StuService &#123;
+    @Autowired
+    private StuMapper stuMapper;
+
+    @Override
+    public void saveParent()&#123;
+        Stu stu = new Stu();
+        stu.setAge(19);
+        stu.setName(&quot;parent&quot;);
+        stuMapper.insert(stu);
+    &#125;
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void saveChildren()&#123;
+        saveChild1();
+        int a = 1/0;
+        saveChild2();
+    &#125;
+
+    public void saveChild1()&#123;
+        Stu stu1 = new Stu();
+        stu1.setName(&quot;child-1&quot;);
+        stu1.setAge(11);
+        stuMapper.insert(stu1);
+    &#125;
+
+    public void saveChild2()&#123;
+        Stu stu2 = new Stu();
+        stu2.setName(&quot;child-2&quot;);
+        stu2.setAge(22);
+        stuMapper.insert(stu2);
+    &#125;
+
+&#125;</code></pre>
+<pre><code>@Service
+public class TransTestImpl implements TransTest &#123;
+    @Autowired
+    private StuService stuService;
+
+    @Override
+    public void testPropagationTrans() &#123;
+        stuService.saveParent();
+        stuService.saveChildren();
+    &#125;
+&#125;</code></pre>
+<p>结果抛出异常：<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/373e609151514365825e49daca15c250~tplv-k3u1fbpfcp-watermark.image"></p>
+<h4 id="2-4-2-子方法有MANDATORY，父方法有有REQUIRD"><a href="#2-4-2-子方法有MANDATORY，父方法有有REQUIRD" class="headerlink" title="2.4.2 子方法有MANDATORY，父方法有有REQUIRD"></a>2.4.2 子方法有MANDATORY，父方法有有REQUIRD</h4><pre><code>@Service
+public class StuServiceImpl implements StuService &#123;
+    @Autowired
+    private StuMapper stuMapper;
+
+    @Override
+    public void saveParent()&#123;
+        Stu stu = new Stu();
+        stu.setAge(19);
+        stu.setName(&quot;parent&quot;);
+        stuMapper.insert(stu);
+    &#125;
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void saveChildren()&#123;
+        saveChild1();
+        int a = 1/0;
+        saveChild2();
+    &#125;
+
+    public void saveChild1()&#123;
+        Stu stu1 = new Stu();
+        stu1.setName(&quot;child-1&quot;);
+        stu1.setAge(11);
+        stuMapper.insert(stu1);
+    &#125;
+
+    public void saveChild2()&#123;
+        Stu stu2 = new Stu();
+        stu2.setName(&quot;child-2&quot;);
+        stu2.setAge(22);
+        stuMapper.insert(stu2);
+    &#125;
+
+&#125;</code></pre>
+<pre><code>@Service
+public class TransTestImpl implements TransTest &#123;
+    @Autowired
+    private StuService stuService;
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void testPropagationTrans() &#123;
+        stuService.saveParent();
+        stuService.saveChildren();
+    &#125;
+&#125;</code></pre>
+<p>结果：数据库无任何变化。</p>
+<h3 id="2-5-Propagation-REQUIRES-NEW"><a href="#2-5-Propagation-REQUIRES-NEW" class="headerlink" title="2.5 Propagation.REQUIRES_NEW"></a>2.5 Propagation.REQUIRES_NEW</h3><pre><code>@Service
+public class StuServiceImpl implements StuService &#123;
+    @Autowired
+    private StuMapper stuMapper;
+
+    @Override
+    public void saveParent()&#123;
+        Stu stu = new Stu();
+        stu.setAge(19);
+        stu.setName(&quot;parent&quot;);
+        stuMapper.insert(stu);
+    &#125;
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void saveChildren()&#123;
+        saveChild1();
+        int a = 1/0;
+        saveChild2();
+    &#125;
+
+    public void saveChild1()&#123;
+        Stu stu1 = new Stu();
+        stu1.setName(&quot;child-1&quot;);
+        stu1.setAge(11);
+        stuMapper.insert(stu1);
+    &#125;
+
+    public void saveChild2()&#123;
+        Stu stu2 = new Stu();
+        stu2.setName(&quot;child-2&quot;);
+        stu2.setAge(22);
+        stuMapper.insert(stu2);
+    &#125;
+
+&#125;</code></pre>
+<pre><code>@Service
+public class TransTestImpl implements TransTest &#123;
+    @Autowired
+    private StuService stuService;
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void testPropagationTrans() &#123;
+        stuService.saveParent();
+        stuService.saveChildren();
+    &#125;
+&#125;</code></pre>
+<p>结果：因为其新启动了一个事务，因此，子方法失败，父方法是另一个事务，接收到子方法的失败后，自身也失败，数据库无任何新增数据。</p>
+<h3 id="2-6-Propagation-NOT-SUPPORTED"><a href="#2-6-Propagation-NOT-SUPPORTED" class="headerlink" title="2.6 Propagation.NOT_SUPPORTED"></a>2.6 Propagation.NOT_SUPPORTED</h3><h4 id="2-6-1-子Propagation-NOT-SUPPORTED，父无"><a href="#2-6-1-子Propagation-NOT-SUPPORTED，父无" class="headerlink" title="2.6.1 子Propagation.NOT_SUPPORTED，父无"></a>2.6.1 子Propagation.NOT_SUPPORTED，父无</h4><pre><code>@Service
+public class StuServiceImpl implements StuService &#123;
+    @Autowired
+    private StuMapper stuMapper;
+
+    @Override
+    public void saveParent()&#123;
+        Stu stu = new Stu();
+        stu.setAge(19);
+        stu.setName(&quot;parent&quot;);
+        stuMapper.insert(stu);
+    &#125;
+    @Override
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public void saveChildren()&#123;
+        saveChild1();
+        int a = 1/0;
+        saveChild2();
+    &#125;
+
+    public void saveChild1()&#123;
+        Stu stu1 = new Stu();
+        stu1.setName(&quot;child-1&quot;);
+        stu1.setAge(11);
+        stuMapper.insert(stu1);
+    &#125;
+
+    public void saveChild2()&#123;
+        Stu stu2 = new Stu();
+        stu2.setName(&quot;child-2&quot;);
+        stu2.setAge(22);
+        stuMapper.insert(stu2);
+    &#125;
+
+&#125;</code></pre>
+<pre><code>@Service
+public class TransTestImpl implements TransTest &#123;
+    @Autowired
+    private StuService stuService;
+
+    @Override
+    public void testPropagationTrans() &#123;
+        stuService.saveParent();
+        stuService.saveChildren();
+    &#125;
+&#125;</code></pre>
+<p>结果：<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a3274c07c46d4289b9bd8014fe10c4b5~tplv-k3u1fbpfcp-watermark.image"></p>
+<h4 id="2-6-2-子Propagation-NOT-SUPPORTED，父Propagation-REQUIRD"><a href="#2-6-2-子Propagation-NOT-SUPPORTED，父Propagation-REQUIRD" class="headerlink" title="2.6.2 子Propagation.NOT_SUPPORTED，父Propagation.REQUIRD"></a>2.6.2 子Propagation.NOT_SUPPORTED，父Propagation.REQUIRD</h4><pre><code>@Service
+public class StuServiceImpl implements StuService &#123;
+    @Autowired
+    private StuMapper stuMapper;
+
+    @Override
+    public void saveParent()&#123;
+        Stu stu = new Stu();
+        stu.setAge(19);
+        stu.setName(&quot;parent&quot;);
+        stuMapper.insert(stu);
+    &#125;
+    @Override
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public void saveChildren()&#123;
+        saveChild1();
+        int a = 1/0;
+        saveChild2();
+    &#125;
+
+    public void saveChild1()&#123;
+        Stu stu1 = new Stu();
+        stu1.setName(&quot;child-1&quot;);
+        stu1.setAge(11);
+        stuMapper.insert(stu1);
+    &#125;
+
+    public void saveChild2()&#123;
+        Stu stu2 = new Stu();
+        stu2.setName(&quot;child-2&quot;);
+        stu2.setAge(22);
+        stuMapper.insert(stu2);
+    &#125;
+
+&#125;</code></pre>
+<pre><code>@Service
+public class TransTestImpl implements TransTest &#123;
+    @Autowired
+    private StuService stuService;
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRD)
+    public void testPropagationTrans() &#123;
+        stuService.saveParent();
+        stuService.saveChildren();
+    &#125;
+&#125;</code></pre>
+<p>结果：<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ce72695e4235407b80dfeb0bc17da0aa~tplv-k3u1fbpfcp-watermark.image"></p>
+<h3 id="2-7-Propagation-NEVER"><a href="#2-7-Propagation-NEVER" class="headerlink" title="2.7 Propagation.NEVER"></a>2.7 Propagation.NEVER</h3><h4 id="2-7-1-子Propagation-NEVER，父Propagation-REQUIRD"><a href="#2-7-1-子Propagation-NEVER，父Propagation-REQUIRD" class="headerlink" title="2.7.1 子Propagation.NEVER，父Propagation.REQUIRD"></a>2.7.1 子Propagation.NEVER，父Propagation.REQUIRD</h4><pre><code>@Service
+public class StuServiceImpl implements StuService &#123;
+    @Autowired
+    private StuMapper stuMapper;
+
+    @Override
+    public void saveParent()&#123;
+        Stu stu = new Stu();
+        stu.setAge(19);
+        stu.setName(&quot;parent&quot;);
+        stuMapper.insert(stu);
+    &#125;
+    @Override
+    @Transactional(propagation = Propagation.NEVER)
+    public void saveChildren()&#123;
+        saveChild1();
+        int a = 1/0;
+        saveChild2();
+    &#125;
+
+    public void saveChild1()&#123;
+        Stu stu1 = new Stu();
+        stu1.setName(&quot;child-1&quot;);
+        stu1.setAge(11);
+        stuMapper.insert(stu1);
+    &#125;
+
+    public void saveChild2()&#123;
+        Stu stu2 = new Stu();
+        stu2.setName(&quot;child-2&quot;);
+        stu2.setAge(22);
+        stuMapper.insert(stu2);
+    &#125;
+
+&#125;</code></pre>
+<pre><code>@Service
+public class TransTestImpl implements TransTest &#123;
+    @Autowired
+    private StuService stuService;
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRD)
+    public void testPropagationTrans() &#123;
+        stuService.saveParent();
+        stuService.saveChildren();
+    &#125;
+&#125;</code></pre>
+<p>结果：<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b3e5b1970ee43019d79d47068b19bd8~tplv-k3u1fbpfcp-watermark.image"></p>
+<h4 id="2-7-2-子Propagation-NEVER，父无"><a href="#2-7-2-子Propagation-NEVER，父无" class="headerlink" title="2.7.2 子Propagation.NEVER，父无"></a>2.7.2 子Propagation.NEVER，父无</h4><pre><code>@Service
+public class StuServiceImpl implements StuService &#123;
+    @Autowired
+    private StuMapper stuMapper;
+
+    @Override
+    public void saveParent()&#123;
+        Stu stu = new Stu();
+        stu.setAge(19);
+        stu.setName(&quot;parent&quot;);
+        stuMapper.insert(stu);
+    &#125;
+    @Override
+    @Transactional(propagation = Propagation.NEVER)
+    public void saveChildren()&#123;
+        saveChild1();
+        int a = 1/0;
+        saveChild2();
+    &#125;
+
+    public void saveChild1()&#123;
+        Stu stu1 = new Stu();
+        stu1.setName(&quot;child-1&quot;);
+        stu1.setAge(11);
+        stuMapper.insert(stu1);
+    &#125;
+
+    public void saveChild2()&#123;
+        Stu stu2 = new Stu();
+        stu2.setName(&quot;child-2&quot;);
+        stu2.setAge(22);
+        stuMapper.insert(stu2);
+    &#125;
+
+&#125;</code></pre>
+<pre><code>@Service
+public class TransTestImpl implements TransTest &#123;
+    @Autowired
+    private StuService stuService;
+
+    @Override
+    public void testPropagationTrans() &#123;
+        stuService.saveParent();
+        stuService.saveChildren();
+    &#125;
+&#125;</code></pre>
+<p>结果：<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b3e5b1970ee43019d79d47068b19bd8~tplv-k3u1fbpfcp-watermark.image"></p>
+<h3 id="2-8-Propagation-NESTED"><a href="#2-8-Propagation-NESTED" class="headerlink" title="2.8 Propagation.NESTED"></a>2.8 Propagation.NESTED</h3><pre><code>@Service
+public class StuServiceImpl implements StuService &#123;
+    @Autowired
+    private StuMapper stuMapper;
+
+    @Override
+    public void saveParent()&#123;
+        Stu stu = new Stu();
+        stu.setAge(19);
+        stu.setName(&quot;parent&quot;);
+        stuMapper.insert(stu);
+    &#125;
+    @Override
+    @Transactional(propagation = Propagation.NESTED)
+    public void saveChildren()&#123;
+        saveChild1();
+        int a = 1/0;
+        saveChild2();
+    &#125;
+
+    public void saveChild1()&#123;
+        Stu stu1 = new Stu();
+        stu1.setName(&quot;child-1&quot;);
+        stu1.setAge(11);
+        stuMapper.insert(stu1);
+    &#125;
+
+    public void saveChild2()&#123;
+        Stu stu2 = new Stu();
+        stu2.setName(&quot;child-2&quot;);
+        stu2.setAge(22);
+        stuMapper.insert(stu2);
+    &#125;
+
+&#125;</code></pre>
+<pre><code>@Service
+public class TransTestImpl implements TransTest &#123;
+    @Autowired
+    private StuService stuService;
+
+    @Override
+     @Transactional(propagation = Propagation.REQUIRED)
+    public void testPropagationTrans() &#123;
+        stuService.saveParent();
+        stuService.saveChildren();
+    &#125;
+&#125;</code></pre>
+<p>结果：<br>无任何数据。<br>即，如果当前有事务，则开启子事务(嵌套事务)，嵌套事务是独立提交或者回滚；如果当前没有事务，则同REQUIRD。</p>
 
             </div>
             <hr/>
@@ -450,7 +1065,7 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jtchen-study.github.io/2020/11/20/SpringBoot%E6%95%B4%E5%90%88%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/">https://jtchen-study.github.io/2020/11/20/SpringBoot%E6%95%B4%E5%90%88%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/</a>
+                    <a href="https://jtchen-study.github.io/2020/11/20/Spring%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BC%A0%E6%92%AD%E6%9C%BA%E5%88%B6/">https://jtchen-study.github.io/2020/11/20/Spring%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BC%A0%E6%92%AD%E6%9C%BA%E5%88%B6/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -488,8 +1103,8 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/SpringBoot/">
-                                    <span class="chip bg-color">SpringBoot</span>
+                                <a href="/tags/Spring/">
+                                    <span class="chip bg-color">Spring</span>
                                 </a>
                             
                         </div>
@@ -922,9 +1537,10 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/11/20/Spring%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BC%A0%E6%92%AD%E6%9C%BA%E5%88%B6/">
                     <div class="card-image">
@@ -942,9 +1558,9 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -957,6 +1573,7 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -975,19 +1592,19 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/11/20/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+                <a href="/2020/11/20/SpringBoot%E6%95%B4%E5%90%88%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="使用SpringBoot进行单元测试">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="SpringBoot整合log4j输出日志">
                         
-                        <span class="card-title">使用SpringBoot进行单元测试</span>
+                        <span class="card-title">SpringBoot整合log4j输出日志</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            使用SpringBoot进行单元测试
+                            SpringBoot整合log4j输出日志
                         
                     </div>
                     <div class="publish-info">
