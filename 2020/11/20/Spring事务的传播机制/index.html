@@ -381,7 +381,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1、一次可以跳一个台阶或者两个台阶"><a href="#1、一次可以跳一个台阶或者两个台阶" class="headerlink" title="1、一次可以跳一个台阶或者两个台阶"></a>1、一次可以跳一个台阶或者两个台阶</h2><h2 id="1、以下是事物的传播机制："><a href="#1、以下是事物的传播机制：" class="headerlink" title="1、以下是事物的传播机制："></a>1、以下是事物的传播机制：</h2><pre><code>@Transactional(propagation=Propagation.REQUIRED)
+                <h2 id="1、以下是事物的传播机制："><a href="#1、以下是事物的传播机制：" class="headerlink" title="1、以下是事物的传播机制："></a>1、以下是事物的传播机制：</h2><pre><code>@Transactional(propagation=Propagation.REQUIRED)
 如果有事务, 那么加入事务, 没有的话新建一个(默认情况下)
 换句话说，使用当前的事务，如果当前没有事务，则自己新建一个事务，
 子方法是必须运行在一个事务中的，如果当前存在事务，则加入这个事务，成为一个整体
@@ -454,7 +454,6 @@ public class TransTestImpl implements TransTest &#123;
     &#125;
 &#125;</code></pre>
 <pre><code>// 单元测试
-
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)  //配置启动类
