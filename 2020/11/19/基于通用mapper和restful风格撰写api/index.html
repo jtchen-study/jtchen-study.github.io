@@ -371,7 +371,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    136
+                    134
                 </div>
                 
 
@@ -394,14 +394,14 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>现数据库有一张名为Stu的表<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32558fc8b8ee4c269afd061c6fcc1060~tplv-k3u1fbpfcp-zoom-1.image"><br>基于上一个博客提到的mybatis逆向工程生成<em>mapper.java、</em>mapper.xml以及pojo实体类，编写案例StuService,以及相应的实现类StuServiceImpl，<strong>注意到的是StuServiceImpl上面需要打上@Service注解以便可以被扫描到。</strong></p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> com<span class="token punctuation">.</span>imooc<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span>Stu<span class="token punctuation">;</span>
+<pre><code>import com.imooc.pojo.Stu;
 
-<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">StuService</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> Stu <span class="token function">getStuInfo</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">saveStu</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">updateStu</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">deleteStu</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+public interface StuService &#123;
+    public Stu getStuInfo(int id);
+    public void saveStu();
+    public void updateStu(int id);
+    public void deleteStu(int id);
+&#125;</code></pre>
 <p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7b448e6f375a4f5684e908972a63dfaf~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c19e06c8e0148ac90ca898303a6d29e~tplv-k3u1fbpfcp-zoom-1.image"><br>编写controller层<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3349a49f574047b5833330c40ee87b6d~tplv-k3u1fbpfcp-zoom-1.image"><br>最后要注意启动类需要加一个@MapperScan注解用于扫描mapper,这里是mybatis来扫描mapper文件</p>
 <p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebb7118fe29d4ccd9387c5c5f9c6f33c~tplv-k3u1fbpfcp-zoom-1.image"></p>
