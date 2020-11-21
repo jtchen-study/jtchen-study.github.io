@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="跳台阶问题的几种变形, Java,Spring,Mybatis,SpringBoot,HTML,CSS,数据结构与算法">
+    <meta name="keywords" content="HiKaricp数据库连接池的使用, Java,Spring,Mybatis,SpringBoot,HTML,CSS,数据结构与算法">
     <meta name="description" content="Whatever you do, do it as professional">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>跳台阶问题的几种变形 | 陈少</title>
+    <title>HiKaricp数据库连接池的使用 | 陈少</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Yafine/cdn@2.6/source/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -203,12 +203,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">跳台阶问题的几种变形</h1>
+                    <h1 class="description center-align post-title">HiKaricp数据库连接池的使用</h1>
                 </div>
             </div>
         </div>
@@ -325,8 +325,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                                <span class="chip bg-color">动态规划</span>
+                            <a href="/tags/HiKaricp/">
+                                <span class="chip bg-color">HiKaricp</span>
+                            </a>
+                        
+                            <a href="/tags/SpringBoot/">
+                                <span class="chip bg-color">SpringBoot</span>
                             </a>
                         
                     </div>
@@ -337,8 +341,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
-                                数据结构与算法
+                            <a href="/categories/HiKaricp/" class="post-category">
+                                HiKaricp
                             </a>
                         
                     </div>
@@ -350,7 +354,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-11-19
+                    2020-11-18
                 </div>
                 
 
@@ -359,14 +363,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    456
+                    321
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    1 分
                 </div>
                 
 
@@ -381,62 +385,51 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1、一次可以跳一个台阶或者两个台阶"><a href="#1、一次可以跳一个台阶或者两个台阶" class="headerlink" title="1、一次可以跳一个台阶或者两个台阶"></a>1、一次可以跳一个台阶或者两个台阶</h2><pre><code>一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n级的台阶总共有多少种跳法。
-示例 1：
-输入：n = 2
-输出：2
+                <p>最近学习到除druid外，一种网上评论更快的数据库连接池，hikaricp,以下是SpringBoot集成HiKaricp</p>
+<h2 id="1、首先在springboot项目中引入mybatis及mysql的相关依赖。"><a href="#1、首先在springboot项目中引入mybatis及mysql的相关依赖。" class="headerlink" title="1、首先在springboot项目中引入mybatis及mysql的相关依赖。"></a>1、首先在springboot项目中引入mybatis及mysql的相关依赖。</h2><pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>mysql<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>mysql-connector-java<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.1.41<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.mybatis.spring.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>mybatis-spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.1.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="2、其次在application-yml中做相应的配置"><a href="#2、其次在application-yml中做相应的配置" class="headerlink" title="2、其次在application.yml中做相应的配置"></a>2、其次在application.yml中做相应的配置</h2><p>相应配置如下</p>
+<pre class=" language-yml"><code class="language-yml">
+#tomcat配置
+server:
+  port: 8088
+  tomcat:
+    uri-encoding: UTF-8
+  max-http-header-size: 80KB
 
-示例 2：
-输入：n = 7
-输出：21
 
-提示：
-0 &lt;= n &lt;= 100</code></pre>
-<pre><code>思路：
-设跳上 n 级台阶有 f(n) 种跳法。在所有跳法中，青蛙的最后一步只有两种情况：跳上 1 级或 2 级台阶。
+#连接池配置
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/foodie-shop?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    username: root
+    password: root
+    hikari:
+      connection-timeout: 30000 #等待连接池分配连接的最大时常（毫秒），超过这个时常还没有可用的连接则会发生SQLException,默认：30秒
+      minimum-idle: 5 #最小连接数
+      maximum-pool-size: 20 #最大连接数
+      auto-commit: true #自动提交
+      idle-timeout: 600000 #连接超时的最大时长(毫秒)，超时则被释放(retired)
+      pool-name: DataSourceHikariCP #连接池名字
+      max-lifetime: 1800000 #连接的生命时长(毫秒)，超时而且没被使用则被释放
+      connection-test-query: SELECT 1
 
-1、当为 1 级台阶： 剩 n-1个台阶，此情况共有 f(n?1) 种跳法；
-2、当为 2 级台阶： 剩 n-2个台阶，此情况共有 f(n?2) 种跳法。
-f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
-<pre><code>class Solution &#123;
-    public int numWays(int n) &#123;
-        if (n == 0)
-            return 1;
-        if (n &lt;= 2)
-            return n;
-        int[] dp = new int[n + 1];
-        dp[1] = 1;
-        dp[2] = 2;
-        for (int i = 3; i &lt;= n; i++) &#123;
-            dp[i] = (dp[i - 1] + dp[i - 2]);
-        &#125;
-        return dp[n];
-    &#125;
-&#125;</code></pre>
-<h2 id="2、一次可以跳一个台阶、两个台阶或者三个台阶"><a href="#2、一次可以跳一个台阶、两个台阶或者三个台阶" class="headerlink" title="2、一次可以跳一个台阶、两个台阶或者三个台阶"></a>2、一次可以跳一个台阶、两个台阶或者三个台阶</h2><pre class=" language-txt"><code class="language-txt">一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶，还可以跳上3级台阶。
-求该青蛙跳上一个 n级的台阶总共有多少种跳法。</code></pre>
-<pre><code>思路：
-最后一步可能是从第n-1阶往上走1阶、从n-2阶往上走2阶，或从第n-3阶往上走3阶。
-因此，抵达最后一阶的走法，其实就是抵达这最后三阶的方式的总和。</code></pre>
-<pre><code>class Solution &#123;
-    public static int numWays(int n) &#123;
-        if (n == 0)
-            return 1;
-        if (n == 2)
-            return 2;
-        if (n == 3)
-            return 4;
-        int[] dp = new int[n + 1];
-        dp[1] = 1;
-        dp[2] = 2;
-        dp[3] = 4;
-        for (int i = 4; i &lt;= n; i++) &#123;
-            dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
-        &#125;
-        return dp[n];
-    &#125;
 
-&#125;</code></pre>
+#mybatis配置
+
+mybatis:
+  type-aliases-package: com.imooc.pojo #实体类的存放位置
+  mapper-locations: classpath:mapper/*.xml #mappery映射文件</code></pre>
 
             </div>
             <hr/>
@@ -462,7 +455,7 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jtchen-study.github.io/2020/11/19/%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98/">https://jtchen-study.github.io/2020/11/19/%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98/</a>
+                    <a href="https://jtchen-study.github.io/2020/11/18/HiKaricp%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%BD%BF%E7%94%A8/">https://jtchen-study.github.io/2020/11/18/HiKaricp%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%BD%BF%E7%94%A8/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -500,8 +493,12 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                                    <span class="chip bg-color">动态规划</span>
+                                <a href="/tags/HiKaricp/">
+                                    <span class="chip bg-color">HiKaricp</span>
+                                </a>
+                            
+                                <a href="/tags/SpringBoot/">
+                                    <span class="chip bg-color">SpringBoot</span>
                                 </a>
                             
                         </div>
@@ -938,31 +935,31 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/11/20/Spring%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BC%A0%E6%92%AD%E6%9C%BA%E5%88%B6/">
+                <a href="/2020/11/19/%E5%88%A9%E7%94%A8%E9%80%9A%E7%94%A8mapper%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Spring中的事务传播机制">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="利用通用mapper进行数据库查询操作">
                         
-                        <span class="card-title">Spring中的事务传播机制</span>
+                        <span class="card-title">利用通用mapper进行数据库查询操作</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Spring中的事务传播机制
+                            利用通用mapper进行数据库查询操作
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-20
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-19
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
+                            <a href="/categories/Mybatis/" class="post-category">
+                                    Mybatis
                                 </a>
                             
                             
@@ -972,8 +969,20 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Spring/">
-                        <span class="chip bg-color">Spring</span>
+                    <a href="/tags/SpringBoot/">
+                        <span class="chip bg-color">SpringBoot</span>
+                    </a>
+                    
+                    <a href="/tags/Maven/">
+                        <span class="chip bg-color">Maven</span>
+                    </a>
+                    
+                    <a href="/tags/MyBatis/">
+                        <span class="chip bg-color">MyBatis</span>
+                    </a>
+                    
+                    <a href="/tags/Restful/">
+                        <span class="chip bg-color">Restful</span>
                     </a>
                     
                 </div>
@@ -987,31 +996,31 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/11/19/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+                <a href="/2020/11/18/maven%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96%E6%9E%84%E5%BB%BASpringBoot%E9%A1%B9%E7%9B%AE/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="使用SpringBoot进行单元测试">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="maven项目导入依赖构建SpringBoot项目">
                         
-                        <span class="card-title">使用SpringBoot进行单元测试</span>
+                        <span class="card-title">maven项目导入依赖构建SpringBoot项目</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            使用SpringBoot进行单元测试
+                            maven项目导入依赖构建SpringBoot项目
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-18
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/SpringBoot/" class="post-category">
-                                    SpringBoot
+                            <a href="/categories/Maven/" class="post-category">
+                                    Maven
                                 </a>
                             
                             
@@ -1023,6 +1032,10 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
                     
                     <a href="/tags/SpringBoot/">
                         <span class="chip bg-color">SpringBoot</span>
+                    </a>
+                    
+                    <a href="/tags/Maven/">
+                        <span class="chip bg-color">Maven</span>
                     </a>
                     
                 </div>

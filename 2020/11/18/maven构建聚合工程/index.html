@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="使用SpringBoot进行单元测试, Java,Spring,Mybatis,SpringBoot,HTML,CSS,数据结构与算法">
+    <meta name="keywords" content="maven构建聚合工程, Java,Spring,Mybatis,SpringBoot,HTML,CSS,数据结构与算法">
     <meta name="description" content="Whatever you do, do it as professional">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>使用SpringBoot进行单元测试 | 陈少</title>
+    <title>maven构建聚合工程 | 陈少</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Yafine/cdn@2.6/source/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -203,12 +203,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">使用SpringBoot进行单元测试</h1>
+                    <h1 class="description center-align post-title">maven构建聚合工程</h1>
                 </div>
             </div>
         </div>
@@ -329,6 +329,10 @@
                                 <span class="chip bg-color">SpringBoot</span>
                             </a>
                         
+                            <a href="/tags/Maven/">
+                                <span class="chip bg-color">Maven</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -337,8 +341,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/SpringBoot/" class="post-category">
-                                SpringBoot
+                            <a href="/categories/Maven/" class="post-category">
+                                Maven
                             </a>
                         
                     </div>
@@ -350,7 +354,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-11-20
+                    2020-11-18
                 </div>
                 
 
@@ -359,14 +363,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    64
+                    733
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -381,16 +385,44 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1、添加依赖"><a href="#1、添加依赖" class="headerlink" title="1、添加依赖"></a>1、添加依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<h2 id="2、编写相关测试用例"><a href="#2、编写相关测试用例" class="headerlink" title="2、编写相关测试用例"></a>2、编写相关测试用例</h2><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c999a60091524928b871b5e42dea587d~tplv-k3u1fbpfcp-zoom-1.image" alt="avatar"></p>
-<p>注意，单元测试需要添加如下注解:</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span>SpringRunner<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@SpringBootTest</span><span class="token punctuation">(</span>classes <span class="token operator">=</span> Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类</span>
-</code></pre>
+                <h2 id="Maven中的打包方式"><a href="#Maven中的打包方式" class="headerlink" title="Maven中的打包方式"></a>Maven中的打包方式</h2><p>maven中打包方式有三种，pom,war,jar，一般在父模块打包方式选pom,子模块再指定相应的war或者jar，其标签如下：</p>
+<pre><code> &lt;packaging&gt;&lt;/packaging&gt;</code></pre>
+<h2 id="SpringBoot构建聚合工程步骤"><a href="#SpringBoot构建聚合工程步骤" class="headerlink" title="SpringBoot构建聚合工程步骤"></a>SpringBoot构建聚合工程步骤</h2><h3 id="1、父工程构建"><a href="#1、父工程构建" class="headerlink" title="1、父工程构建"></a>1、父工程构建</h3><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8290f8b0c42b4897886bcc1ff97534c6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h3 id="2、子工程构建"><a href="#2、子工程构建" class="headerlink" title="2、子工程构建"></a>2、子工程构建</h3><p>1、在父模块点击new module<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/238211cbd250462baa4118b2708dbc63~tplv-k3u1fbpfcp-zoom-1.image"><br>2、next下一步即可<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/921d56a58eb9466b9e1a6b1ec1d30cdf~tplv-k3u1fbpfcp-zoom-1.image"><br>在这里可以看出子模块清晰地标出了丛属的parent模块<br>3、子模块的pom文件<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8847ea6138524b06b2c96fc2825ea9bd~tplv-k3u1fbpfcp-zoom-1.image"><br>注意到，其默认打包方式为jar，但是我们一般喜欢显示的声明出来。</p>
+<p>4、此时可以查看父模块的pom文件，发现发生了变化，父模块的pom文件多了个</p>
+<pre><code> &lt;modules&gt;  &lt;/modules&gt;</code></pre>
+<p>标签，并且所有的子模块都在这个标签中出现。<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/75f15eea4b7142d6ab63b24519ded62e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>5、子工程之间可以相互依赖，如何做到这一点呢，其实很简单，比如我们再创建一个子模块叫foodie-dev-pojo，并且在他的pom文件里加入依赖，这样，两个子工程就做到相互依赖了。</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-common<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a4c99e267b04b818793a8ddf24a8c35~tplv-k3u1fbpfcp-zoom-1.image"><br>6、接下来我们又创建了mapper模块，用以存放与mybatis交互的一些mapper.jar等，这里需要注意这个子模块要依赖pojo层，原因是一些sql语句需要实体类，因此需添加相关依赖。</p>
+<pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-pojo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3e306a999fea48b38f913d0d816c1259~tplv-k3u1fbpfcp-zoom-1.image"><br>子模块的依赖关系如下<br>mapper–&gt;pojo–&gt;common，因此mapper也可以使用common中的相应方法。</p>
+<p>7、接下来是service层，同理这一部分需要依赖mapper层。</p>
+<pre class=" language-xml"><code class="language-xml">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-mapper<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ffc2e67b9d2840f58430e655dc6eb795~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>依赖关系如下：<br>service–&gt;mapper–&gt;pojo–&gt;common</p>
+<p>8、最后一个子模块是api模块，也就是controller层<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/25e87c918d054c7abf3a584ad2e44798~tplv-k3u1fbpfcp-zoom-1.image"><br>api层依赖了service，也可以调用mapper层，但是原则上不允许之间调mapepr层，只允许调用service层。</p>
+<p>9、最后需要注意的是，我们构建完聚合工程后，一定要安装，所谓的安装就是在maven的root项目的lifecycle里双击install命令。<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7c444d793b2f4b989e55e11590e52c84~tplv-k3u1fbpfcp-zoom-1.image"><br>安装完成控制台会出现，build success提示。</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa4f10b9eed44c5b3c2d93979bae07f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1、聚合工程可以分为顶级项目(顶级工程、父工程)与子工程，这两者的关系其实就是父子继承的关系，子工程在maven里称之为模块(module)，模块之间是平级的，<strong>是可以相互依赖的。</strong><br>2、子模块可以使用顶级工程里的所有资源(依赖)，子模块之间如果要使用资源，必须构建依赖(构建关系)<br>3、一个顶级工程是可以由多个不同的子工程共同组合而成。这就构成了一个可以运行的项目。</p>
 
             </div>
             <hr/>
@@ -416,7 +448,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jtchen-study.github.io/2020/11/20/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">https://jtchen-study.github.io/2020/11/20/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</a>
+                    <a href="https://jtchen-study.github.io/2020/11/18/maven%E6%9E%84%E5%BB%BA%E8%81%9A%E5%90%88%E5%B7%A5%E7%A8%8B/">https://jtchen-study.github.io/2020/11/18/maven%E6%9E%84%E5%BB%BA%E8%81%9A%E5%90%88%E5%B7%A5%E7%A8%8B/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -456,6 +488,10 @@
                             
                                 <a href="/tags/SpringBoot/">
                                     <span class="chip bg-color">SpringBoot</span>
+                                </a>
+                            
+                                <a href="/tags/Maven/">
+                                    <span class="chip bg-color">Maven</span>
                                 </a>
                             
                         </div>
@@ -892,31 +928,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/11/20/SpringBoot%E6%95%B4%E5%90%88%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/">
+                <a href="/2020/11/18/maven%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96%E6%9E%84%E5%BB%BASpringBoot%E9%A1%B9%E7%9B%AE/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="SpringBoot整合log4j输出日志">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="maven项目导入依赖构建SpringBoot项目">
                         
-                        <span class="card-title">SpringBoot整合log4j输出日志</span>
+                        <span class="card-title">maven项目导入依赖构建SpringBoot项目</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            SpringBoot整合log4j输出日志
+                            maven项目导入依赖构建SpringBoot项目
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-20
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-18
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/SpringBoot/" class="post-category">
-                                    SpringBoot
+                            <a href="/categories/Maven/" class="post-category">
+                                    Maven
                                 </a>
                             
                             
@@ -930,6 +966,10 @@
                         <span class="chip bg-color">SpringBoot</span>
                     </a>
                     
+                    <a href="/tags/Maven/">
+                        <span class="chip bg-color">Maven</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -941,31 +981,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/11/19/%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98/">
+                <a href="/2020/11/17/MyBatis%E9%80%86%E5%90%91%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="跳台阶问题的几种变形">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="MyBatis逆向生成工具">
                         
-                        <span class="card-title">跳台阶问题的几种变形</span>
+                        <span class="card-title">MyBatis逆向生成工具</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            leetcode若干相关题解
+                            MyBatis逆向生成工具
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-17
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
-                                    数据结构与算法
+                            <a href="/categories/MyBatis/" class="post-category">
+                                    MyBatis
                                 </a>
                             
                             
@@ -975,8 +1015,16 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                        <span class="chip bg-color">动态规划</span>
+                    <a href="/tags/SpringBoot/">
+                        <span class="chip bg-color">SpringBoot</span>
+                    </a>
+                    
+                    <a href="/tags/Maven/">
+                        <span class="chip bg-color">Maven</span>
+                    </a>
+                    
+                    <a href="/tags/MyBatis/">
+                        <span class="chip bg-color">MyBatis</span>
                     </a>
                     
                 </div>
@@ -1131,7 +1179,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">2.9k</span>&nbsp;字
+                class="white-color">5.3k</span>&nbsp;字
             
             
             

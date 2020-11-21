@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="跳台阶问题的几种变形, Java,Spring,Mybatis,SpringBoot,HTML,CSS,数据结构与算法">
+    <meta name="keywords" content="maven项目导入依赖构建SpringBoot项目, Java,Spring,Mybatis,SpringBoot,HTML,CSS,数据结构与算法">
     <meta name="description" content="Whatever you do, do it as professional">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>跳台阶问题的几种变形 | 陈少</title>
+    <title>maven项目导入依赖构建SpringBoot项目 | 陈少</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Yafine/cdn@2.6/source/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -203,12 +203,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">跳台阶问题的几种变形</h1>
+                    <h1 class="description center-align post-title">maven项目导入依赖构建SpringBoot项目</h1>
                 </div>
             </div>
         </div>
@@ -325,8 +325,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                                <span class="chip bg-color">动态规划</span>
+                            <a href="/tags/SpringBoot/">
+                                <span class="chip bg-color">SpringBoot</span>
+                            </a>
+                        
+                            <a href="/tags/Maven/">
+                                <span class="chip bg-color">Maven</span>
                             </a>
                         
                     </div>
@@ -337,8 +341,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
-                                数据结构与算法
+                            <a href="/categories/Maven/" class="post-category">
+                                Maven
                             </a>
                         
                     </div>
@@ -350,7 +354,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-11-19
+                    2020-11-18
                 </div>
                 
 
@@ -359,7 +363,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    456
+                    573
                 </div>
                 
 
@@ -381,62 +385,107 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1、一次可以跳一个台阶或者两个台阶"><a href="#1、一次可以跳一个台阶或者两个台阶" class="headerlink" title="1、一次可以跳一个台阶或者两个台阶"></a>1、一次可以跳一个台阶或者两个台阶</h2><pre><code>一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n级的台阶总共有多少种跳法。
-示例 1：
-输入：n = 2
-输出：2
+                <h2 id="1、首先导入相关依赖"><a href="#1、首先导入相关依赖" class="headerlink" title="1、首先导入相关依赖"></a>1、首先导入相关依赖</h2><pre class=" language-xml"><code class="language-xml">//引入parent依赖，引入后就代表项目是springboot项目
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>parent</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-parent<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.2.4.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>relativePath</span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>parent</span><span class="token punctuation">></span></span>
+//设置资源属性
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project.build.sourceEncoding</span><span class="token punctuation">></span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project.build.sourceEncoding</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project.reporting.outputEncoding</span><span class="token punctuation">></span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project.reporting.outputEncoding</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>java.version</span><span class="token punctuation">></span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>java.version</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
+//springboot的子依赖，第一个依赖就是springboot依赖，并且排除了自带的日志依赖，第二个依赖是web相关依赖
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusions</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusion</span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-logging<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusion</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusions</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-web<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+// spring默认使用yml中的配置，但有时候要用传统的xml或properties配置，就需要使用spring-boot-configuration-processor了
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-configuration-processor<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>optional</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>optional</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="2、编写配置文件及相应启动类"><a href="#2、编写配置文件及相应启动类" class="headerlink" title="2、编写配置文件及相应启动类"></a>2、编写配置文件及相应启动类</h2><p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8166e4e3451a424dabbbe2d05262f8d0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7e4c620138a44b98b788699b7619d935~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="3、测试"><a href="#3、测试" class="headerlink" title="3、测试"></a>3、测试</h2><p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fddbc570379c44b2b7f2681294902906~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c96c5c6b7d8f4d5186c8ac5605e2bfe6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="4、看一下-SpringBootApplication这个注解"><a href="#4、看一下-SpringBootApplication这个注解" class="headerlink" title="4、看一下@SpringBootApplication这个注解"></a>4、看一下@SpringBootApplication这个注解</h2><p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/09e0da99b2324ba49cf63b9bdc43977c~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>里面包含三个关键注解</strong><br>@SpringBootConfiguration</p>
+<p>首先谈谈@Configuration注解</p>
+<p>定义一个实体类Person</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Integer id<span class="token punctuation">;</span>
 
-示例 2：
-输入：n = 7
-输出：21
+    <span class="token keyword">public</span> String <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-提示：
-0 &lt;= n &lt;= 100</code></pre>
-<pre><code>思路：
-设跳上 n 级台阶有 f(n) 种跳法。在所有跳法中，青蛙的最后一步只有两种情况：跳上 1 级或 2 级台阶。
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span>String name<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-1、当为 1 级台阶： 剩 n-1个台阶，此情况共有 f(n?1) 种跳法；
-2、当为 2 级台阶： 剩 n-2个台阶，此情况共有 f(n?2) 种跳法。
-f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
-<pre><code>class Solution &#123;
-    public int numWays(int n) &#123;
-        if (n == 0)
-            return 1;
-        if (n &lt;= 2)
-            return n;
-        int[] dp = new int[n + 1];
-        dp[1] = 1;
-        dp[2] = 2;
-        for (int i = 3; i &lt;= n; i++) &#123;
-            dp[i] = (dp[i - 1] + dp[i - 2]);
-        &#125;
-        return dp[n];
-    &#125;
-&#125;</code></pre>
-<h2 id="2、一次可以跳一个台阶、两个台阶或者三个台阶"><a href="#2、一次可以跳一个台阶、两个台阶或者三个台阶" class="headerlink" title="2、一次可以跳一个台阶、两个台阶或者三个台阶"></a>2、一次可以跳一个台阶、两个台阶或者三个台阶</h2><pre class=" language-txt"><code class="language-txt">一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶，还可以跳上3级台阶。
-求该青蛙跳上一个 n级的台阶总共有多少种跳法。</code></pre>
-<pre><code>思路：
-最后一步可能是从第n-1阶往上走1阶、从n-2阶往上走2阶，或从第n-3阶往上走3阶。
-因此，抵达最后一阶的走法，其实就是抵达这最后三阶的方式的总和。</code></pre>
-<pre><code>class Solution &#123;
-    public static int numWays(int n) &#123;
-        if (n == 0)
-            return 1;
-        if (n == 2)
-            return 2;
-        if (n == 3)
-            return 4;
-        int[] dp = new int[n + 1];
-        dp[1] = 1;
-        dp[2] = 2;
-        dp[3] = 4;
-        for (int i = 4; i &lt;= n; i++) &#123;
-            dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
-        &#125;
-        return dp[n];
-    &#125;
+    <span class="token keyword">public</span> Integer <span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> id<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-&#125;</code></pre>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setId</span><span class="token punctuation">(</span>Integer id<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">Person</span><span class="token punctuation">(</span>String name<span class="token punctuation">,</span> Integer id<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token string">"Person&amp;#123;"</span> <span class="token operator">+</span>
+                <span class="token string">"name='"</span> <span class="token operator">+</span> name <span class="token operator">+</span> <span class="token string">'\''</span> <span class="token operator">+</span>
+                <span class="token string">", id="</span> <span class="token operator">+</span> id <span class="token operator">+</span>
+                <span class="token string">'&amp;#125;'</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+</code></pre>
+<p>定义Config类</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> com<span class="token punctuation">.</span>atguigu<span class="token punctuation">.</span>bean<span class="token punctuation">.</span>Person<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>Bean<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>ComponentScan<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>Configuration<span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Configuration</span>
+<span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"com.atguigu"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MainConfig</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span><span class="token string">"person"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> Person <span class="token function">person01</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token string">"lisi"</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<p>测试<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5fa5643b014944e0a2b80d1ecd95b636~tplv-k3u1fbpfcp-zoom-1.image"><br>结果<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4d01313c7480441cb9fdf76ca46b5812~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>以上可以说明其实@Configuration配置可以把里面的bean装入容器里面，这个容器也就是applicationContext里面的bean被扫描后都可以装入容器中。</p>
+<p>其次谈谈@SpringBootConfiguration注解, @SpringBootConfiguration继承自@Configuration，二者功能也一致，标注当前类是配置类，<br>并会将当前类内声明的一个或多个以@Bean注解标记的方法的实例纳入到spring容器中，并且实例名就是方法名。</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f63fcffb6db44ae5952d14c8118da941~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>结果<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/69a88840456a401b98b4c62ada18dabb~tplv-k3u1fbpfcp-zoom-1.image"></p>
 
             </div>
             <hr/>
@@ -462,7 +511,7 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jtchen-study.github.io/2020/11/19/%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98/">https://jtchen-study.github.io/2020/11/19/%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98/</a>
+                    <a href="https://jtchen-study.github.io/2020/11/18/maven%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96%E6%9E%84%E5%BB%BASpringBoot%E9%A1%B9%E7%9B%AE/">https://jtchen-study.github.io/2020/11/18/maven%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96%E6%9E%84%E5%BB%BASpringBoot%E9%A1%B9%E7%9B%AE/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -500,8 +549,12 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                                    <span class="chip bg-color">动态规划</span>
+                                <a href="/tags/SpringBoot/">
+                                    <span class="chip bg-color">SpringBoot</span>
+                                </a>
+                            
+                                <a href="/tags/Maven/">
+                                    <span class="chip bg-color">Maven</span>
                                 </a>
                             
                         </div>
@@ -938,31 +991,31 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/11/20/Spring%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BC%A0%E6%92%AD%E6%9C%BA%E5%88%B6/">
+                <a href="/2020/11/18/HiKaricp%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%BD%BF%E7%94%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Spring中的事务传播机制">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="HiKaricp数据库连接池的使用">
                         
-                        <span class="card-title">Spring中的事务传播机制</span>
+                        <span class="card-title">HiKaricp数据库连接池的使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Spring中的事务传播机制
+                            HiKaricp数据库连接池的使用
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-20
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-18
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
+                            <a href="/categories/HiKaricp/" class="post-category">
+                                    HiKaricp
                                 </a>
                             
                             
@@ -972,8 +1025,12 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Spring/">
-                        <span class="chip bg-color">Spring</span>
+                    <a href="/tags/HiKaricp/">
+                        <span class="chip bg-color">HiKaricp</span>
+                    </a>
+                    
+                    <a href="/tags/SpringBoot/">
+                        <span class="chip bg-color">SpringBoot</span>
                     </a>
                     
                 </div>
@@ -987,31 +1044,31 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/11/19/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+                <a href="/2020/11/18/maven%E6%9E%84%E5%BB%BA%E8%81%9A%E5%90%88%E5%B7%A5%E7%A8%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="使用SpringBoot进行单元测试">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="maven构建聚合工程">
                         
-                        <span class="card-title">使用SpringBoot进行单元测试</span>
+                        <span class="card-title">maven构建聚合工程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            使用SpringBoot进行单元测试
+                            maven构建聚合工程
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-18
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/SpringBoot/" class="post-category">
-                                    SpringBoot
+                            <a href="/categories/Maven/" class="post-category">
+                                    Maven
                                 </a>
                             
                             
@@ -1023,6 +1080,10 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
                     
                     <a href="/tags/SpringBoot/">
                         <span class="chip bg-color">SpringBoot</span>
+                    </a>
+                    
+                    <a href="/tags/Maven/">
+                        <span class="chip bg-color">Maven</span>
                     </a>
                     
                 </div>
