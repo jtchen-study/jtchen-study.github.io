@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Spring中的事务传播机制, Java,Spring,Mybatis,SpringBoot,HTML,CSS,数据结构与算法">
+    <meta name="keywords" content="自定义相应体类, Java,Spring,Mybatis,SpringBoot,HTML,CSS,数据结构与算法">
     <meta name="description" content="Whatever you do, do it as professional">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Spring中的事务传播机制 | 陈少</title>
+    <title>自定义相应体类 | 陈少</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Yafine/cdn@2.6/source/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -203,12 +203,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Spring中的事务传播机制</h1>
+                    <h1 class="description center-align post-title">自定义相应体类</h1>
                 </div>
             </div>
         </div>
@@ -325,8 +325,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Spring/">
-                                <span class="chip bg-color">Spring</span>
+                            <a href="/tags/JavaEE/">
+                                <span class="chip bg-color">JavaEE</span>
                             </a>
                         
                     </div>
@@ -337,8 +337,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Spring/" class="post-category">
-                                Spring
+                            <a href="/categories/JavaEE/" class="post-category">
+                                JavaEE
                             </a>
                         
                     </div>
@@ -350,7 +350,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-11-20
+                    2020-11-21
                 </div>
                 
 
@@ -359,14 +359,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.1k
+                    490
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    2 分
                 </div>
                 
 
@@ -381,664 +381,143 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1、以下是事物的传播机制："><a href="#1、以下是事物的传播机制：" class="headerlink" title="1、以下是事物的传播机制："></a>1、以下是事物的传播机制：</h2><pre><code>@Transactional(propagation=Propagation.REQUIRED)
-如果有事务, 那么加入事务, 没有的话新建一个(默认情况下)
-换句话说，使用当前的事务，如果当前没有事务，则自己新建一个事务，
-子方法是必须运行在一个事务中的，如果当前存在事务，则加入这个事务，成为一个整体
-@Transactional(propagation=Propagation.SUPPORTS)
-如果当前有事务，则使用事务，如果当前没有事务，则不使用事务
-@Transactional(propagation=Propagation.MANDATORY)
-必须在一个已有的事务中执行,否则抛出异常
-@Transactional(propagation=Propagation.REQUIRES_NEW)
-不管是否存在事务,都创建一个新的事务,原来的挂起,新的执行完毕,继续执行老的事务
-@Transactional(propagation=Propagation.NOT_SUPPORTED)
-容器不为这个方法开启事务
-@Transactional(propagation=Propagation.NEVER)
-必须在一个没有的事务中执行,否则抛出异常(与Propagation.MANDATORY相反)</code></pre>
-<h2 id="2、代码验证说明："><a href="#2、代码验证说明：" class="headerlink" title="2、代码验证说明："></a>2、代码验证说明：</h2><h3 id="2-1-无任何事务"><a href="#2-1-无任何事务" class="headerlink" title="2.1 无任何事务"></a>2.1 无任何事务</h3><pre><code>// service层
-public interface StuService &#123;
-    public void saveParent();
-    public void saveChildren();
+                <p>类结构如下，参考慕课网。</p>
+<pre><code>import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+/**
+ * 
+ * @Title: IMOOCJSONResult.java
+ * @Package com.imooc.utils
+ * @Description: 自定义响应数据结构
+ *                 本类可提供给 H5/ios/安卓/公众号/小程序 使用
+ *                 前端接受此类数据（json object)后，可自行根据业务去实现相关功能
+ * 
+ *                 200：表示成功
+ *                 500：表示错误，错误信息在msg字段中
+ *                 501：bean验证错误，不管多少个错误都以map形式返回
+ *                 502：拦截器拦截到用户token出错
+ *                 555：异常抛出信息
+ *                 556: 用户qq校验异常
+ * @Copyright: Copyright (c) 2020
+ * @Company: www.imooc.com
+ * @author 慕课网 - 风间影月
+ * @version V1.0
+ */
+public class IMOOCJSONResult &#123;
+
+    // 定义jackson对象
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    // 响应业务状态
+    private Integer status;
+
+    // 响应消息
+    private String msg;
+
+    // 响应中的数据
+    private Object data;
+
+    @JsonIgnore
+    private String ok;    // 不使用
+
+    public static IMOOCJSONResult build(Integer status, String msg, Object data) &#123;
+        return new IMOOCJSONResult(status, msg, data);
+    &#125;
+
+    public static IMOOCJSONResult build(Integer status, String msg, Object data, String ok) &#123;
+        return new IMOOCJSONResult(status, msg, data, ok);
+    &#125;
+
+    public static IMOOCJSONResult ok(Object data) &#123;
+        return new IMOOCJSONResult(data);
+    &#125;
+
+    public static IMOOCJSONResult ok() &#123;
+        return new IMOOCJSONResult(null);
+    &#125;
+
+    public static IMOOCJSONResult errorMsg(String msg) &#123;
+        return new IMOOCJSONResult(500, msg, null);
+    &#125;
+
+    public static IMOOCJSONResult errorMap(Object data) &#123;
+        return new IMOOCJSONResult(501, &quot;error&quot;, data);
+    &#125;
+
+    public static IMOOCJSONResult errorTokenMsg(String msg) &#123;
+        return new IMOOCJSONResult(502, msg, null);
+    &#125;
+
+    public static IMOOCJSONResult errorException(String msg) &#123;
+        return new IMOOCJSONResult(555, msg, null);
+    &#125;
+
+    public static IMOOCJSONResult errorUserQQ(String msg) &#123;
+        return new IMOOCJSONResult(556, msg, null);
+    &#125;
+
+    public IMOOCJSONResult() &#123;
+
+    &#125;
+
+    public IMOOCJSONResult(Integer status, String msg, Object data) &#123;
+        this.status = status;
+        this.msg = msg;
+        this.data = data;
+    &#125;
+
+    public IMOOCJSONResult(Integer status, String msg, Object data, String ok) &#123;
+        this.status = status;
+        this.msg = msg;
+        this.data = data;
+        this.ok = ok;
+    &#125;
+
+    public IMOOCJSONResult(Object data) &#123;
+        this.status = 200;
+        this.msg = &quot;OK&quot;;
+        this.data = data;
+    &#125;
+
+    public Boolean isOK() &#123;
+        return this.status == 200;
+    &#125;
+
+    public Integer getStatus() &#123;
+        return status;
+    &#125;
+
+    public void setStatus(Integer status) &#123;
+        this.status = status;
+    &#125;
+
+    public String getMsg() &#123;
+        return msg;
+    &#125;
+
+    public void setMsg(String msg) &#123;
+        this.msg = msg;
+    &#125;
+
+    public Object getData() &#123;
+        return data;
+    &#125;
+
+    public void setData(Object data) &#123;
+        this.data = data;
+    &#125;
+
+    public String getOk() &#123;
+        return ok;
+    &#125;
+
+    public void setOk(String ok) &#123;
+        this.ok = ok;
+    &#125;
+
 &#125;
-// service实现类
-@Service
-public class StuServiceImpl implements StuService &#123;
-    @Autowired
-    private StuMapper stuMapper;
-
-    @Override
-    public void saveParent()&#123;
-        Stu stu = new Stu();
-        stu.setAge(19);
-        stu.setName(&quot;parent&quot;);
-        stuMapper.insert(stu);
-    &#125;
-    @Override
-    public void saveChildren()&#123;
-        saveChild1();
-        int a = 1/0;
-        saveChild2();
-    &#125;
-
-    public void saveChild1()&#123;
-        Stu stu1 = new Stu();
-        stu1.setName(&quot;child-1&quot;);
-        stu1.setAge(11);
-        stuMapper.insert(stu1);
-    &#125;
-
-    public void saveChild2()&#123;
-        Stu stu2 = new Stu();
-        stu2.setName(&quot;child-2&quot;);
-        stu2.setAge(22);
-        stuMapper.insert(stu2);
-    &#125;
-
-&#125;</code></pre>
-<pre><code>//测试service接口及实现类
-
-public interface TransTest &#123;
-    public void testPropagationTrans();
-&#125;
-
-
-@Service
-public class TransTestImpl implements TransTest &#123;
-    @Autowired
-    private StuService stuService;
-
-    @Override
-    public void testPropagationTrans() &#123;
-        stuService.saveParent();
-        stuService.saveChildren();
-    &#125;
-&#125;</code></pre>
-<pre><code>// 单元测试
-
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)  //配置启动类
-public class Test &#123;
-    @Autowired
-    private TransTest transTest;
-    @org.junit.Test
-    public void myTest()&#123;
-        transTest.testPropagationTrans();
-    &#125;
-&#125;</code></pre>
-<p>结果：</p>
-<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cfc2a4bf478b4cc9994717b5f651a0ca~tplv-k3u1fbpfcp-watermark.image"></p>
-<h3 id="2-2-测试Propagation-REQUIRED"><a href="#2-2-测试Propagation-REQUIRED" class="headerlink" title="2.2 测试Propagation.REQUIRED"></a>2.2 测试Propagation.REQUIRED</h3><h4 id="2-2-1-父方法有Propagation-REQUIRED"><a href="#2-2-1-父方法有Propagation-REQUIRED" class="headerlink" title="2.2.1 父方法有Propagation.REQUIRED"></a>2.2.1 父方法有Propagation.REQUIRED</h4><pre><code>@Service
-public class StuServiceImpl implements StuService &#123;
-    @Autowired
-    private StuMapper stuMapper;
-
-    @Override
-    public void saveParent()&#123;
-        Stu stu = new Stu();
-        stu.setAge(19);
-        stu.setName(&quot;parent&quot;);
-        stuMapper.insert(stu);
-    &#125;
-    @Override
-    public void saveChildren()&#123;
-        saveChild1();
-        int a = 1/0;
-        saveChild2();
-    &#125;
-
-    public void saveChild1()&#123;
-        Stu stu1 = new Stu();
-        stu1.setName(&quot;child-1&quot;);
-        stu1.setAge(11);
-        stuMapper.insert(stu1);
-    &#125;
-
-    public void saveChild2()&#123;
-        Stu stu2 = new Stu();
-        stu2.setName(&quot;child-2&quot;);
-        stu2.setAge(22);
-        stuMapper.insert(stu2);
-    &#125;
-
-&#125;</code></pre>
-<pre><code>@Service
-public class TransTestImpl implements TransTest &#123;
-    @Autowired
-    private StuService stuService;
-
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void testPropagationTrans() &#123;
-        stuService.saveParent();
-        stuService.saveChildren();
-    &#125;
-&#125;</code></pre>
-<p>结果：<br>数据库未新增任何数据。</p>
-<h4 id="2-2-2-子方法有Propagation-REQUIRED"><a href="#2-2-2-子方法有Propagation-REQUIRED" class="headerlink" title="2.2.2 子方法有Propagation.REQUIRED"></a>2.2.2 子方法有Propagation.REQUIRED</h4><pre><code>@Service
-public class StuServiceImpl implements StuService &#123;
-    @Autowired
-    private StuMapper stuMapper;
-
-    @Override
-    public void saveParent()&#123;
-        Stu stu = new Stu();
-        stu.setAge(19);
-        stu.setName(&quot;parent&quot;);
-        stuMapper.insert(stu);
-    &#125;
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void saveChildren()&#123;
-        saveChild1();
-        int a = 1/0;
-        saveChild2();
-    &#125;
-
-    public void saveChild1()&#123;
-        Stu stu1 = new Stu();
-        stu1.setName(&quot;child-1&quot;);
-        stu1.setAge(11);
-        stuMapper.insert(stu1);
-    &#125;
-
-    public void saveChild2()&#123;
-        Stu stu2 = new Stu();
-        stu2.setName(&quot;child-2&quot;);
-        stu2.setAge(22);
-        stuMapper.insert(stu2);
-    &#125;
-
-&#125;</code></pre>
-<pre><code>@Service
-public class TransTestImpl implements TransTest &#123;
-    @Autowired
-    private StuService stuService;
-
-    @Override
-    public void testPropagationTrans() &#123;
-        stuService.saveParent();
-        stuService.saveChildren();
-    &#125;
-&#125;</code></pre>
-<p>结果：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/46285d8259ba45c792eeaab1f567875a~tplv-k3u1fbpfcp-watermark.image"></p>
-<h3 id="2-3-Propagation-SUPPORTS"><a href="#2-3-Propagation-SUPPORTS" class="headerlink" title="2.3 Propagation.SUPPORTS"></a>2.3 Propagation.SUPPORTS</h3><h4 id="2-3-1子方法SUPPORTS-父方法无事务"><a href="#2-3-1子方法SUPPORTS-父方法无事务" class="headerlink" title="2.3.1子方法SUPPORTS,父方法无事务"></a>2.3.1子方法SUPPORTS,父方法无事务</h4><pre><code>@Service
-public class StuServiceImpl implements StuService &#123;
-    @Autowired
-    private StuMapper stuMapper;
-
-    @Override
-    public void saveParent()&#123;
-        Stu stu = new Stu();
-        stu.setAge(19);
-        stu.setName(&quot;parent&quot;);
-        stuMapper.insert(stu);
-    &#125;
-    @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
-    public void saveChildren()&#123;
-        saveChild1();
-        int a = 1/0;
-        saveChild2();
-    &#125;
-
-    public void saveChild1()&#123;
-        Stu stu1 = new Stu();
-        stu1.setName(&quot;child-1&quot;);
-        stu1.setAge(11);
-        stuMapper.insert(stu1);
-    &#125;
-
-    public void saveChild2()&#123;
-        Stu stu2 = new Stu();
-        stu2.setName(&quot;child-2&quot;);
-        stu2.setAge(22);
-        stuMapper.insert(stu2);
-    &#125;
-
-&#125;</code></pre>
-<pre><code>@Service
-public class TransTestImpl implements TransTest &#123;
-    @Autowired
-    private StuService stuService;
-
-    @Override
-    public void testPropagationTrans() &#123;
-        stuService.saveParent();
-        stuService.saveChildren();
-    &#125;
-&#125;</code></pre>
-<p>结果：</p>
-<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef1462ba34a844d39e29dd518262f6d5~tplv-k3u1fbpfcp-watermark.image"></p>
-<h4 id="2-3-2-子方法SUPPORTS-父方法REQUIRD"><a href="#2-3-2-子方法SUPPORTS-父方法REQUIRD" class="headerlink" title="2.3.2 子方法SUPPORTS,父方法REQUIRD"></a>2.3.2 子方法SUPPORTS,父方法REQUIRD</h4><pre><code>@Service
-public class StuServiceImpl implements StuService &#123;
-    @Autowired
-    private StuMapper stuMapper;
-
-    @Override
-    public void saveParent()&#123;
-        Stu stu = new Stu();
-        stu.setAge(19);
-        stu.setName(&quot;parent&quot;);
-        stuMapper.insert(stu);
-    &#125;
-    @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
-    public void saveChildren()&#123;
-        saveChild1();
-        int a = 1/0;
-        saveChild2();
-    &#125;
-
-    public void saveChild1()&#123;
-        Stu stu1 = new Stu();
-        stu1.setName(&quot;child-1&quot;);
-        stu1.setAge(11);
-        stuMapper.insert(stu1);
-    &#125;
-
-    public void saveChild2()&#123;
-        Stu stu2 = new Stu();
-        stu2.setName(&quot;child-2&quot;);
-        stu2.setAge(22);
-        stuMapper.insert(stu2);
-    &#125;
-
-&#125;</code></pre>
-<pre><code>@Service
-public class TransTestImpl implements TransTest &#123;
-    @Autowired
-    private StuService stuService;
-
-    @Override
-    @Transactional(propagation = Propagation.REQUIRD)
-    public void testPropagationTrans() &#123;
-        stuService.saveParent();
-        stuService.saveChildren();
-    &#125;
-&#125;</code></pre>
-<p>结果：<br>数据库无任何新增。</p>
-<h3 id="2-4-Propagation-MANDATORY"><a href="#2-4-Propagation-MANDATORY" class="headerlink" title="2.4 Propagation.MANDATORY"></a>2.4 Propagation.MANDATORY</h3><h4 id="2-4-1-子方法有MANDATORY，父方法无事务"><a href="#2-4-1-子方法有MANDATORY，父方法无事务" class="headerlink" title="2.4.1 子方法有MANDATORY，父方法无事务"></a>2.4.1 子方法有MANDATORY，父方法无事务</h4><pre><code>@Service
-public class StuServiceImpl implements StuService &#123;
-    @Autowired
-    private StuMapper stuMapper;
-
-    @Override
-    public void saveParent()&#123;
-        Stu stu = new Stu();
-        stu.setAge(19);
-        stu.setName(&quot;parent&quot;);
-        stuMapper.insert(stu);
-    &#125;
-    @Override
-    @Transactional(propagation = Propagation.MANDATORY)
-    public void saveChildren()&#123;
-        saveChild1();
-        int a = 1/0;
-        saveChild2();
-    &#125;
-
-    public void saveChild1()&#123;
-        Stu stu1 = new Stu();
-        stu1.setName(&quot;child-1&quot;);
-        stu1.setAge(11);
-        stuMapper.insert(stu1);
-    &#125;
-
-    public void saveChild2()&#123;
-        Stu stu2 = new Stu();
-        stu2.setName(&quot;child-2&quot;);
-        stu2.setAge(22);
-        stuMapper.insert(stu2);
-    &#125;
-
-&#125;</code></pre>
-<pre><code>@Service
-public class TransTestImpl implements TransTest &#123;
-    @Autowired
-    private StuService stuService;
-
-    @Override
-    public void testPropagationTrans() &#123;
-        stuService.saveParent();
-        stuService.saveChildren();
-    &#125;
-&#125;</code></pre>
-<p>结果抛出异常：<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/373e609151514365825e49daca15c250~tplv-k3u1fbpfcp-watermark.image"></p>
-<h4 id="2-4-2-子方法有MANDATORY，父方法有有REQUIRD"><a href="#2-4-2-子方法有MANDATORY，父方法有有REQUIRD" class="headerlink" title="2.4.2 子方法有MANDATORY，父方法有有REQUIRD"></a>2.4.2 子方法有MANDATORY，父方法有有REQUIRD</h4><pre><code>@Service
-public class StuServiceImpl implements StuService &#123;
-    @Autowired
-    private StuMapper stuMapper;
-
-    @Override
-    public void saveParent()&#123;
-        Stu stu = new Stu();
-        stu.setAge(19);
-        stu.setName(&quot;parent&quot;);
-        stuMapper.insert(stu);
-    &#125;
-    @Override
-    @Transactional(propagation = Propagation.MANDATORY)
-    public void saveChildren()&#123;
-        saveChild1();
-        int a = 1/0;
-        saveChild2();
-    &#125;
-
-    public void saveChild1()&#123;
-        Stu stu1 = new Stu();
-        stu1.setName(&quot;child-1&quot;);
-        stu1.setAge(11);
-        stuMapper.insert(stu1);
-    &#125;
-
-    public void saveChild2()&#123;
-        Stu stu2 = new Stu();
-        stu2.setName(&quot;child-2&quot;);
-        stu2.setAge(22);
-        stuMapper.insert(stu2);
-    &#125;
-
-&#125;</code></pre>
-<pre><code>@Service
-public class TransTestImpl implements TransTest &#123;
-    @Autowired
-    private StuService stuService;
-
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void testPropagationTrans() &#123;
-        stuService.saveParent();
-        stuService.saveChildren();
-    &#125;
-&#125;</code></pre>
-<p>结果：数据库无任何变化。</p>
-<h3 id="2-5-Propagation-REQUIRES-NEW"><a href="#2-5-Propagation-REQUIRES-NEW" class="headerlink" title="2.5 Propagation.REQUIRES_NEW"></a>2.5 Propagation.REQUIRES_NEW</h3><pre><code>@Service
-public class StuServiceImpl implements StuService &#123;
-    @Autowired
-    private StuMapper stuMapper;
-
-    @Override
-    public void saveParent()&#123;
-        Stu stu = new Stu();
-        stu.setAge(19);
-        stu.setName(&quot;parent&quot;);
-        stuMapper.insert(stu);
-    &#125;
-    @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void saveChildren()&#123;
-        saveChild1();
-        int a = 1/0;
-        saveChild2();
-    &#125;
-
-    public void saveChild1()&#123;
-        Stu stu1 = new Stu();
-        stu1.setName(&quot;child-1&quot;);
-        stu1.setAge(11);
-        stuMapper.insert(stu1);
-    &#125;
-
-    public void saveChild2()&#123;
-        Stu stu2 = new Stu();
-        stu2.setName(&quot;child-2&quot;);
-        stu2.setAge(22);
-        stuMapper.insert(stu2);
-    &#125;
-
-&#125;</code></pre>
-<pre><code>@Service
-public class TransTestImpl implements TransTest &#123;
-    @Autowired
-    private StuService stuService;
-
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void testPropagationTrans() &#123;
-        stuService.saveParent();
-        stuService.saveChildren();
-    &#125;
-&#125;</code></pre>
-<p>结果：因为其新启动了一个事务，因此，子方法失败，父方法是另一个事务，接收到子方法的失败后，自身也失败，数据库无任何新增数据。</p>
-<h3 id="2-6-Propagation-NOT-SUPPORTED"><a href="#2-6-Propagation-NOT-SUPPORTED" class="headerlink" title="2.6 Propagation.NOT_SUPPORTED"></a>2.6 Propagation.NOT_SUPPORTED</h3><h4 id="2-6-1-子Propagation-NOT-SUPPORTED，父无"><a href="#2-6-1-子Propagation-NOT-SUPPORTED，父无" class="headerlink" title="2.6.1 子Propagation.NOT_SUPPORTED，父无"></a>2.6.1 子Propagation.NOT_SUPPORTED，父无</h4><pre><code>@Service
-public class StuServiceImpl implements StuService &#123;
-    @Autowired
-    private StuMapper stuMapper;
-
-    @Override
-    public void saveParent()&#123;
-        Stu stu = new Stu();
-        stu.setAge(19);
-        stu.setName(&quot;parent&quot;);
-        stuMapper.insert(stu);
-    &#125;
-    @Override
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public void saveChildren()&#123;
-        saveChild1();
-        int a = 1/0;
-        saveChild2();
-    &#125;
-
-    public void saveChild1()&#123;
-        Stu stu1 = new Stu();
-        stu1.setName(&quot;child-1&quot;);
-        stu1.setAge(11);
-        stuMapper.insert(stu1);
-    &#125;
-
-    public void saveChild2()&#123;
-        Stu stu2 = new Stu();
-        stu2.setName(&quot;child-2&quot;);
-        stu2.setAge(22);
-        stuMapper.insert(stu2);
-    &#125;
-
-&#125;</code></pre>
-<pre><code>@Service
-public class TransTestImpl implements TransTest &#123;
-    @Autowired
-    private StuService stuService;
-
-    @Override
-    public void testPropagationTrans() &#123;
-        stuService.saveParent();
-        stuService.saveChildren();
-    &#125;
-&#125;</code></pre>
-<p>结果：<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a3274c07c46d4289b9bd8014fe10c4b5~tplv-k3u1fbpfcp-watermark.image"></p>
-<h4 id="2-6-2-子Propagation-NOT-SUPPORTED，父Propagation-REQUIRD"><a href="#2-6-2-子Propagation-NOT-SUPPORTED，父Propagation-REQUIRD" class="headerlink" title="2.6.2 子Propagation.NOT_SUPPORTED，父Propagation.REQUIRD"></a>2.6.2 子Propagation.NOT_SUPPORTED，父Propagation.REQUIRD</h4><pre><code>@Service
-public class StuServiceImpl implements StuService &#123;
-    @Autowired
-    private StuMapper stuMapper;
-
-    @Override
-    public void saveParent()&#123;
-        Stu stu = new Stu();
-        stu.setAge(19);
-        stu.setName(&quot;parent&quot;);
-        stuMapper.insert(stu);
-    &#125;
-    @Override
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public void saveChildren()&#123;
-        saveChild1();
-        int a = 1/0;
-        saveChild2();
-    &#125;
-
-    public void saveChild1()&#123;
-        Stu stu1 = new Stu();
-        stu1.setName(&quot;child-1&quot;);
-        stu1.setAge(11);
-        stuMapper.insert(stu1);
-    &#125;
-
-    public void saveChild2()&#123;
-        Stu stu2 = new Stu();
-        stu2.setName(&quot;child-2&quot;);
-        stu2.setAge(22);
-        stuMapper.insert(stu2);
-    &#125;
-
-&#125;</code></pre>
-<pre><code>@Service
-public class TransTestImpl implements TransTest &#123;
-    @Autowired
-    private StuService stuService;
-
-    @Override
-    @Transactional(propagation = Propagation.REQUIRD)
-    public void testPropagationTrans() &#123;
-        stuService.saveParent();
-        stuService.saveChildren();
-    &#125;
-&#125;</code></pre>
-<p>结果：<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ce72695e4235407b80dfeb0bc17da0aa~tplv-k3u1fbpfcp-watermark.image"></p>
-<h3 id="2-7-Propagation-NEVER"><a href="#2-7-Propagation-NEVER" class="headerlink" title="2.7 Propagation.NEVER"></a>2.7 Propagation.NEVER</h3><h4 id="2-7-1-子Propagation-NEVER，父Propagation-REQUIRD"><a href="#2-7-1-子Propagation-NEVER，父Propagation-REQUIRD" class="headerlink" title="2.7.1 子Propagation.NEVER，父Propagation.REQUIRD"></a>2.7.1 子Propagation.NEVER，父Propagation.REQUIRD</h4><pre><code>@Service
-public class StuServiceImpl implements StuService &#123;
-    @Autowired
-    private StuMapper stuMapper;
-
-    @Override
-    public void saveParent()&#123;
-        Stu stu = new Stu();
-        stu.setAge(19);
-        stu.setName(&quot;parent&quot;);
-        stuMapper.insert(stu);
-    &#125;
-    @Override
-    @Transactional(propagation = Propagation.NEVER)
-    public void saveChildren()&#123;
-        saveChild1();
-        int a = 1/0;
-        saveChild2();
-    &#125;
-
-    public void saveChild1()&#123;
-        Stu stu1 = new Stu();
-        stu1.setName(&quot;child-1&quot;);
-        stu1.setAge(11);
-        stuMapper.insert(stu1);
-    &#125;
-
-    public void saveChild2()&#123;
-        Stu stu2 = new Stu();
-        stu2.setName(&quot;child-2&quot;);
-        stu2.setAge(22);
-        stuMapper.insert(stu2);
-    &#125;
-
-&#125;</code></pre>
-<pre><code>@Service
-public class TransTestImpl implements TransTest &#123;
-    @Autowired
-    private StuService stuService;
-
-    @Override
-    @Transactional(propagation = Propagation.REQUIRD)
-    public void testPropagationTrans() &#123;
-        stuService.saveParent();
-        stuService.saveChildren();
-    &#125;
-&#125;</code></pre>
-<p>结果：<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b3e5b1970ee43019d79d47068b19bd8~tplv-k3u1fbpfcp-watermark.image"></p>
-<h4 id="2-7-2-子Propagation-NEVER，父无"><a href="#2-7-2-子Propagation-NEVER，父无" class="headerlink" title="2.7.2 子Propagation.NEVER，父无"></a>2.7.2 子Propagation.NEVER，父无</h4><pre><code>@Service
-public class StuServiceImpl implements StuService &#123;
-    @Autowired
-    private StuMapper stuMapper;
-
-    @Override
-    public void saveParent()&#123;
-        Stu stu = new Stu();
-        stu.setAge(19);
-        stu.setName(&quot;parent&quot;);
-        stuMapper.insert(stu);
-    &#125;
-    @Override
-    @Transactional(propagation = Propagation.NEVER)
-    public void saveChildren()&#123;
-        saveChild1();
-        int a = 1/0;
-        saveChild2();
-    &#125;
-
-    public void saveChild1()&#123;
-        Stu stu1 = new Stu();
-        stu1.setName(&quot;child-1&quot;);
-        stu1.setAge(11);
-        stuMapper.insert(stu1);
-    &#125;
-
-    public void saveChild2()&#123;
-        Stu stu2 = new Stu();
-        stu2.setName(&quot;child-2&quot;);
-        stu2.setAge(22);
-        stuMapper.insert(stu2);
-    &#125;
-
-&#125;</code></pre>
-<pre><code>@Service
-public class TransTestImpl implements TransTest &#123;
-    @Autowired
-    private StuService stuService;
-
-    @Override
-    public void testPropagationTrans() &#123;
-        stuService.saveParent();
-        stuService.saveChildren();
-    &#125;
-&#125;</code></pre>
-<p>结果：<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b3e5b1970ee43019d79d47068b19bd8~tplv-k3u1fbpfcp-watermark.image"></p>
-<h3 id="2-8-Propagation-NESTED"><a href="#2-8-Propagation-NESTED" class="headerlink" title="2.8 Propagation.NESTED"></a>2.8 Propagation.NESTED</h3><pre><code>@Service
-public class StuServiceImpl implements StuService &#123;
-    @Autowired
-    private StuMapper stuMapper;
-
-    @Override
-    public void saveParent()&#123;
-        Stu stu = new Stu();
-        stu.setAge(19);
-        stu.setName(&quot;parent&quot;);
-        stuMapper.insert(stu);
-    &#125;
-    @Override
-    @Transactional(propagation = Propagation.NESTED)
-    public void saveChildren()&#123;
-        saveChild1();
-        int a = 1/0;
-        saveChild2();
-    &#125;
-
-    public void saveChild1()&#123;
-        Stu stu1 = new Stu();
-        stu1.setName(&quot;child-1&quot;);
-        stu1.setAge(11);
-        stuMapper.insert(stu1);
-    &#125;
-
-    public void saveChild2()&#123;
-        Stu stu2 = new Stu();
-        stu2.setName(&quot;child-2&quot;);
-        stu2.setAge(22);
-        stuMapper.insert(stu2);
-    &#125;
-
-&#125;</code></pre>
-<pre><code>@Service
-public class TransTestImpl implements TransTest &#123;
-    @Autowired
-    private StuService stuService;
-
-    @Override
-     @Transactional(propagation = Propagation.REQUIRED)
-    public void testPropagationTrans() &#123;
-        stuService.saveParent();
-        stuService.saveChildren();
-    &#125;
-&#125;</code></pre>
-<p>结果：<br>无任何数据。<br>即，如果当前有事务，则开启子事务(嵌套事务)，嵌套事务是独立提交或者回滚；如果当前没有事务，则同REQUIRD。</p>
+</code></pre>
 
             </div>
             <hr/>
@@ -1064,7 +543,7 @@ public class TransTestImpl implements TransTest &#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jtchen-study.github.io/2020/11/20/Spring%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BC%A0%E6%92%AD%E6%9C%BA%E5%88%B6/">https://jtchen-study.github.io/2020/11/20/Spring%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BC%A0%E6%92%AD%E6%9C%BA%E5%88%B6/</a>
+                    <a href="https://jtchen-study.github.io/2020/11/21/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%93%8D%E5%BA%94%E4%BD%93%E7%B1%BB/">https://jtchen-study.github.io/2020/11/21/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%93%8D%E5%BA%94%E4%BD%93%E7%B1%BB/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1102,8 +581,8 @@ public class TransTestImpl implements TransTest &#123;
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Spring/">
-                                    <span class="chip bg-color">Spring</span>
+                                <a href="/tags/JavaEE/">
+                                    <span class="chip bg-color">JavaEE</span>
                                 </a>
                             
                         </div>
@@ -1540,31 +1019,31 @@ public class TransTestImpl implements TransTest &#123;
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/11/21/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%93%8D%E5%BA%94%E4%BD%93%E7%B1%BB/">
+                <a href="/2020/11/22/SpringBoot%E6%95%B4%E5%90%88%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="自定义相应体类">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="SpringBoot整合log4j输出日志">
                         
-                        <span class="card-title">自定义相应体类</span>
+                        <span class="card-title">SpringBoot整合log4j输出日志</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            自定义相应体类
+                            SpringBoot整合log4j输出日志
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-21
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-22
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JavaEE/" class="post-category">
-                                    JavaEE
+                            <a href="/categories/SpringBoot/" class="post-category">
+                                    SpringBoot
                                 </a>
                             
                             
@@ -1574,8 +1053,8 @@ public class TransTestImpl implements TransTest &#123;
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JavaEE/">
-                        <span class="chip bg-color">JavaEE</span>
+                    <a href="/tags/SpringBoot/">
+                        <span class="chip bg-color">SpringBoot</span>
                     </a>
                     
                 </div>
@@ -1589,31 +1068,31 @@ public class TransTestImpl implements TransTest &#123;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/11/19/%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98/">
+                <a href="/2020/11/20/Spring%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BC%A0%E6%92%AD%E6%9C%BA%E5%88%B6/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="跳台阶问题的几种变形">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Spring中的事务传播机制">
                         
-                        <span class="card-title">跳台阶问题的几种变形</span>
+                        <span class="card-title">Spring中的事务传播机制</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            leetcode若干相关题解
+                            Spring中的事务传播机制
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-20
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
-                                    数据结构与算法
+                            <a href="/categories/Spring/" class="post-category">
+                                    Spring
                                 </a>
                             
                             
@@ -1623,8 +1102,8 @@ public class TransTestImpl implements TransTest &#123;
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                        <span class="chip bg-color">动态规划</span>
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
                     </a>
                     
                 </div>

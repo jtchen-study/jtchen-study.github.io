@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SpringBoot整合log4j输出日志</title>
+    <url>/2020/11/22/SpringBoot%E6%95%B4%E5%90%88%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<h2 id="1、首先剔除springboot自带的logging日志，因为其内容包含的太多。"><a href="#1、首先剔除springboot自带的logging日志，因为其内容包含的太多。" class="headerlink" title="1、首先剔除springboot自带的logging日志，因为其内容包含的太多。"></a>1、首先剔除springboot自带的logging日志，因为其内容包含的太多。</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/50f1b4d49f0c450b887bbb2df050c88a~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusions</span><span class="token punctuation">></span></span> // 剔除springboot自带的logging
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusion</span><span class="token punctuation">></span></span>
+           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-logging<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusion</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusions</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<p>剔除后再启动项目，可以发现控制台的输出，缺少日志，并且无端口号之类的信息.<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a7c5054094be45218054a5784ff385fe~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
+<h2 id="2、加入日志相关依赖"><a href="#2、加入日志相关依赖" class="headerlink" title="2、加入日志相关依赖"></a>2、加入日志相关依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token comment" spellcheck="true">&lt;!-- 日志相关 抽象层及实现层 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>slf4j-api<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.7.21<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>slf4j-log4j12<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.7.21<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<p>效果图:<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5ea618ec6f0444e6a60d0ba9ac2914dc~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
+<h2 id="3、编写相关配置文件log4j-properties"><a href="#3、编写相关配置文件log4j-properties" class="headerlink" title="3、编写相关配置文件log4j.properties"></a>3、编写相关配置文件log4j.properties</h2><pre class=" language-xml"><code class="language-xml">log4j.rootLogger=DEBUG,stdout,file
+log4j.additivity.org.apache=true
+
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.threshold=INFO
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%-5p %c<span class="token entity" title="&#123;">&amp;#123;</span>1<span class="token entity" title="&#125;">&amp;#125;</span>:%L - %m%n
+
+log4j.appender.file=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.file.layout=org.apache.log4j.PatternLayout
+log4j.appender.file.DatePattern='.'yyyy-MM-dd-HH-mm
+log4j.appender.file.layout.ConversionPattern=%d<span class="token entity" title="&#123;">&amp;#123;</span>yyyy-MM-dd HH:mm:ss<span class="token entity" title="&#125;">&amp;#125;</span> %-5p %c<span class="token entity" title="&#123;">&amp;#123;</span>1<span class="token entity" title="&#125;">&amp;#125;</span>::%L - %m%n
+log4j.appender.file.Threshold=INFO
+log4j.appender.file.append=true
+log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
+</code></pre>
+<p>效果图:</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/56c1835ece22498ab520fec2904671dd~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
+<h2 id="4、项目中的使用"><a href="#4、项目中的使用" class="headerlink" title="4、项目中的使用"></a>4、项目中的使用</h2><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/152078da697143ce85f031930ee32a5f~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
+<p>注意Logger是 org.slf4j包下的。</p>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HiKaricp数据库连接池的使用</title>
     <url>/2020/11/18/HiKaricp%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<p>最近学习到除druid外，一种网上评论更快的数据库连接池，hikaricp,以下是SpringBoot集成HiKaricp</p>
@@ -53,8 +108,8 @@ mybatis:
         <category>HiKaricp</category>
       </categories>
       <tags>
-        <tag>HiKaricp</tag>
         <tag>SpringBoot</tag>
+        <tag>HiKaricp</tag>
       </tags>
   </entry>
   <entry>
@@ -70,61 +125,6 @@ mybatis:
 <pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span>SpringRunner<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
 <span class="token annotation punctuation">@SpringBootTest</span><span class="token punctuation">(</span>classes <span class="token operator">=</span> Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类</span>
 </code></pre>
-]]></content>
-      <categories>
-        <category>SpringBoot</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SpringBoot整合log4j输出日志</title>
-    <url>/2020/11/22/SpringBoot%E6%95%B4%E5%90%88%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/</url>
-    <content><![CDATA[<h2 id="1、首先剔除springboot自带的logging日志，因为其内容包含的太多。"><a href="#1、首先剔除springboot自带的logging日志，因为其内容包含的太多。" class="headerlink" title="1、首先剔除springboot自带的logging日志，因为其内容包含的太多。"></a>1、首先剔除springboot自带的logging日志，因为其内容包含的太多。</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/50f1b4d49f0c450b887bbb2df050c88a~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusions</span><span class="token punctuation">></span></span> // 剔除springboot自带的logging
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusion</span><span class="token punctuation">></span></span>
-           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-logging<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusion</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusions</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<p>剔除后再启动项目，可以发现控制台的输出，缺少日志，并且无端口号之类的信息.<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a7c5054094be45218054a5784ff385fe~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<h2 id="2、加入日志相关依赖"><a href="#2、加入日志相关依赖" class="headerlink" title="2、加入日志相关依赖"></a>2、加入日志相关依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token comment" spellcheck="true">&lt;!-- 日志相关 抽象层及实现层 --></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>slf4j-api<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.7.21<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>slf4j-log4j12<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.7.21<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<p>效果图:<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5ea618ec6f0444e6a60d0ba9ac2914dc~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<h2 id="3、编写相关配置文件log4j-properties"><a href="#3、编写相关配置文件log4j-properties" class="headerlink" title="3、编写相关配置文件log4j.properties"></a>3、编写相关配置文件log4j.properties</h2><pre class=" language-xml"><code class="language-xml">log4j.rootLogger=DEBUG,stdout,file
-log4j.additivity.org.apache=true
-
-log4j.appender.stdout=org.apache.log4j.ConsoleAppender
-log4j.appender.stdout.threshold=INFO
-log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
-log4j.appender.stdout.layout.ConversionPattern=%-5p %c<span class="token entity" title="&#123;">&amp;#123;</span>1<span class="token entity" title="&#125;">&amp;#125;</span>:%L - %m%n
-
-log4j.appender.file=org.apache.log4j.DailyRollingFileAppender
-log4j.appender.file.layout=org.apache.log4j.PatternLayout
-log4j.appender.file.DatePattern='.'yyyy-MM-dd-HH-mm
-log4j.appender.file.layout.ConversionPattern=%d<span class="token entity" title="&#123;">&amp;#123;</span>yyyy-MM-dd HH:mm:ss<span class="token entity" title="&#125;">&amp;#125;</span> %-5p %c<span class="token entity" title="&#123;">&amp;#123;</span>1<span class="token entity" title="&#125;">&amp;#125;</span>::%L - %m%n
-log4j.appender.file.Threshold=INFO
-log4j.appender.file.append=true
-log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
-</code></pre>
-<p>效果图:</p>
-<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/56c1835ece22498ab520fec2904671dd~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<h2 id="4、项目中的使用"><a href="#4、项目中的使用" class="headerlink" title="4、项目中的使用"></a>4、项目中的使用</h2><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/152078da697143ce85f031930ee32a5f~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<p>注意Logger是 org.slf4j包下的。</p>
 ]]></content>
       <categories>
         <category>SpringBoot</category>
@@ -259,32 +259,6 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
       <tags>
         <tag>SpringBoot</tag>
         <tag>Maven</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于通用mapper和restful风格撰写api</title>
-    <url>/2020/11/19/%E5%9F%BA%E4%BA%8E%E9%80%9A%E7%94%A8mapper%E5%92%8Crestful%E9%A3%8E%E6%A0%BC%E6%92%B0%E5%86%99api/</url>
-    <content><![CDATA[<p>现数据库有一张名为Stu的表<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32558fc8b8ee4c269afd061c6fcc1060~tplv-k3u1fbpfcp-zoom-1.image"><br>基于上一个博客提到的mybatis逆向工程生成<em>mapper.java、</em>mapper.xml以及pojo实体类，编写案例StuService,以及相应的实现类StuServiceImpl，<strong>注意到的是StuServiceImpl上面需要打上@Service注解以便可以被扫描到。</strong></p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> com<span class="token punctuation">.</span>imooc<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span>Stu<span class="token punctuation">;</span>
-
-<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">StuService</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> Stu <span class="token function">getStuInfo</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">saveStu</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">updateStu</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">deleteStu</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
-<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7b448e6f375a4f5684e908972a63dfaf~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c19e06c8e0148ac90ca898303a6d29e~tplv-k3u1fbpfcp-zoom-1.image"><br>编写controller层<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3349a49f574047b5833330c40ee87b6d~tplv-k3u1fbpfcp-zoom-1.image"><br>最后要注意启动类需要加一个@MapperScan注解用于扫描mapper,这里是mybatis来扫描mapper文件</p>
-<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebb7118fe29d4ccd9387c5c5f9c6f33c~tplv-k3u1fbpfcp-zoom-1.image"></p>
-]]></content>
-      <categories>
-        <category>Restful</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-        <tag>Maven</tag>
-        <tag>MyBatis</tag>
-        <tag>Restful</tag>
       </tags>
   </entry>
   <entry>
@@ -480,6 +454,180 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
       </categories>
       <tags>
         <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于通用mapper和restful风格撰写api</title>
+    <url>/2020/11/19/%E5%9F%BA%E4%BA%8E%E9%80%9A%E7%94%A8mapper%E5%92%8Crestful%E9%A3%8E%E6%A0%BC%E6%92%B0%E5%86%99api/</url>
+    <content><![CDATA[<p>现数据库有一张名为Stu的表<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32558fc8b8ee4c269afd061c6fcc1060~tplv-k3u1fbpfcp-zoom-1.image"><br>基于上一个博客提到的mybatis逆向工程生成<em>mapper.java、</em>mapper.xml以及pojo实体类，编写案例StuService,以及相应的实现类StuServiceImpl，<strong>注意到的是StuServiceImpl上面需要打上@Service注解以便可以被扫描到。</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> com<span class="token punctuation">.</span>imooc<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span>Stu<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">StuService</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> Stu <span class="token function">getStuInfo</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">saveStu</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">updateStu</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">deleteStu</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7b448e6f375a4f5684e908972a63dfaf~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c19e06c8e0148ac90ca898303a6d29e~tplv-k3u1fbpfcp-zoom-1.image"><br>编写controller层<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3349a49f574047b5833330c40ee87b6d~tplv-k3u1fbpfcp-zoom-1.image"><br>最后要注意启动类需要加一个@MapperScan注解用于扫描mapper,这里是mybatis来扫描mapper文件</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebb7118fe29d4ccd9387c5c5f9c6f33c~tplv-k3u1fbpfcp-zoom-1.image"></p>
+]]></content>
+      <categories>
+        <category>Restful</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+        <tag>Maven</tag>
+        <tag>MyBatis</tag>
+        <tag>Restful</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自定义相应体类</title>
+    <url>/2020/11/21/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%93%8D%E5%BA%94%E4%BD%93%E7%B1%BB/</url>
+    <content><![CDATA[<p>类结构如下，参考慕课网。</p>
+<pre><code>import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+/**
+ * 
+ * @Title: IMOOCJSONResult.java
+ * @Package com.imooc.utils
+ * @Description: 自定义响应数据结构
+ *                 本类可提供给 H5/ios/安卓/公众号/小程序 使用
+ *                 前端接受此类数据（json object)后，可自行根据业务去实现相关功能
+ * 
+ *                 200：表示成功
+ *                 500：表示错误，错误信息在msg字段中
+ *                 501：bean验证错误，不管多少个错误都以map形式返回
+ *                 502：拦截器拦截到用户token出错
+ *                 555：异常抛出信息
+ *                 556: 用户qq校验异常
+ * @Copyright: Copyright (c) 2020
+ * @Company: www.imooc.com
+ * @author 慕课网 - 风间影月
+ * @version V1.0
+ */
+public class IMOOCJSONResult &#123;
+
+    // 定义jackson对象
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    // 响应业务状态
+    private Integer status;
+
+    // 响应消息
+    private String msg;
+
+    // 响应中的数据
+    private Object data;
+
+    @JsonIgnore
+    private String ok;    // 不使用
+
+    public static IMOOCJSONResult build(Integer status, String msg, Object data) &#123;
+        return new IMOOCJSONResult(status, msg, data);
+    &#125;
+
+    public static IMOOCJSONResult build(Integer status, String msg, Object data, String ok) &#123;
+        return new IMOOCJSONResult(status, msg, data, ok);
+    &#125;
+
+    public static IMOOCJSONResult ok(Object data) &#123;
+        return new IMOOCJSONResult(data);
+    &#125;
+
+    public static IMOOCJSONResult ok() &#123;
+        return new IMOOCJSONResult(null);
+    &#125;
+
+    public static IMOOCJSONResult errorMsg(String msg) &#123;
+        return new IMOOCJSONResult(500, msg, null);
+    &#125;
+
+    public static IMOOCJSONResult errorMap(Object data) &#123;
+        return new IMOOCJSONResult(501, &quot;error&quot;, data);
+    &#125;
+
+    public static IMOOCJSONResult errorTokenMsg(String msg) &#123;
+        return new IMOOCJSONResult(502, msg, null);
+    &#125;
+
+    public static IMOOCJSONResult errorException(String msg) &#123;
+        return new IMOOCJSONResult(555, msg, null);
+    &#125;
+
+    public static IMOOCJSONResult errorUserQQ(String msg) &#123;
+        return new IMOOCJSONResult(556, msg, null);
+    &#125;
+
+    public IMOOCJSONResult() &#123;
+
+    &#125;
+
+    public IMOOCJSONResult(Integer status, String msg, Object data) &#123;
+        this.status = status;
+        this.msg = msg;
+        this.data = data;
+    &#125;
+
+    public IMOOCJSONResult(Integer status, String msg, Object data, String ok) &#123;
+        this.status = status;
+        this.msg = msg;
+        this.data = data;
+        this.ok = ok;
+    &#125;
+
+    public IMOOCJSONResult(Object data) &#123;
+        this.status = 200;
+        this.msg = &quot;OK&quot;;
+        this.data = data;
+    &#125;
+
+    public Boolean isOK() &#123;
+        return this.status == 200;
+    &#125;
+
+    public Integer getStatus() &#123;
+        return status;
+    &#125;
+
+    public void setStatus(Integer status) &#123;
+        this.status = status;
+    &#125;
+
+    public String getMsg() &#123;
+        return msg;
+    &#125;
+
+    public void setMsg(String msg) &#123;
+        this.msg = msg;
+    &#125;
+
+    public Object getData() &#123;
+        return data;
+    &#125;
+
+    public void setData(Object data) &#123;
+        this.data = data;
+    &#125;
+
+    public String getOk() &#123;
+        return ok;
+    &#125;
+
+    public void setOk(String ok) &#123;
+        this.ok = ok;
+    &#125;
+
+&#125;
+</code></pre>
+]]></content>
+      <categories>
+        <category>JavaEE</category>
+      </categories>
+      <tags>
+        <tag>JavaEE</tag>
       </tags>
   </entry>
   <entry>
