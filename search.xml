@@ -1,23 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>使用SpringBoot进行单元测试</title>
-    <url>/2020/11/19/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h2 id="1、添加依赖"><a href="#1、添加依赖" class="headerlink" title="1、添加依赖"></a>1、添加依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<h2 id="2、编写相关测试用例"><a href="#2、编写相关测试用例" class="headerlink" title="2、编写相关测试用例"></a>2、编写相关测试用例</h2><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c999a60091524928b871b5e42dea587d~tplv-k3u1fbpfcp-zoom-1.image" alt="avatar"></p>
-<p>注意，单元测试需要添加如下注解:</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span>SpringRunner<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@SpringBootTest</span><span class="token punctuation">(</span>classes <span class="token operator">=</span> Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类</span>
-</code></pre>
+    <title>HiKaricp数据库连接池的使用</title>
+    <url>/2020/11/18/HiKaricp%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>最近学习到除druid外，一种网上评论更快的数据库连接池，hikaricp,以下是SpringBoot集成HiKaricp</p>
+<h2 id="1、首先在springboot项目中引入mybatis及mysql的相关依赖。"><a href="#1、首先在springboot项目中引入mybatis及mysql的相关依赖。" class="headerlink" title="1、首先在springboot项目中引入mybatis及mysql的相关依赖。"></a>1、首先在springboot项目中引入mybatis及mysql的相关依赖。</h2><pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>mysql<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>mysql-connector-java<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.1.41<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.mybatis.spring.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>mybatis-spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.1.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="2、其次在application-yml中做相应的配置"><a href="#2、其次在application-yml中做相应的配置" class="headerlink" title="2、其次在application.yml中做相应的配置"></a>2、其次在application.yml中做相应的配置</h2><p>相应配置如下</p>
+<pre class=" language-yml"><code class="language-yml">
+#tomcat配置
+server:
+  port: 8088
+  tomcat:
+    uri-encoding: UTF-8
+  max-http-header-size: 80KB
+
+
+#连接池配置
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/foodie-shop?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    username: root
+    password: root
+    hikari:
+      connection-timeout: 30000 #等待连接池分配连接的最大时常（毫秒），超过这个时常还没有可用的连接则会发生SQLException,默认：30秒
+      minimum-idle: 5 #最小连接数
+      maximum-pool-size: 20 #最大连接数
+      auto-commit: true #自动提交
+      idle-timeout: 600000 #连接超时的最大时长(毫秒)，超时则被释放(retired)
+      pool-name: DataSourceHikariCP #连接池名字
+      max-lifetime: 1800000 #连接的生命时长(毫秒)，超时而且没被使用则被释放
+      connection-test-query: SELECT 1
+
+
+#mybatis配置
+
+mybatis:
+  type-aliases-package: com.imooc.pojo #实体类的存放位置
+  mapper-locations: classpath:mapper/*.xml #mappery映射文件</code></pre>
 ]]></content>
       <categories>
-        <category>SpringBoot</category>
+        <category>HiKaricp</category>
       </categories>
       <tags>
+        <tag>HiKaricp</tag>
         <tag>SpringBoot</tag>
       </tags>
   </entry>
@@ -100,60 +136,24 @@
       </tags>
   </entry>
   <entry>
-    <title>HiKaricp数据库连接池的使用</title>
-    <url>/2020/11/18/HiKaricp%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>最近学习到除druid外，一种网上评论更快的数据库连接池，hikaricp,以下是SpringBoot集成HiKaricp</p>
-<h2 id="1、首先在springboot项目中引入mybatis及mysql的相关依赖。"><a href="#1、首先在springboot项目中引入mybatis及mysql的相关依赖。" class="headerlink" title="1、首先在springboot项目中引入mybatis及mysql的相关依赖。"></a>1、首先在springboot项目中引入mybatis及mysql的相关依赖。</h2><pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>mysql<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>mysql-connector-java<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.1.41<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.mybatis.spring.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>mybatis-spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.1.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<h2 id="2、其次在application-yml中做相应的配置"><a href="#2、其次在application-yml中做相应的配置" class="headerlink" title="2、其次在application.yml中做相应的配置"></a>2、其次在application.yml中做相应的配置</h2><p>相应配置如下</p>
-<pre class=" language-yml"><code class="language-yml">
-#tomcat配置
-server:
-  port: 8088
-  tomcat:
-    uri-encoding: UTF-8
-  max-http-header-size: 80KB
-
-
-#连接池配置
-spring:
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/foodie-shop?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
-    username: root
-    password: root
-    hikari:
-      connection-timeout: 30000 #等待连接池分配连接的最大时常（毫秒），超过这个时常还没有可用的连接则会发生SQLException,默认：30秒
-      minimum-idle: 5 #最小连接数
-      maximum-pool-size: 20 #最大连接数
-      auto-commit: true #自动提交
-      idle-timeout: 600000 #连接超时的最大时长(毫秒)，超时则被释放(retired)
-      pool-name: DataSourceHikariCP #连接池名字
-      max-lifetime: 1800000 #连接的生命时长(毫秒)，超时而且没被使用则被释放
-      connection-test-query: SELECT 1
-
-
-#mybatis配置
-
-mybatis:
-  type-aliases-package: com.imooc.pojo #实体类的存放位置
-  mapper-locations: classpath:mapper/*.xml #mappery映射文件</code></pre>
+    <title>使用SpringBoot进行单元测试</title>
+    <url>/2020/11/19/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h2 id="1、添加依赖"><a href="#1、添加依赖" class="headerlink" title="1、添加依赖"></a>1、添加依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="2、编写相关测试用例"><a href="#2、编写相关测试用例" class="headerlink" title="2、编写相关测试用例"></a>2、编写相关测试用例</h2><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c999a60091524928b871b5e42dea587d~tplv-k3u1fbpfcp-zoom-1.image" alt="avatar"></p>
+<p>注意，单元测试需要添加如下注解:</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span>SpringRunner<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@SpringBootTest</span><span class="token punctuation">(</span>classes <span class="token operator">=</span> Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类</span>
+</code></pre>
 ]]></content>
       <categories>
-        <category>HiKaricp</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
         <tag>SpringBoot</tag>
-        <tag>HiKaricp</tag>
       </tags>
   </entry>
   <entry>
@@ -209,56 +209,6 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
       </categories>
       <tags>
         <tag>SpringBoot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>maven构建聚合工程</title>
-    <url>/2020/11/18/maven%E6%9E%84%E5%BB%BA%E8%81%9A%E5%90%88%E5%B7%A5%E7%A8%8B/</url>
-    <content><![CDATA[<h2 id="Maven中的打包方式"><a href="#Maven中的打包方式" class="headerlink" title="Maven中的打包方式"></a>Maven中的打包方式</h2><p>maven中打包方式有三种，pom,war,jar，一般在父模块打包方式选pom,子模块再指定相应的war或者jar，其标签如下：</p>
-<pre><code> &lt;packaging&gt;&lt;/packaging&gt;</code></pre>
-<h2 id="SpringBoot构建聚合工程步骤"><a href="#SpringBoot构建聚合工程步骤" class="headerlink" title="SpringBoot构建聚合工程步骤"></a>SpringBoot构建聚合工程步骤</h2><h3 id="1、父工程构建"><a href="#1、父工程构建" class="headerlink" title="1、父工程构建"></a>1、父工程构建</h3><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8290f8b0c42b4897886bcc1ff97534c6~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h3 id="2、子工程构建"><a href="#2、子工程构建" class="headerlink" title="2、子工程构建"></a>2、子工程构建</h3><p>1、在父模块点击new module<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/238211cbd250462baa4118b2708dbc63~tplv-k3u1fbpfcp-zoom-1.image"><br>2、next下一步即可<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/921d56a58eb9466b9e1a6b1ec1d30cdf~tplv-k3u1fbpfcp-zoom-1.image"><br>在这里可以看出子模块清晰地标出了丛属的parent模块<br>3、子模块的pom文件<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8847ea6138524b06b2c96fc2825ea9bd~tplv-k3u1fbpfcp-zoom-1.image"><br>注意到，其默认打包方式为jar，但是我们一般喜欢显示的声明出来。</p>
-<p>4、此时可以查看父模块的pom文件，发现发生了变化，父模块的pom文件多了个</p>
-<pre><code> &lt;modules&gt;  &lt;/modules&gt;</code></pre>
-<p>标签，并且所有的子模块都在这个标签中出现。<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/75f15eea4b7142d6ab63b24519ded62e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>5、子工程之间可以相互依赖，如何做到这一点呢，其实很简单，比如我们再创建一个子模块叫foodie-dev-pojo，并且在他的pom文件里加入依赖，这样，两个子工程就做到相互依赖了。</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-common<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a4c99e267b04b818793a8ddf24a8c35~tplv-k3u1fbpfcp-zoom-1.image"><br>6、接下来我们又创建了mapper模块，用以存放与mybatis交互的一些mapper.jar等，这里需要注意这个子模块要依赖pojo层，原因是一些sql语句需要实体类，因此需添加相关依赖。</p>
-<pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-pojo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3e306a999fea48b38f913d0d816c1259~tplv-k3u1fbpfcp-zoom-1.image"><br>子模块的依赖关系如下<br>mapper–&gt;pojo–&gt;common，因此mapper也可以使用common中的相应方法。</p>
-<p>7、接下来是service层，同理这一部分需要依赖mapper层。</p>
-<pre class=" language-xml"><code class="language-xml">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-mapper<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ffc2e67b9d2840f58430e655dc6eb795~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>依赖关系如下：<br>service–&gt;mapper–&gt;pojo–&gt;common</p>
-<p>8、最后一个子模块是api模块，也就是controller层<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/25e87c918d054c7abf3a584ad2e44798~tplv-k3u1fbpfcp-zoom-1.image"><br>api层依赖了service，也可以调用mapper层，但是原则上不允许之间调mapepr层，只允许调用service层。</p>
-<p>9、最后需要注意的是，我们构建完聚合工程后，一定要安装，所谓的安装就是在maven的root项目的lifecycle里双击install命令。<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7c444d793b2f4b989e55e11590e52c84~tplv-k3u1fbpfcp-zoom-1.image"><br>安装完成控制台会出现，build success提示。</p>
-<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa4f10b9eed44c5b3c2d93979bae07f~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1、聚合工程可以分为顶级项目(顶级工程、父工程)与子工程，这两者的关系其实就是父子继承的关系，子工程在maven里称之为模块(module)，模块之间是平级的，<strong>是可以相互依赖的。</strong><br>2、子模块可以使用顶级工程里的所有资源(依赖)，子模块之间如果要使用资源，必须构建依赖(构建关系)<br>3、一个顶级工程是可以由多个不同的子工程共同组合而成。这就构成了一个可以运行的项目。</p>
-]]></content>
-      <categories>
-        <category>Maven</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-        <tag>Maven</tag>
       </tags>
   </entry>
   <entry>
@@ -380,6 +330,56 @@ public class MainConfig &#123;
 <p>其次谈谈@SpringBootConfiguration注解, @SpringBootConfiguration继承自@Configuration，二者功能也一致，标注当前类是配置类，<br>并会将当前类内声明的一个或多个以@Bean注解标记的方法的实例纳入到spring容器中，并且实例名就是方法名。</p>
 <p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f63fcffb6db44ae5952d14c8118da941~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>结果<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/69a88840456a401b98b4c62ada18dabb~tplv-k3u1fbpfcp-zoom-1.image"></p>
+]]></content>
+      <categories>
+        <category>Maven</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+        <tag>Maven</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>maven构建聚合工程</title>
+    <url>/2020/11/18/maven%E6%9E%84%E5%BB%BA%E8%81%9A%E5%90%88%E5%B7%A5%E7%A8%8B/</url>
+    <content><![CDATA[<h2 id="Maven中的打包方式"><a href="#Maven中的打包方式" class="headerlink" title="Maven中的打包方式"></a>Maven中的打包方式</h2><p>maven中打包方式有三种，pom,war,jar，一般在父模块打包方式选pom,子模块再指定相应的war或者jar，其标签如下：</p>
+<pre><code> &lt;packaging&gt;&lt;/packaging&gt;</code></pre>
+<h2 id="SpringBoot构建聚合工程步骤"><a href="#SpringBoot构建聚合工程步骤" class="headerlink" title="SpringBoot构建聚合工程步骤"></a>SpringBoot构建聚合工程步骤</h2><h3 id="1、父工程构建"><a href="#1、父工程构建" class="headerlink" title="1、父工程构建"></a>1、父工程构建</h3><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8290f8b0c42b4897886bcc1ff97534c6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h3 id="2、子工程构建"><a href="#2、子工程构建" class="headerlink" title="2、子工程构建"></a>2、子工程构建</h3><p>1、在父模块点击new module<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/238211cbd250462baa4118b2708dbc63~tplv-k3u1fbpfcp-zoom-1.image"><br>2、next下一步即可<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/921d56a58eb9466b9e1a6b1ec1d30cdf~tplv-k3u1fbpfcp-zoom-1.image"><br>在这里可以看出子模块清晰地标出了丛属的parent模块<br>3、子模块的pom文件<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8847ea6138524b06b2c96fc2825ea9bd~tplv-k3u1fbpfcp-zoom-1.image"><br>注意到，其默认打包方式为jar，但是我们一般喜欢显示的声明出来。</p>
+<p>4、此时可以查看父模块的pom文件，发现发生了变化，父模块的pom文件多了个</p>
+<pre><code> &lt;modules&gt;  &lt;/modules&gt;</code></pre>
+<p>标签，并且所有的子模块都在这个标签中出现。<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/75f15eea4b7142d6ab63b24519ded62e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>5、子工程之间可以相互依赖，如何做到这一点呢，其实很简单，比如我们再创建一个子模块叫foodie-dev-pojo，并且在他的pom文件里加入依赖，这样，两个子工程就做到相互依赖了。</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-common<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a4c99e267b04b818793a8ddf24a8c35~tplv-k3u1fbpfcp-zoom-1.image"><br>6、接下来我们又创建了mapper模块，用以存放与mybatis交互的一些mapper.jar等，这里需要注意这个子模块要依赖pojo层，原因是一些sql语句需要实体类，因此需添加相关依赖。</p>
+<pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-pojo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3e306a999fea48b38f913d0d816c1259~tplv-k3u1fbpfcp-zoom-1.image"><br>子模块的依赖关系如下<br>mapper–&gt;pojo–&gt;common，因此mapper也可以使用common中的相应方法。</p>
+<p>7、接下来是service层，同理这一部分需要依赖mapper层。</p>
+<pre class=" language-xml"><code class="language-xml">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-mapper<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ffc2e67b9d2840f58430e655dc6eb795~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>依赖关系如下：<br>service–&gt;mapper–&gt;pojo–&gt;common</p>
+<p>8、最后一个子模块是api模块，也就是controller层<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/25e87c918d054c7abf3a584ad2e44798~tplv-k3u1fbpfcp-zoom-1.image"><br>api层依赖了service，也可以调用mapper层，但是原则上不允许之间调mapepr层，只允许调用service层。</p>
+<p>9、最后需要注意的是，我们构建完聚合工程后，一定要安装，所谓的安装就是在maven的root项目的lifecycle里双击install命令。<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7c444d793b2f4b989e55e11590e52c84~tplv-k3u1fbpfcp-zoom-1.image"><br>安装完成控制台会出现，build success提示。</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa4f10b9eed44c5b3c2d93979bae07f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1、聚合工程可以分为顶级项目(顶级工程、父工程)与子工程，这两者的关系其实就是父子继承的关系，子工程在maven里称之为模块(module)，模块之间是平级的，<strong>是可以相互依赖的。</strong><br>2、子模块可以使用顶级工程里的所有资源(依赖)，子模块之间如果要使用资源，必须构建依赖(构建关系)<br>3、一个顶级工程是可以由多个不同的子工程共同组合而成。这就构成了一个可以运行的项目。</p>
 ]]></content>
       <categories>
         <category>Maven</category>
@@ -647,7 +647,7 @@ public class IMOOCJSONResult &#123;
   </entry>
   <entry>
     <title>跳台阶问题的几种变形</title>
-    <url>/2020/11/19/%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98/</url>
+    <url>/2020/11/10/%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h2 id="1、一次可以跳一个台阶或者两个台阶"><a href="#1、一次可以跳一个台阶或者两个台阶" class="headerlink" title="1、一次可以跳一个台阶或者两个台阶"></a>1、一次可以跳一个台阶或者两个台阶</h2><pre><code>一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n级的台阶总共有多少种跳法。
 示例 1：
 输入：n = 2
