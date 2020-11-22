@@ -212,53 +212,18 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
       </tags>
   </entry>
   <entry>
-    <title>maven构建聚合工程</title>
-    <url>/2020/11/18/maven%E6%9E%84%E5%BB%BA%E8%81%9A%E5%90%88%E5%B7%A5%E7%A8%8B/</url>
-    <content><![CDATA[<h2 id="Maven中的打包方式"><a href="#Maven中的打包方式" class="headerlink" title="Maven中的打包方式"></a>Maven中的打包方式</h2><p>maven中打包方式有三种，pom,war,jar，一般在父模块打包方式选pom,子模块再指定相应的war或者jar，其标签如下：</p>
-<pre><code> &lt;packaging&gt;&lt;/packaging&gt;</code></pre>
-<h2 id="SpringBoot构建聚合工程步骤"><a href="#SpringBoot构建聚合工程步骤" class="headerlink" title="SpringBoot构建聚合工程步骤"></a>SpringBoot构建聚合工程步骤</h2><h3 id="1、父工程构建"><a href="#1、父工程构建" class="headerlink" title="1、父工程构建"></a>1、父工程构建</h3><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8290f8b0c42b4897886bcc1ff97534c6~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h3 id="2、子工程构建"><a href="#2、子工程构建" class="headerlink" title="2、子工程构建"></a>2、子工程构建</h3><p>1、在父模块点击new module<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/238211cbd250462baa4118b2708dbc63~tplv-k3u1fbpfcp-zoom-1.image"><br>2、next下一步即可<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/921d56a58eb9466b9e1a6b1ec1d30cdf~tplv-k3u1fbpfcp-zoom-1.image"><br>在这里可以看出子模块清晰地标出了丛属的parent模块<br>3、子模块的pom文件<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8847ea6138524b06b2c96fc2825ea9bd~tplv-k3u1fbpfcp-zoom-1.image"><br>注意到，其默认打包方式为jar，但是我们一般喜欢显示的声明出来。</p>
-<p>4、此时可以查看父模块的pom文件，发现发生了变化，父模块的pom文件多了个</p>
-<pre><code> &lt;modules&gt;  &lt;/modules&gt;</code></pre>
-<p>标签，并且所有的子模块都在这个标签中出现。<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/75f15eea4b7142d6ab63b24519ded62e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>5、子工程之间可以相互依赖，如何做到这一点呢，其实很简单，比如我们再创建一个子模块叫foodie-dev-pojo，并且在他的pom文件里加入依赖，这样，两个子工程就做到相互依赖了。</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-common<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a4c99e267b04b818793a8ddf24a8c35~tplv-k3u1fbpfcp-zoom-1.image"><br>6、接下来我们又创建了mapper模块，用以存放与mybatis交互的一些mapper.jar等，这里需要注意这个子模块要依赖pojo层，原因是一些sql语句需要实体类，因此需添加相关依赖。</p>
-<pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-pojo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3e306a999fea48b38f913d0d816c1259~tplv-k3u1fbpfcp-zoom-1.image"><br>子模块的依赖关系如下<br>mapper–&gt;pojo–&gt;common，因此mapper也可以使用common中的相应方法。</p>
-<p>7、接下来是service层，同理这一部分需要依赖mapper层。</p>
-<pre class=" language-xml"><code class="language-xml">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-mapper<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ffc2e67b9d2840f58430e655dc6eb795~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>依赖关系如下：<br>service–&gt;mapper–&gt;pojo–&gt;common</p>
-<p>8、最后一个子模块是api模块，也就是controller层<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/25e87c918d054c7abf3a584ad2e44798~tplv-k3u1fbpfcp-zoom-1.image"><br>api层依赖了service，也可以调用mapper层，但是原则上不允许之间调mapepr层，只允许调用service层。</p>
-<p>9、最后需要注意的是，我们构建完聚合工程后，一定要安装，所谓的安装就是在maven的root项目的lifecycle里双击install命令。<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7c444d793b2f4b989e55e11590e52c84~tplv-k3u1fbpfcp-zoom-1.image"><br>安装完成控制台会出现，build success提示。</p>
-<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa4f10b9eed44c5b3c2d93979bae07f~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1、聚合工程可以分为顶级项目(顶级工程、父工程)与子工程，这两者的关系其实就是父子继承的关系，子工程在maven里称之为模块(module)，模块之间是平级的，<strong>是可以相互依赖的。</strong><br>2、子模块可以使用顶级工程里的所有资源(依赖)，子模块之间如果要使用资源，必须构建依赖(构建关系)<br>3、一个顶级工程是可以由多个不同的子工程共同组合而成。这就构成了一个可以运行的项目。</p>
+    <title>利用通用mapper进行数据库查询操作</title>
+    <url>/2020/11/19/%E5%88%A9%E7%94%A8%E9%80%9A%E7%94%A8mapper%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<p>案例：使用example创建查询条件进行相关查询。<br>例如查询数据库中是否存在某个用户名。<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/864beb5a1c714781878bcba260d006b5~tplv-k3u1fbpfcp-watermark.image"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7dd41d13edca4c98bd97b1861c9d66d6~tplv-k3u1fbpfcp-watermark.image"></p>
 ]]></content>
       <categories>
-        <category>Maven</category>
+        <category>Mybatis</category>
       </categories>
       <tags>
         <tag>SpringBoot</tag>
         <tag>Maven</tag>
+        <tag>MyBatis</tag>
+        <tag>Restful</tag>
       </tags>
   </entry>
   <entry>
@@ -375,18 +340,79 @@ public class MainConfig &#123;
       </tags>
   </entry>
   <entry>
-    <title>利用通用mapper进行数据库查询操作</title>
-    <url>/2020/11/19/%E5%88%A9%E7%94%A8%E9%80%9A%E7%94%A8mapper%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<p>案例：使用example创建查询条件进行相关查询。<br>例如查询数据库中是否存在某个用户名。<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/864beb5a1c714781878bcba260d006b5~tplv-k3u1fbpfcp-watermark.image"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7dd41d13edca4c98bd97b1861c9d66d6~tplv-k3u1fbpfcp-watermark.image"></p>
+    <title>基于通用mapper和restful风格撰写api</title>
+    <url>/2020/11/19/%E5%9F%BA%E4%BA%8E%E9%80%9A%E7%94%A8mapper%E5%92%8Crestful%E9%A3%8E%E6%A0%BC%E6%92%B0%E5%86%99api/</url>
+    <content><![CDATA[<p>现数据库有一张名为Stu的表<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32558fc8b8ee4c269afd061c6fcc1060~tplv-k3u1fbpfcp-zoom-1.image"><br>基于上一个博客提到的mybatis逆向工程生成<em>mapper.java、</em>mapper.xml以及pojo实体类，编写案例StuService,以及相应的实现类StuServiceImpl，<strong>注意到的是StuServiceImpl上面需要打上@Service注解以便可以被扫描到。</strong></p>
+<pre><code>import com.imooc.pojo.Stu;
+
+public interface StuService &#123;
+    public Stu getStuInfo(int id);
+    public void saveStu();
+    public void updateStu(int id);
+    public void deleteStu(int id);
+&#125;</code></pre>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7b448e6f375a4f5684e908972a63dfaf~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c19e06c8e0148ac90ca898303a6d29e~tplv-k3u1fbpfcp-zoom-1.image"><br>编写controller层<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3349a49f574047b5833330c40ee87b6d~tplv-k3u1fbpfcp-zoom-1.image"><br>最后要注意启动类需要加一个@MapperScan注解用于扫描mapper,这里是mybatis来扫描mapper文件</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebb7118fe29d4ccd9387c5c5f9c6f33c~tplv-k3u1fbpfcp-zoom-1.image"></p>
 ]]></content>
       <categories>
-        <category>Mybatis</category>
+        <category>Restful</category>
       </categories>
       <tags>
         <tag>SpringBoot</tag>
         <tag>Maven</tag>
         <tag>MyBatis</tag>
         <tag>Restful</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>maven构建聚合工程</title>
+    <url>/2020/11/18/maven%E6%9E%84%E5%BB%BA%E8%81%9A%E5%90%88%E5%B7%A5%E7%A8%8B/</url>
+    <content><![CDATA[<h2 id="Maven中的打包方式"><a href="#Maven中的打包方式" class="headerlink" title="Maven中的打包方式"></a>Maven中的打包方式</h2><p>maven中打包方式有三种，pom,war,jar，一般在父模块打包方式选pom,子模块再指定相应的war或者jar，其标签如下：</p>
+<pre><code> &lt;packaging&gt;&lt;/packaging&gt;</code></pre>
+<h2 id="SpringBoot构建聚合工程步骤"><a href="#SpringBoot构建聚合工程步骤" class="headerlink" title="SpringBoot构建聚合工程步骤"></a>SpringBoot构建聚合工程步骤</h2><h3 id="1、父工程构建"><a href="#1、父工程构建" class="headerlink" title="1、父工程构建"></a>1、父工程构建</h3><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8290f8b0c42b4897886bcc1ff97534c6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h3 id="2、子工程构建"><a href="#2、子工程构建" class="headerlink" title="2、子工程构建"></a>2、子工程构建</h3><p>1、在父模块点击new module<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/238211cbd250462baa4118b2708dbc63~tplv-k3u1fbpfcp-zoom-1.image"><br>2、next下一步即可<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/921d56a58eb9466b9e1a6b1ec1d30cdf~tplv-k3u1fbpfcp-zoom-1.image"><br>在这里可以看出子模块清晰地标出了丛属的parent模块<br>3、子模块的pom文件<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8847ea6138524b06b2c96fc2825ea9bd~tplv-k3u1fbpfcp-zoom-1.image"><br>注意到，其默认打包方式为jar，但是我们一般喜欢显示的声明出来。</p>
+<p>4、此时可以查看父模块的pom文件，发现发生了变化，父模块的pom文件多了个</p>
+<pre><code> &lt;modules&gt;  &lt;/modules&gt;</code></pre>
+<p>标签，并且所有的子模块都在这个标签中出现。<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/75f15eea4b7142d6ab63b24519ded62e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>5、子工程之间可以相互依赖，如何做到这一点呢，其实很简单，比如我们再创建一个子模块叫foodie-dev-pojo，并且在他的pom文件里加入依赖，这样，两个子工程就做到相互依赖了。</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-common<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a4c99e267b04b818793a8ddf24a8c35~tplv-k3u1fbpfcp-zoom-1.image"><br>6、接下来我们又创建了mapper模块，用以存放与mybatis交互的一些mapper.jar等，这里需要注意这个子模块要依赖pojo层，原因是一些sql语句需要实体类，因此需添加相关依赖。</p>
+<pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-pojo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3e306a999fea48b38f913d0d816c1259~tplv-k3u1fbpfcp-zoom-1.image"><br>子模块的依赖关系如下<br>mapper–&gt;pojo–&gt;common，因此mapper也可以使用common中的相应方法。</p>
+<p>7、接下来是service层，同理这一部分需要依赖mapper层。</p>
+<pre class=" language-xml"><code class="language-xml">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-mapper<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ffc2e67b9d2840f58430e655dc6eb795~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>依赖关系如下：<br>service–&gt;mapper–&gt;pojo–&gt;common</p>
+<p>8、最后一个子模块是api模块，也就是controller层<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/25e87c918d054c7abf3a584ad2e44798~tplv-k3u1fbpfcp-zoom-1.image"><br>api层依赖了service，也可以调用mapper层，但是原则上不允许之间调mapepr层，只允许调用service层。</p>
+<p>9、最后需要注意的是，我们构建完聚合工程后，一定要安装，所谓的安装就是在maven的root项目的lifecycle里双击install命令。<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7c444d793b2f4b989e55e11590e52c84~tplv-k3u1fbpfcp-zoom-1.image"><br>安装完成控制台会出现，build success提示。</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa4f10b9eed44c5b3c2d93979bae07f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1、聚合工程可以分为顶级项目(顶级工程、父工程)与子工程，这两者的关系其实就是父子继承的关系，子工程在maven里称之为模块(module)，模块之间是平级的，<strong>是可以相互依赖的。</strong><br>2、子模块可以使用顶级工程里的所有资源(依赖)，子模块之间如果要使用资源，必须构建依赖(构建关系)<br>3、一个顶级工程是可以由多个不同的子工程共同组合而成。这就构成了一个可以运行的项目。</p>
+]]></content>
+      <categories>
+        <category>Maven</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+        <tag>Maven</tag>
       </tags>
   </entry>
   <entry>
@@ -602,32 +628,6 @@ f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
       </categories>
       <tags>
         <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于通用mapper和restful风格撰写api</title>
-    <url>/2020/11/19/%E5%9F%BA%E4%BA%8E%E9%80%9A%E7%94%A8mapper%E5%92%8Crestful%E9%A3%8E%E6%A0%BC%E6%92%B0%E5%86%99api/</url>
-    <content><![CDATA[<p>现数据库有一张名为Stu的表<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32558fc8b8ee4c269afd061c6fcc1060~tplv-k3u1fbpfcp-zoom-1.image"><br>基于上一个博客提到的mybatis逆向工程生成<em>mapper.java、</em>mapper.xml以及pojo实体类，编写案例StuService,以及相应的实现类StuServiceImpl，<strong>注意到的是StuServiceImpl上面需要打上@Service注解以便可以被扫描到。</strong></p>
-<pre><code>import com.imooc.pojo.Stu;
-
-public interface StuService &#123;
-    public Stu getStuInfo(int id);
-    public void saveStu();
-    public void updateStu(int id);
-    public void deleteStu(int id);
-&#125;</code></pre>
-<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7b448e6f375a4f5684e908972a63dfaf~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c19e06c8e0148ac90ca898303a6d29e~tplv-k3u1fbpfcp-zoom-1.image"><br>编写controller层<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3349a49f574047b5833330c40ee87b6d~tplv-k3u1fbpfcp-zoom-1.image"><br>最后要注意启动类需要加一个@MapperScan注解用于扫描mapper,这里是mybatis来扫描mapper文件</p>
-<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebb7118fe29d4ccd9387c5c5f9c6f33c~tplv-k3u1fbpfcp-zoom-1.image"></p>
-]]></content>
-      <categories>
-        <category>Restful</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-        <tag>Maven</tag>
-        <tag>MyBatis</tag>
-        <tag>Restful</tag>
       </tags>
   </entry>
   <entry>
