@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>使用SpringBoot进行单元测试</title>
+    <url>/2020/11/19/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h2 id="1、添加依赖"><a href="#1、添加依赖" class="headerlink" title="1、添加依赖"></a>1、添加依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="2、编写相关测试用例"><a href="#2、编写相关测试用例" class="headerlink" title="2、编写相关测试用例"></a>2、编写相关测试用例</h2><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c999a60091524928b871b5e42dea587d~tplv-k3u1fbpfcp-zoom-1.image" alt="avatar"></p>
+<p>注意，单元测试需要添加如下注解:</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span>SpringRunner<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@SpringBootTest</span><span class="token punctuation">(</span>classes <span class="token operator">=</span> Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类</span>
+</code></pre>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HiKaricp数据库连接池的使用</title>
     <url>/2020/11/18/HiKaricp%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<p>最近学习到除druid外，一种网上评论更快的数据库连接池，hikaricp,以下是SpringBoot集成HiKaricp</p>
@@ -53,8 +74,8 @@ mybatis:
         <category>HiKaricp</category>
       </categories>
       <tags>
-        <tag>HiKaricp</tag>
         <tag>SpringBoot</tag>
+        <tag>HiKaricp</tag>
       </tags>
   </entry>
   <entry>
@@ -136,27 +157,6 @@ mybatis:
       </tags>
   </entry>
   <entry>
-    <title>使用SpringBoot进行单元测试</title>
-    <url>/2020/11/19/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h2 id="1、添加依赖"><a href="#1、添加依赖" class="headerlink" title="1、添加依赖"></a>1、添加依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<h2 id="2、编写相关测试用例"><a href="#2、编写相关测试用例" class="headerlink" title="2、编写相关测试用例"></a>2、编写相关测试用例</h2><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c999a60091524928b871b5e42dea587d~tplv-k3u1fbpfcp-zoom-1.image" alt="avatar"></p>
-<p>注意，单元测试需要添加如下注解:</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span>SpringRunner<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@SpringBootTest</span><span class="token punctuation">(</span>classes <span class="token operator">=</span> Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类</span>
-</code></pre>
-]]></content>
-      <categories>
-        <category>SpringBoot</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SpringBoot整合log4j输出日志</title>
     <url>/2020/11/22/SpringBoot%E6%95%B4%E5%90%88%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/</url>
     <content><![CDATA[<h2 id="1、首先剔除springboot自带的logging日志，因为其内容包含的太多。"><a href="#1、首先剔除springboot自带的logging日志，因为其内容包含的太多。" class="headerlink" title="1、首先剔除springboot自带的logging日志，因为其内容包含的太多。"></a>1、首先剔除springboot自带的logging日志，因为其内容包含的太多。</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/50f1b4d49f0c450b887bbb2df050c88a~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
@@ -209,56 +209,6 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
       </categories>
       <tags>
         <tag>SpringBoot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>maven构建聚合工程</title>
-    <url>/2020/11/18/maven%E6%9E%84%E5%BB%BA%E8%81%9A%E5%90%88%E5%B7%A5%E7%A8%8B/</url>
-    <content><![CDATA[<h2 id="Maven中的打包方式"><a href="#Maven中的打包方式" class="headerlink" title="Maven中的打包方式"></a>Maven中的打包方式</h2><p>maven中打包方式有三种，pom,war,jar，一般在父模块打包方式选pom,子模块再指定相应的war或者jar，其标签如下：</p>
-<pre><code> &lt;packaging&gt;&lt;/packaging&gt;</code></pre>
-<h2 id="SpringBoot构建聚合工程步骤"><a href="#SpringBoot构建聚合工程步骤" class="headerlink" title="SpringBoot构建聚合工程步骤"></a>SpringBoot构建聚合工程步骤</h2><h3 id="1、父工程构建"><a href="#1、父工程构建" class="headerlink" title="1、父工程构建"></a>1、父工程构建</h3><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8290f8b0c42b4897886bcc1ff97534c6~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h3 id="2、子工程构建"><a href="#2、子工程构建" class="headerlink" title="2、子工程构建"></a>2、子工程构建</h3><p>1、在父模块点击new module<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/238211cbd250462baa4118b2708dbc63~tplv-k3u1fbpfcp-zoom-1.image"><br>2、next下一步即可<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/921d56a58eb9466b9e1a6b1ec1d30cdf~tplv-k3u1fbpfcp-zoom-1.image"><br>在这里可以看出子模块清晰地标出了丛属的parent模块<br>3、子模块的pom文件<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8847ea6138524b06b2c96fc2825ea9bd~tplv-k3u1fbpfcp-zoom-1.image"><br>注意到，其默认打包方式为jar，但是我们一般喜欢显示的声明出来。</p>
-<p>4、此时可以查看父模块的pom文件，发现发生了变化，父模块的pom文件多了个</p>
-<pre><code> &lt;modules&gt;  &lt;/modules&gt;</code></pre>
-<p>标签，并且所有的子模块都在这个标签中出现。<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/75f15eea4b7142d6ab63b24519ded62e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>5、子工程之间可以相互依赖，如何做到这一点呢，其实很简单，比如我们再创建一个子模块叫foodie-dev-pojo，并且在他的pom文件里加入依赖，这样，两个子工程就做到相互依赖了。</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-common<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a4c99e267b04b818793a8ddf24a8c35~tplv-k3u1fbpfcp-zoom-1.image"><br>6、接下来我们又创建了mapper模块，用以存放与mybatis交互的一些mapper.jar等，这里需要注意这个子模块要依赖pojo层，原因是一些sql语句需要实体类，因此需添加相关依赖。</p>
-<pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-pojo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3e306a999fea48b38f913d0d816c1259~tplv-k3u1fbpfcp-zoom-1.image"><br>子模块的依赖关系如下<br>mapper–&gt;pojo–&gt;common，因此mapper也可以使用common中的相应方法。</p>
-<p>7、接下来是service层，同理这一部分需要依赖mapper层。</p>
-<pre class=" language-xml"><code class="language-xml">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-mapper<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ffc2e67b9d2840f58430e655dc6eb795~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>依赖关系如下：<br>service–&gt;mapper–&gt;pojo–&gt;common</p>
-<p>8、最后一个子模块是api模块，也就是controller层<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/25e87c918d054c7abf3a584ad2e44798~tplv-k3u1fbpfcp-zoom-1.image"><br>api层依赖了service，也可以调用mapper层，但是原则上不允许之间调mapepr层，只允许调用service层。</p>
-<p>9、最后需要注意的是，我们构建完聚合工程后，一定要安装，所谓的安装就是在maven的root项目的lifecycle里双击install命令。<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7c444d793b2f4b989e55e11590e52c84~tplv-k3u1fbpfcp-zoom-1.image"><br>安装完成控制台会出现，build success提示。</p>
-<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa4f10b9eed44c5b3c2d93979bae07f~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1、聚合工程可以分为顶级项目(顶级工程、父工程)与子工程，这两者的关系其实就是父子继承的关系，子工程在maven里称之为模块(module)，模块之间是平级的，<strong>是可以相互依赖的。</strong><br>2、子模块可以使用顶级工程里的所有资源(依赖)，子模块之间如果要使用资源，必须构建依赖(构建关系)<br>3、一个顶级工程是可以由多个不同的子工程共同组合而成。这就构成了一个可以运行的项目。</p>
-]]></content>
-      <categories>
-        <category>Maven</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-        <tag>Maven</tag>
       </tags>
   </entry>
   <entry>
@@ -375,18 +325,53 @@ public class MainConfig &#123;
       </tags>
   </entry>
   <entry>
-    <title>利用通用mapper进行数据库查询操作</title>
-    <url>/2020/11/19/%E5%88%A9%E7%94%A8%E9%80%9A%E7%94%A8mapper%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<p>案例：使用example创建查询条件进行相关查询。<br>例如查询数据库中是否存在某个用户名。<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/864beb5a1c714781878bcba260d006b5~tplv-k3u1fbpfcp-watermark.image"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7dd41d13edca4c98bd97b1861c9d66d6~tplv-k3u1fbpfcp-watermark.image"></p>
+    <title>maven构建聚合工程</title>
+    <url>/2020/11/18/maven%E6%9E%84%E5%BB%BA%E8%81%9A%E5%90%88%E5%B7%A5%E7%A8%8B/</url>
+    <content><![CDATA[<h2 id="Maven中的打包方式"><a href="#Maven中的打包方式" class="headerlink" title="Maven中的打包方式"></a>Maven中的打包方式</h2><p>maven中打包方式有三种，pom,war,jar，一般在父模块打包方式选pom,子模块再指定相应的war或者jar，其标签如下：</p>
+<pre><code> &lt;packaging&gt;&lt;/packaging&gt;</code></pre>
+<h2 id="SpringBoot构建聚合工程步骤"><a href="#SpringBoot构建聚合工程步骤" class="headerlink" title="SpringBoot构建聚合工程步骤"></a>SpringBoot构建聚合工程步骤</h2><h3 id="1、父工程构建"><a href="#1、父工程构建" class="headerlink" title="1、父工程构建"></a>1、父工程构建</h3><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8290f8b0c42b4897886bcc1ff97534c6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h3 id="2、子工程构建"><a href="#2、子工程构建" class="headerlink" title="2、子工程构建"></a>2、子工程构建</h3><p>1、在父模块点击new module<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/238211cbd250462baa4118b2708dbc63~tplv-k3u1fbpfcp-zoom-1.image"><br>2、next下一步即可<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/921d56a58eb9466b9e1a6b1ec1d30cdf~tplv-k3u1fbpfcp-zoom-1.image"><br>在这里可以看出子模块清晰地标出了丛属的parent模块<br>3、子模块的pom文件<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8847ea6138524b06b2c96fc2825ea9bd~tplv-k3u1fbpfcp-zoom-1.image"><br>注意到，其默认打包方式为jar，但是我们一般喜欢显示的声明出来。</p>
+<p>4、此时可以查看父模块的pom文件，发现发生了变化，父模块的pom文件多了个</p>
+<pre><code> &lt;modules&gt;  &lt;/modules&gt;</code></pre>
+<p>标签，并且所有的子模块都在这个标签中出现。<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/75f15eea4b7142d6ab63b24519ded62e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>5、子工程之间可以相互依赖，如何做到这一点呢，其实很简单，比如我们再创建一个子模块叫foodie-dev-pojo，并且在他的pom文件里加入依赖，这样，两个子工程就做到相互依赖了。</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-common<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a4c99e267b04b818793a8ddf24a8c35~tplv-k3u1fbpfcp-zoom-1.image"><br>6、接下来我们又创建了mapper模块，用以存放与mybatis交互的一些mapper.jar等，这里需要注意这个子模块要依赖pojo层，原因是一些sql语句需要实体类，因此需添加相关依赖。</p>
+<pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-pojo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3e306a999fea48b38f913d0d816c1259~tplv-k3u1fbpfcp-zoom-1.image"><br>子模块的依赖关系如下<br>mapper–&gt;pojo–&gt;common，因此mapper也可以使用common中的相应方法。</p>
+<p>7、接下来是service层，同理这一部分需要依赖mapper层。</p>
+<pre class=" language-xml"><code class="language-xml">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-mapper<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ffc2e67b9d2840f58430e655dc6eb795~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>依赖关系如下：<br>service–&gt;mapper–&gt;pojo–&gt;common</p>
+<p>8、最后一个子模块是api模块，也就是controller层<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/25e87c918d054c7abf3a584ad2e44798~tplv-k3u1fbpfcp-zoom-1.image"><br>api层依赖了service，也可以调用mapper层，但是原则上不允许之间调mapepr层，只允许调用service层。</p>
+<p>9、最后需要注意的是，我们构建完聚合工程后，一定要安装，所谓的安装就是在maven的root项目的lifecycle里双击install命令。<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7c444d793b2f4b989e55e11590e52c84~tplv-k3u1fbpfcp-zoom-1.image"><br>安装完成控制台会出现，build success提示。</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa4f10b9eed44c5b3c2d93979bae07f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1、聚合工程可以分为顶级项目(顶级工程、父工程)与子工程，这两者的关系其实就是父子继承的关系，子工程在maven里称之为模块(module)，模块之间是平级的，<strong>是可以相互依赖的。</strong><br>2、子模块可以使用顶级工程里的所有资源(依赖)，子模块之间如果要使用资源，必须构建依赖(构建关系)<br>3、一个顶级工程是可以由多个不同的子工程共同组合而成。这就构成了一个可以运行的项目。</p>
 ]]></content>
       <categories>
-        <category>Mybatis</category>
+        <category>Maven</category>
       </categories>
       <tags>
         <tag>SpringBoot</tag>
         <tag>Maven</tag>
-        <tag>MyBatis</tag>
-        <tag>Restful</tag>
       </tags>
   </entry>
   <entry>
@@ -413,6 +398,170 @@ public interface StuService &#123;
         <tag>Maven</tag>
         <tag>MyBatis</tag>
         <tag>Restful</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于Spring aop通过日志监控service执行时间</title>
+    <url>/2020/11/10/%E5%9F%BA%E4%BA%8ESpring%20aop%E9%80%9A%E8%BF%87%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7service%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4/</url>
+    <content><![CDATA[<h2 id="1、导入依赖"><a href="#1、导入依赖" class="headerlink" title="1、导入依赖"></a>1、导入依赖</h2><pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-aop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="2-编写aspect切面类"><a href="#2-编写aspect切面类" class="headerlink" title="2.编写aspect切面类"></a>2.编写aspect切面类</h2><pre><code>package com.imooc.aspect;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+@Component
+@Aspect
+public class ServiceAspect &#123;
+    public static final Logger logger = LoggerFactory.getLogger(ServiceAspect.class);
+
+    /**
+     * Aop通知：
+     * 1. 前置通知：在方法调用之前执行
+     * 2. 后置通知：在方法调用之后执行
+     * 3. 环绕通知：在方法调用之前和之后，都分别可以执行通知
+     * 4. 异常通知：如果在方法调用过程中发生异常，则通知
+     * 5. 最终通知，在方法调用之后执行
+     */
+    /**
+     *
+     * 切面表达式
+     * execution 代表所要执行的表达式主体
+     * 第一处 *代表方法返回类型 *代表所有类型
+     * 第二处 包名代表aop监控的类所在的包
+     * 第三处 .. 代表该包以及其子包下的所有类方法
+     * 第四处 * 代表类名，*代表所有类
+     * 第五处 *(..) *代表类中的方法名，(..)表示方法中的任何参数
+     */
+    @Around(&quot;execution(* com.imooc.service.impl..*.*(..))&quot;)
+    public Object recordTimeLog(ProceedingJoinPoint joinPoint) throws Throwable &#123;
+        logger.info(&quot;===== 开始执行&#123;&#125;.&#123;&#125; =====&quot;,
+                joinPoint.getTarget().getClass(),
+                joinPoint.getSignature().getName());
+        long begin = System.currentTimeMillis();
+        Object result = joinPoint.proceed();
+        long end = System.currentTimeMillis();
+        long takeTime = end - begin;
+      if (takeTime &gt; 3000) &#123;
+            logger.error(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
+        &#125;else if(takeTime &gt; 2000)&#123;
+            logger.warn(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
+        &#125;else &#123;
+            logger.info(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
+        &#125;
+        return result;
+&#125;
+</code></pre>
+<p>执行效果<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fa56bde956d24d9c91a82e134763eb27~tplv-k3u1fbpfcp-watermark.webp"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/14f0a8c7f2d743f29e8a24311748330c~tplv-k3u1fbpfcp-watermark.webp"></p>
+]]></content>
+      <categories>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring Aop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用通用mapper进行数据库查询操作</title>
+    <url>/2020/11/19/%E5%88%A9%E7%94%A8%E9%80%9A%E7%94%A8mapper%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<p>案例：使用example创建查询条件进行相关查询。<br>例如查询数据库中是否存在某个用户名。<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/864beb5a1c714781878bcba260d006b5~tplv-k3u1fbpfcp-watermark.image"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7dd41d13edca4c98bd97b1861c9d66d6~tplv-k3u1fbpfcp-watermark.image"></p>
+]]></content>
+      <categories>
+        <category>Mybatis</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+        <tag>Maven</tag>
+        <tag>MyBatis</tag>
+        <tag>Restful</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文档api编写插件Swagger2的使用</title>
+    <url>/2020/11/19/%E6%96%87%E6%A1%A3api%E7%BC%96%E5%86%99%E6%8F%92%E4%BB%B6%20Swagger2%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>为了减少程序员撰写文档，提高生产力，Swagger2应运而生，使用Swagger2可以减少编写过多的文档，只需要通过代码就能生成文档api提供给前端人员对接，非常方便。</p>
+<h2 id="1、引入依赖"><a href="#1、引入依赖" class="headerlink" title="1、引入依赖"></a>1、引入依赖</h2><pre><code>&lt;!--swagger2配置--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+            &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;
+            &lt;version&gt;2.4.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+            &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;
+            &lt;version&gt;2.4.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        以上两个是官网提供的
+        以下依赖也是ui但是是非官方的
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.github.xiaoymin&lt;/groupId&gt;
+            &lt;artifactId&gt;swagger-bootstrap-ui&lt;/artifactId&gt;
+            &lt;version&gt;1.6&lt;/version&gt;
+        &lt;/dependency&gt;</code></pre>
+<h2 id="2、编写配置类"><a href="#2、编写配置类" class="headerlink" title="2、编写配置类"></a>2、编写配置类</h2><pre><code>package com.imooc.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@Configuration
+@EnableSwagger2
+public class Swagger2 &#123;
+
+    // 访问地址： http://localhost:8088/swagger-ui.html
+    //配置swagger2核心配置 -- docket
+    @Bean
+    public Docket createRestApi()&#123;
+        return new Docket(DocumentationType.SWAGGER_2) // 指定api类型为swagger2
+        .apiInfo(apiInfo()) // 用于定义api文档
+        .select().apis(RequestHandlerSelectors.basePackage(&quot;com.imooc.controller&quot;)) // 指定controller包
+        .paths(PathSelectors.any()) // 所有controller
+        .build();
+    &#125;
+    private ApiInfo apiInfo()&#123;
+        return new ApiInfoBuilder()
+                .title(&quot;天天吃货 电商平台接口api&quot;) // 文档页标题
+                .contact(new Contact(&quot;imooc&quot;,
+                        &quot;https://www.imooc/com&quot;,
+                        &quot;abc@imooc.com&quot;)) // 联系人信息
+                .description(&quot;专为天天吃货提供的api文档&quot;) // 详细信息
+                .version(&quot;1.0.1&quot;) //文档版本号
+                .termsOfServiceUrl(&quot;https://www.imooc/com&quot;) // 网站地址
+                .build();
+    &#125;
+&#125;
+</code></pre>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0694b0325217478a8392dcbbe263b14e~tplv-k3u1fbpfcp-watermark.webp"></p>
+<h2 id="3、访问效果"><a href="#3、访问效果" class="headerlink" title="3、访问效果"></a>3、访问效果</h2><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9dced80f16584f4bac1c2f9d1475b87d~tplv-k3u1fbpfcp-watermark.webp"></p>
+<p>记得加的最后一个依赖，可以通过最后一个依赖进行换肤操作，很简单，访问路径不同。<br>现在需要访问 <a href="http://localhost:8088/doc.html">http://localhost:8088/doc.html</a> 即可，效果图如下<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3e276fd3865f459d863d1b82d4af7527~tplv-k3u1fbpfcp-watermark.webp"></p>
+<h2 id="4、-ApiIgnore，-Api，-ApiOperation-ApiModel-ApiModelProperty用法"><a href="#4、-ApiIgnore，-Api，-ApiOperation-ApiModel-ApiModelProperty用法" class="headerlink" title="4、@ApiIgnore，@Api，@ApiOperation,@ApiModel,@ApiModelProperty用法"></a>4、@ApiIgnore，@Api，@ApiOperation,@ApiModel,@ApiModelProperty用法</h2><p>如果想忽略controller包下的某些接口，可以添加@ApiIgnore<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7def157a86384669bf5e247f64e83ec4~tplv-k3u1fbpfcp-watermark.webp"></p>
+<p>@Api添加controller类相关注释<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80dce5657e0048578207e88aec24d53d~tplv-k3u1fbpfcp-watermark.webp"><br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f31c9313d89d4bd2bf76531e1a801238~tplv-k3u1fbpfcp-watermark.webp"></p>
+<p>@ApiOperation添加接口相关注释</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/db7341c928e647ea8b9a737f02054c6a~tplv-k3u1fbpfcp-watermark.webp"><br>效果图</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7bd9608ac316426b907bef2239724716~tplv-k3u1fbpfcp-watermark.webp"></p>
+<p>@ApiModel与@ApiModelProperty为实体类相关注释。</p>
+<p>用法：<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/610df3100f8d475689c11d53f463ce0f~tplv-k3u1fbpfcp-watermark.image"></p>
+<p>效果图：<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/529441ab7574447d8f87a31610abdd0c~tplv-k3u1fbpfcp-watermark.image"></p>
+]]></content>
+      <categories>
+        <category>Swagger2</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+        <tag>Swagger2</tag>
       </tags>
   </entry>
   <entry>
@@ -867,88 +1016,6 @@ public class JsonUtils &#123;
       <tags>
         <tag>cookie</tag>
         <tag>JavaEE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>文档api编写插件Swagger2的使用</title>
-    <url>/2020/11/19/%E6%96%87%E6%A1%A3api%E7%BC%96%E5%86%99%E6%8F%92%E4%BB%B6%20Swagger2%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>为了减少程序员撰写文档，提高生产力，Swagger2应运而生，使用Swagger2可以减少编写过多的文档，只需要通过代码就能生成文档api提供给前端人员对接，非常方便。</p>
-<h2 id="1、引入依赖"><a href="#1、引入依赖" class="headerlink" title="1、引入依赖"></a>1、引入依赖</h2><pre><code>&lt;!--swagger2配置--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;io.springfox&lt;/groupId&gt;
-            &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;
-            &lt;version&gt;2.4.0&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;io.springfox&lt;/groupId&gt;
-            &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;
-            &lt;version&gt;2.4.0&lt;/version&gt;
-        &lt;/dependency&gt;
-        以上两个是官网提供的
-        以下依赖也是ui但是是非官方的
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.github.xiaoymin&lt;/groupId&gt;
-            &lt;artifactId&gt;swagger-bootstrap-ui&lt;/artifactId&gt;
-            &lt;version&gt;1.6&lt;/version&gt;
-        &lt;/dependency&gt;</code></pre>
-<h2 id="2、编写配置类"><a href="#2、编写配置类" class="headerlink" title="2、编写配置类"></a>2、编写配置类</h2><pre><code>package com.imooc.config;
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-@Configuration
-@EnableSwagger2
-public class Swagger2 &#123;
-
-    // 访问地址： http://localhost:8088/swagger-ui.html
-    //配置swagger2核心配置 -- docket
-    @Bean
-    public Docket createRestApi()&#123;
-        return new Docket(DocumentationType.SWAGGER_2) // 指定api类型为swagger2
-        .apiInfo(apiInfo()) // 用于定义api文档
-        .select().apis(RequestHandlerSelectors.basePackage(&quot;com.imooc.controller&quot;)) // 指定controller包
-        .paths(PathSelectors.any()) // 所有controller
-        .build();
-    &#125;
-    private ApiInfo apiInfo()&#123;
-        return new ApiInfoBuilder()
-                .title(&quot;天天吃货 电商平台接口api&quot;) // 文档页标题
-                .contact(new Contact(&quot;imooc&quot;,
-                        &quot;https://www.imooc/com&quot;,
-                        &quot;abc@imooc.com&quot;)) // 联系人信息
-                .description(&quot;专为天天吃货提供的api文档&quot;) // 详细信息
-                .version(&quot;1.0.1&quot;) //文档版本号
-                .termsOfServiceUrl(&quot;https://www.imooc/com&quot;) // 网站地址
-                .build();
-    &#125;
-&#125;
-</code></pre>
-<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0694b0325217478a8392dcbbe263b14e~tplv-k3u1fbpfcp-watermark.webp"></p>
-<h2 id="3、访问效果"><a href="#3、访问效果" class="headerlink" title="3、访问效果"></a>3、访问效果</h2><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9dced80f16584f4bac1c2f9d1475b87d~tplv-k3u1fbpfcp-watermark.webp"></p>
-<p>记得加的最后一个依赖，可以通过最后一个依赖进行换肤操作，很简单，访问路径不同。<br>现在需要访问 <a href="http://localhost:8088/doc.html">http://localhost:8088/doc.html</a> 即可，效果图如下<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3e276fd3865f459d863d1b82d4af7527~tplv-k3u1fbpfcp-watermark.webp"></p>
-<h2 id="4、-ApiIgnore，-Api，-ApiOperation-ApiModel-ApiModelProperty用法"><a href="#4、-ApiIgnore，-Api，-ApiOperation-ApiModel-ApiModelProperty用法" class="headerlink" title="4、@ApiIgnore，@Api，@ApiOperation,@ApiModel,@ApiModelProperty用法"></a>4、@ApiIgnore，@Api，@ApiOperation,@ApiModel,@ApiModelProperty用法</h2><p>如果想忽略controller包下的某些接口，可以添加@ApiIgnore<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7def157a86384669bf5e247f64e83ec4~tplv-k3u1fbpfcp-watermark.webp"></p>
-<p>@Api添加controller类相关注释<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80dce5657e0048578207e88aec24d53d~tplv-k3u1fbpfcp-watermark.webp"><br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f31c9313d89d4bd2bf76531e1a801238~tplv-k3u1fbpfcp-watermark.webp"></p>
-<p>@ApiOperation添加接口相关注释</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/db7341c928e647ea8b9a737f02054c6a~tplv-k3u1fbpfcp-watermark.webp"><br>效果图</p>
-<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7bd9608ac316426b907bef2239724716~tplv-k3u1fbpfcp-watermark.webp"></p>
-<p>@ApiModel与@ApiModelProperty为实体类相关注释。</p>
-<p>用法：<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/610df3100f8d475689c11d53f463ce0f~tplv-k3u1fbpfcp-watermark.image"></p>
-<p>效果图：<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/529441ab7574447d8f87a31610abdd0c~tplv-k3u1fbpfcp-watermark.image"></p>
-]]></content>
-      <categories>
-        <category>Swagger2</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-        <tag>Swagger2</tag>
       </tags>
   </entry>
   <entry>
