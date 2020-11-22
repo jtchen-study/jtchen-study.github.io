@@ -1,27 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>使用SpringBoot进行单元测试</title>
-    <url>/2020/11/19/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h2 id="1、添加依赖"><a href="#1、添加依赖" class="headerlink" title="1、添加依赖"></a>1、添加依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<h2 id="2、编写相关测试用例"><a href="#2、编写相关测试用例" class="headerlink" title="2、编写相关测试用例"></a>2、编写相关测试用例</h2><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c999a60091524928b871b5e42dea587d~tplv-k3u1fbpfcp-zoom-1.image" alt="avatar"></p>
-<p>注意，单元测试需要添加如下注解:</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span>SpringRunner<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@SpringBootTest</span><span class="token punctuation">(</span>classes <span class="token operator">=</span> Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类</span>
-</code></pre>
-]]></content>
-      <categories>
-        <category>SpringBoot</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>HiKaricp数据库连接池的使用</title>
     <url>/2020/11/18/HiKaricp%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<p>最近学习到除druid外，一种网上评论更快的数据库连接池，hikaricp,以下是SpringBoot集成HiKaricp</p>
@@ -74,8 +53,8 @@ mybatis:
         <category>HiKaricp</category>
       </categories>
       <tags>
-        <tag>SpringBoot</tag>
         <tag>HiKaricp</tag>
+        <tag>SpringBoot</tag>
       </tags>
   </entry>
   <entry>
@@ -212,116 +191,24 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
       </tags>
   </entry>
   <entry>
-    <title>maven项目导入依赖构建SpringBoot项目</title>
-    <url>/2020/11/18/maven%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96%E6%9E%84%E5%BB%BASpringBoot%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<h2 id="1、首先导入相关依赖"><a href="#1、首先导入相关依赖" class="headerlink" title="1、首先导入相关依赖"></a>1、首先导入相关依赖</h2><pre class=" language-xml"><code class="language-xml">//引入parent依赖，引入后就代表项目是springboot项目
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>parent</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-parent<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.2.4.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>relativePath</span> <span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>parent</span><span class="token punctuation">></span></span>
-//设置资源属性
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project.build.sourceEncoding</span><span class="token punctuation">></span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project.build.sourceEncoding</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project.reporting.outputEncoding</span><span class="token punctuation">></span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project.reporting.outputEncoding</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>java.version</span><span class="token punctuation">></span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>java.version</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
-//springboot的子依赖，第一个依赖就是springboot依赖，并且排除了自带的日志依赖，第二个依赖是web相关依赖
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusions</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusion</span><span class="token punctuation">></span></span>
-                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-logging<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusion</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusions</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-web<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-// spring默认使用yml中的配置，但有时候要用传统的xml或properties配置，就需要使用spring-boot-configuration-processor了
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-configuration-processor<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>optional</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>optional</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
-<h2 id="2、编写配置文件及相应启动类"><a href="#2、编写配置文件及相应启动类" class="headerlink" title="2、编写配置文件及相应启动类"></a>2、编写配置文件及相应启动类</h2><p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8166e4e3451a424dabbbe2d05262f8d0~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7e4c620138a44b98b788699b7619d935~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h2 id="3、测试"><a href="#3、测试" class="headerlink" title="3、测试"></a>3、测试</h2><p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fddbc570379c44b2b7f2681294902906~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c96c5c6b7d8f4d5186c8ac5605e2bfe6~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h2 id="4、看一下-SpringBootApplication这个注解"><a href="#4、看一下-SpringBootApplication这个注解" class="headerlink" title="4、看一下@SpringBootApplication这个注解"></a>4、看一下@SpringBootApplication这个注解</h2><p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/09e0da99b2324ba49cf63b9bdc43977c~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>里面包含三个关键注解</strong><br>@SpringBootConfiguration</p>
-<p>首先谈谈@Configuration注解</p>
-<p>定义一个实体类Person</p>
-<pre><code>public class Person &#123;
-    private String name;
-    private Integer id;
-
-    public String getName() &#123;
-        return name;
-    &#125;
-
-    public void setName(String name) &#123;
-        this.name = name;
-    &#125;
-
-    public Integer getId() &#123;
-        return id;
-    &#125;
-
-    public void setId(Integer id) &#123;
-        this.id = id;
-    &#125;
-
-    public Person(String name, Integer id) &#123;
-        this.name = name;
-        this.id = id;
-    &#125;
-
-    public Person() &#123;
-    &#125;
-
-    @Override
-    public String toString() &#123;
-        return &quot;Person&#123;&quot; +
-                &quot;name=&#39;&quot; + name + &#39;\&#39;&#39; +
-                &quot;, id=&quot; + id +
-                &#39;&#125;&#39;;
-    &#125;
-
-&#125;
+    <title>使用SpringBoot进行单元测试</title>
+    <url>/2020/11/19/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h2 id="1、添加依赖"><a href="#1、添加依赖" class="headerlink" title="1、添加依赖"></a>1、添加依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="2、编写相关测试用例"><a href="#2、编写相关测试用例" class="headerlink" title="2、编写相关测试用例"></a>2、编写相关测试用例</h2><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c999a60091524928b871b5e42dea587d~tplv-k3u1fbpfcp-zoom-1.image" alt="avatar"></p>
+<p>注意，单元测试需要添加如下注解:</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span>SpringRunner<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@SpringBootTest</span><span class="token punctuation">(</span>classes <span class="token operator">=</span> Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类</span>
 </code></pre>
-<p>定义Config类</p>
-<pre><code>import com.atguigu.bean.Person;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-@ComponentScan(value = &quot;com.atguigu&quot;)
-public class MainConfig &#123;
-    @Bean(&quot;person&quot;)
-    public Person person01() &#123;
-        return new Person(&quot;lisi&quot;, 20);
-    &#125;
-&#125;</code></pre>
-<p>测试<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5fa5643b014944e0a2b80d1ecd95b636~tplv-k3u1fbpfcp-zoom-1.image"><br>结果<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4d01313c7480441cb9fdf76ca46b5812~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>以上可以说明其实@Configuration配置可以把里面的bean装入容器里面，这个容器也就是applicationContext里面的bean被扫描后都可以装入容器中。</p>
-<p>其次谈谈@SpringBootConfiguration注解, @SpringBootConfiguration继承自@Configuration，二者功能也一致，标注当前类是配置类，<br>并会将当前类内声明的一个或多个以@Bean注解标记的方法的实例纳入到spring容器中，并且实例名就是方法名。</p>
-<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f63fcffb6db44ae5952d14c8118da941~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>结果<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/69a88840456a401b98b4c62ada18dabb~tplv-k3u1fbpfcp-zoom-1.image"></p>
 ]]></content>
       <categories>
-        <category>Maven</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
         <tag>SpringBoot</tag>
-        <tag>Maven</tag>
       </tags>
   </entry>
   <entry>
@@ -480,6 +367,119 @@ public class ServiceAspect &#123;
         <tag>Maven</tag>
         <tag>MyBatis</tag>
         <tag>Restful</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>maven项目导入依赖构建SpringBoot项目</title>
+    <url>/2020/11/18/maven%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96%E6%9E%84%E5%BB%BASpringBoot%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h2 id="1、首先导入相关依赖"><a href="#1、首先导入相关依赖" class="headerlink" title="1、首先导入相关依赖"></a>1、首先导入相关依赖</h2><pre class=" language-xml"><code class="language-xml">//引入parent依赖，引入后就代表项目是springboot项目
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>parent</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-parent<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.2.4.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>relativePath</span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>parent</span><span class="token punctuation">></span></span>
+//设置资源属性
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project.build.sourceEncoding</span><span class="token punctuation">></span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project.build.sourceEncoding</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project.reporting.outputEncoding</span><span class="token punctuation">></span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project.reporting.outputEncoding</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>java.version</span><span class="token punctuation">></span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>java.version</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
+//springboot的子依赖，第一个依赖就是springboot依赖，并且排除了自带的日志依赖，第二个依赖是web相关依赖
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusions</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusion</span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-logging<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusion</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusions</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-web<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+// spring默认使用yml中的配置，但有时候要用传统的xml或properties配置，就需要使用spring-boot-configuration-processor了
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-configuration-processor<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>optional</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>optional</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="2、编写配置文件及相应启动类"><a href="#2、编写配置文件及相应启动类" class="headerlink" title="2、编写配置文件及相应启动类"></a>2、编写配置文件及相应启动类</h2><p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8166e4e3451a424dabbbe2d05262f8d0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7e4c620138a44b98b788699b7619d935~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="3、测试"><a href="#3、测试" class="headerlink" title="3、测试"></a>3、测试</h2><p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fddbc570379c44b2b7f2681294902906~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c96c5c6b7d8f4d5186c8ac5605e2bfe6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="4、看一下-SpringBootApplication这个注解"><a href="#4、看一下-SpringBootApplication这个注解" class="headerlink" title="4、看一下@SpringBootApplication这个注解"></a>4、看一下@SpringBootApplication这个注解</h2><p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/09e0da99b2324ba49cf63b9bdc43977c~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>里面包含三个关键注解</strong><br>@SpringBootConfiguration</p>
+<p>首先谈谈@Configuration注解</p>
+<p>定义一个实体类Person</p>
+<pre><code>public class Person &#123;
+    private String name;
+    private Integer id;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+
+    public Integer getId() &#123;
+        return id;
+    &#125;
+
+    public void setId(Integer id) &#123;
+        this.id = id;
+    &#125;
+
+    public Person(String name, Integer id) &#123;
+        this.name = name;
+        this.id = id;
+    &#125;
+
+    public Person() &#123;
+    &#125;
+
+    @Override
+    public String toString() &#123;
+        return &quot;Person&#123;&quot; +
+                &quot;name=&#39;&quot; + name + &#39;\&#39;&#39; +
+                &quot;, id=&quot; + id +
+                &#39;&#125;&#39;;
+    &#125;
+
+&#125;
+</code></pre>
+<p>定义Config类</p>
+<pre><code>import com.atguigu.bean.Person;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan(value = &quot;com.atguigu&quot;)
+public class MainConfig &#123;
+    @Bean(&quot;person&quot;)
+    public Person person01() &#123;
+        return new Person(&quot;lisi&quot;, 20);
+    &#125;
+&#125;</code></pre>
+<p>测试<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5fa5643b014944e0a2b80d1ecd95b636~tplv-k3u1fbpfcp-zoom-1.image"><br>结果<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4d01313c7480441cb9fdf76ca46b5812~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>以上可以说明其实@Configuration配置可以把里面的bean装入容器里面，这个容器也就是applicationContext里面的bean被扫描后都可以装入容器中。</p>
+<p>其次谈谈@SpringBootConfiguration注解, @SpringBootConfiguration继承自@Configuration，二者功能也一致，标注当前类是配置类，<br>并会将当前类内声明的一个或多个以@Bean注解标记的方法的实例纳入到spring容器中，并且实例名就是方法名。</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f63fcffb6db44ae5952d14c8118da941~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>结果<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/69a88840456a401b98b4c62ada18dabb~tplv-k3u1fbpfcp-zoom-1.image"></p>
+]]></content>
+      <categories>
+        <category>Maven</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+        <tag>Maven</tag>
       </tags>
   </entry>
   <entry>
@@ -1019,6 +1019,73 @@ public class JsonUtils &#123;
       </tags>
   </entry>
   <entry>
+    <title>跳台阶问题的几种变形</title>
+    <url>/2020/11/10/%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h2 id="1、一次可以跳一个台阶或者两个台阶"><a href="#1、一次可以跳一个台阶或者两个台阶" class="headerlink" title="1、一次可以跳一个台阶或者两个台阶"></a>1、一次可以跳一个台阶或者两个台阶</h2><pre><code>一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n级的台阶总共有多少种跳法。
+示例 1：
+输入：n = 2
+输出：2
+
+示例 2：
+输入：n = 7
+输出：21
+
+提示：
+0 &lt;= n &lt;= 100</code></pre>
+<pre><code>思路：
+设跳上 n 级台阶有 f(n) 种跳法。在所有跳法中，青蛙的最后一步只有两种情况：跳上 1 级或 2 级台阶。
+
+1、当为 1 级台阶： 剩 n-1个台阶，此情况共有 f(n?1) 种跳法；
+2、当为 2 级台阶： 剩 n-2个台阶，此情况共有 f(n?2) 种跳法。
+f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
+<pre><code>class Solution &#123;
+    public int numWays(int n) &#123;
+        if (n == 0)
+            return 1;
+        if (n &lt;= 2)
+            return n;
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i &lt;= n; i++) &#123;
+            dp[i] = (dp[i - 1] + dp[i - 2]);
+        &#125;
+        return dp[n];
+    &#125;
+&#125;</code></pre>
+<h2 id="2、一次可以跳一个台阶、两个台阶或者三个台阶"><a href="#2、一次可以跳一个台阶、两个台阶或者三个台阶" class="headerlink" title="2、一次可以跳一个台阶、两个台阶或者三个台阶"></a>2、一次可以跳一个台阶、两个台阶或者三个台阶</h2><pre class=" language-txt"><code class="language-txt">一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶，还可以跳上3级台阶。
+求该青蛙跳上一个 n级的台阶总共有多少种跳法。</code></pre>
+<pre><code>思路：
+最后一步可能是从第n-1阶往上走1阶、从n-2阶往上走2阶，或从第n-3阶往上走3阶。
+因此，抵达最后一阶的走法，其实就是抵达这最后三阶的方式的总和。</code></pre>
+<pre><code>class Solution &#123;
+    public static int numWays(int n) &#123;
+        if (n == 0)
+            return 1;
+        if (n == 2)
+            return 2;
+        if (n == 3)
+            return 4;
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+        dp[3] = 4;
+        for (int i = 4; i &lt;= n; i++) &#123;
+            dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
+        &#125;
+        return dp[n];
+    &#125;
+
+&#125;</code></pre>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>自定义响应体类</title>
     <url>/2020/11/21/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%93%8D%E5%BA%94%E4%BD%93%E7%B1%BB/</url>
     <content><![CDATA[<p>类结构如下，参考慕课网。</p>
@@ -1164,73 +1231,6 @@ public class IMOOCJSONResult &#123;
       </categories>
       <tags>
         <tag>JavaEE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>跳台阶问题的几种变形</title>
-    <url>/2020/11/10/%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h2 id="1、一次可以跳一个台阶或者两个台阶"><a href="#1、一次可以跳一个台阶或者两个台阶" class="headerlink" title="1、一次可以跳一个台阶或者两个台阶"></a>1、一次可以跳一个台阶或者两个台阶</h2><pre><code>一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n级的台阶总共有多少种跳法。
-示例 1：
-输入：n = 2
-输出：2
-
-示例 2：
-输入：n = 7
-输出：21
-
-提示：
-0 &lt;= n &lt;= 100</code></pre>
-<pre><code>思路：
-设跳上 n 级台阶有 f(n) 种跳法。在所有跳法中，青蛙的最后一步只有两种情况：跳上 1 级或 2 级台阶。
-
-1、当为 1 级台阶： 剩 n-1个台阶，此情况共有 f(n?1) 种跳法；
-2、当为 2 级台阶： 剩 n-2个台阶，此情况共有 f(n?2) 种跳法。
-f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)</code></pre>
-<pre><code>class Solution &#123;
-    public int numWays(int n) &#123;
-        if (n == 0)
-            return 1;
-        if (n &lt;= 2)
-            return n;
-        int[] dp = new int[n + 1];
-        dp[1] = 1;
-        dp[2] = 2;
-        for (int i = 3; i &lt;= n; i++) &#123;
-            dp[i] = (dp[i - 1] + dp[i - 2]);
-        &#125;
-        return dp[n];
-    &#125;
-&#125;</code></pre>
-<h2 id="2、一次可以跳一个台阶、两个台阶或者三个台阶"><a href="#2、一次可以跳一个台阶、两个台阶或者三个台阶" class="headerlink" title="2、一次可以跳一个台阶、两个台阶或者三个台阶"></a>2、一次可以跳一个台阶、两个台阶或者三个台阶</h2><pre class=" language-txt"><code class="language-txt">一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶，还可以跳上3级台阶。
-求该青蛙跳上一个 n级的台阶总共有多少种跳法。</code></pre>
-<pre><code>思路：
-最后一步可能是从第n-1阶往上走1阶、从n-2阶往上走2阶，或从第n-3阶往上走3阶。
-因此，抵达最后一阶的走法，其实就是抵达这最后三阶的方式的总和。</code></pre>
-<pre><code>class Solution &#123;
-    public static int numWays(int n) &#123;
-        if (n == 0)
-            return 1;
-        if (n == 2)
-            return 2;
-        if (n == 3)
-            return 4;
-        int[] dp = new int[n + 1];
-        dp[1] = 1;
-        dp[2] = 2;
-        dp[3] = 4;
-        for (int i = 4; i &lt;= n; i++) &#123;
-            dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
-        &#125;
-        return dp[n];
-    &#125;
-
-&#125;</code></pre>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
