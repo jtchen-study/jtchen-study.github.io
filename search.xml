@@ -212,18 +212,53 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
       </tags>
   </entry>
   <entry>
-    <title>利用通用mapper进行数据库查询操作</title>
-    <url>/2020/11/19/%E5%88%A9%E7%94%A8%E9%80%9A%E7%94%A8mapper%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<p>案例：使用example创建查询条件进行相关查询。<br>例如查询数据库中是否存在某个用户名。<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/864beb5a1c714781878bcba260d006b5~tplv-k3u1fbpfcp-watermark.image"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7dd41d13edca4c98bd97b1861c9d66d6~tplv-k3u1fbpfcp-watermark.image"></p>
+    <title>maven构建聚合工程</title>
+    <url>/2020/11/18/maven%E6%9E%84%E5%BB%BA%E8%81%9A%E5%90%88%E5%B7%A5%E7%A8%8B/</url>
+    <content><![CDATA[<h2 id="Maven中的打包方式"><a href="#Maven中的打包方式" class="headerlink" title="Maven中的打包方式"></a>Maven中的打包方式</h2><p>maven中打包方式有三种，pom,war,jar，一般在父模块打包方式选pom,子模块再指定相应的war或者jar，其标签如下：</p>
+<pre><code> &lt;packaging&gt;&lt;/packaging&gt;</code></pre>
+<h2 id="SpringBoot构建聚合工程步骤"><a href="#SpringBoot构建聚合工程步骤" class="headerlink" title="SpringBoot构建聚合工程步骤"></a>SpringBoot构建聚合工程步骤</h2><h3 id="1、父工程构建"><a href="#1、父工程构建" class="headerlink" title="1、父工程构建"></a>1、父工程构建</h3><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8290f8b0c42b4897886bcc1ff97534c6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h3 id="2、子工程构建"><a href="#2、子工程构建" class="headerlink" title="2、子工程构建"></a>2、子工程构建</h3><p>1、在父模块点击new module<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/238211cbd250462baa4118b2708dbc63~tplv-k3u1fbpfcp-zoom-1.image"><br>2、next下一步即可<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/921d56a58eb9466b9e1a6b1ec1d30cdf~tplv-k3u1fbpfcp-zoom-1.image"><br>在这里可以看出子模块清晰地标出了丛属的parent模块<br>3、子模块的pom文件<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8847ea6138524b06b2c96fc2825ea9bd~tplv-k3u1fbpfcp-zoom-1.image"><br>注意到，其默认打包方式为jar，但是我们一般喜欢显示的声明出来。</p>
+<p>4、此时可以查看父模块的pom文件，发现发生了变化，父模块的pom文件多了个</p>
+<pre><code> &lt;modules&gt;  &lt;/modules&gt;</code></pre>
+<p>标签，并且所有的子模块都在这个标签中出现。<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/75f15eea4b7142d6ab63b24519ded62e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>5、子工程之间可以相互依赖，如何做到这一点呢，其实很简单，比如我们再创建一个子模块叫foodie-dev-pojo，并且在他的pom文件里加入依赖，这样，两个子工程就做到相互依赖了。</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-common<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a4c99e267b04b818793a8ddf24a8c35~tplv-k3u1fbpfcp-zoom-1.image"><br>6、接下来我们又创建了mapper模块，用以存放与mybatis交互的一些mapper.jar等，这里需要注意这个子模块要依赖pojo层，原因是一些sql语句需要实体类，因此需添加相关依赖。</p>
+<pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-pojo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3e306a999fea48b38f913d0d816c1259~tplv-k3u1fbpfcp-zoom-1.image"><br>子模块的依赖关系如下<br>mapper–&gt;pojo–&gt;common，因此mapper也可以使用common中的相应方法。</p>
+<p>7、接下来是service层，同理这一部分需要依赖mapper层。</p>
+<pre class=" language-xml"><code class="language-xml">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-mapper<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ffc2e67b9d2840f58430e655dc6eb795~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>依赖关系如下：<br>service–&gt;mapper–&gt;pojo–&gt;common</p>
+<p>8、最后一个子模块是api模块，也就是controller层<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/25e87c918d054c7abf3a584ad2e44798~tplv-k3u1fbpfcp-zoom-1.image"><br>api层依赖了service，也可以调用mapper层，但是原则上不允许之间调mapepr层，只允许调用service层。</p>
+<p>9、最后需要注意的是，我们构建完聚合工程后，一定要安装，所谓的安装就是在maven的root项目的lifecycle里双击install命令。<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7c444d793b2f4b989e55e11590e52c84~tplv-k3u1fbpfcp-zoom-1.image"><br>安装完成控制台会出现，build success提示。</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa4f10b9eed44c5b3c2d93979bae07f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1、聚合工程可以分为顶级项目(顶级工程、父工程)与子工程，这两者的关系其实就是父子继承的关系，子工程在maven里称之为模块(module)，模块之间是平级的，<strong>是可以相互依赖的。</strong><br>2、子模块可以使用顶级工程里的所有资源(依赖)，子模块之间如果要使用资源，必须构建依赖(构建关系)<br>3、一个顶级工程是可以由多个不同的子工程共同组合而成。这就构成了一个可以运行的项目。</p>
 ]]></content>
       <categories>
-        <category>Mybatis</category>
+        <category>Maven</category>
       </categories>
       <tags>
         <tag>SpringBoot</tag>
         <tag>Maven</tag>
-        <tag>MyBatis</tag>
-        <tag>Restful</tag>
       </tags>
   </entry>
   <entry>
@@ -340,53 +375,18 @@ public class MainConfig &#123;
       </tags>
   </entry>
   <entry>
-    <title>maven构建聚合工程</title>
-    <url>/2020/11/18/maven%E6%9E%84%E5%BB%BA%E8%81%9A%E5%90%88%E5%B7%A5%E7%A8%8B/</url>
-    <content><![CDATA[<h2 id="Maven中的打包方式"><a href="#Maven中的打包方式" class="headerlink" title="Maven中的打包方式"></a>Maven中的打包方式</h2><p>maven中打包方式有三种，pom,war,jar，一般在父模块打包方式选pom,子模块再指定相应的war或者jar，其标签如下：</p>
-<pre><code> &lt;packaging&gt;&lt;/packaging&gt;</code></pre>
-<h2 id="SpringBoot构建聚合工程步骤"><a href="#SpringBoot构建聚合工程步骤" class="headerlink" title="SpringBoot构建聚合工程步骤"></a>SpringBoot构建聚合工程步骤</h2><h3 id="1、父工程构建"><a href="#1、父工程构建" class="headerlink" title="1、父工程构建"></a>1、父工程构建</h3><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8290f8b0c42b4897886bcc1ff97534c6~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h3 id="2、子工程构建"><a href="#2、子工程构建" class="headerlink" title="2、子工程构建"></a>2、子工程构建</h3><p>1、在父模块点击new module<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/238211cbd250462baa4118b2708dbc63~tplv-k3u1fbpfcp-zoom-1.image"><br>2、next下一步即可<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/921d56a58eb9466b9e1a6b1ec1d30cdf~tplv-k3u1fbpfcp-zoom-1.image"><br>在这里可以看出子模块清晰地标出了丛属的parent模块<br>3、子模块的pom文件<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8847ea6138524b06b2c96fc2825ea9bd~tplv-k3u1fbpfcp-zoom-1.image"><br>注意到，其默认打包方式为jar，但是我们一般喜欢显示的声明出来。</p>
-<p>4、此时可以查看父模块的pom文件，发现发生了变化，父模块的pom文件多了个</p>
-<pre><code> &lt;modules&gt;  &lt;/modules&gt;</code></pre>
-<p>标签，并且所有的子模块都在这个标签中出现。<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/75f15eea4b7142d6ab63b24519ded62e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>5、子工程之间可以相互依赖，如何做到这一点呢，其实很简单，比如我们再创建一个子模块叫foodie-dev-pojo，并且在他的pom文件里加入依赖，这样，两个子工程就做到相互依赖了。</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-common<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a4c99e267b04b818793a8ddf24a8c35~tplv-k3u1fbpfcp-zoom-1.image"><br>6、接下来我们又创建了mapper模块，用以存放与mybatis交互的一些mapper.jar等，这里需要注意这个子模块要依赖pojo层，原因是一些sql语句需要实体类，因此需添加相关依赖。</p>
-<pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-pojo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3e306a999fea48b38f913d0d816c1259~tplv-k3u1fbpfcp-zoom-1.image"><br>子模块的依赖关系如下<br>mapper–&gt;pojo–&gt;common，因此mapper也可以使用common中的相应方法。</p>
-<p>7、接下来是service层，同理这一部分需要依赖mapper层。</p>
-<pre class=" language-xml"><code class="language-xml">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>foodie-dev-mapper<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ffc2e67b9d2840f58430e655dc6eb795~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>依赖关系如下：<br>service–&gt;mapper–&gt;pojo–&gt;common</p>
-<p>8、最后一个子模块是api模块，也就是controller层<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/25e87c918d054c7abf3a584ad2e44798~tplv-k3u1fbpfcp-zoom-1.image"><br>api层依赖了service，也可以调用mapper层，但是原则上不允许之间调mapepr层，只允许调用service层。</p>
-<p>9、最后需要注意的是，我们构建完聚合工程后，一定要安装，所谓的安装就是在maven的root项目的lifecycle里双击install命令。<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7c444d793b2f4b989e55e11590e52c84~tplv-k3u1fbpfcp-zoom-1.image"><br>安装完成控制台会出现，build success提示。</p>
-<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa4f10b9eed44c5b3c2d93979bae07f~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1、聚合工程可以分为顶级项目(顶级工程、父工程)与子工程，这两者的关系其实就是父子继承的关系，子工程在maven里称之为模块(module)，模块之间是平级的，<strong>是可以相互依赖的。</strong><br>2、子模块可以使用顶级工程里的所有资源(依赖)，子模块之间如果要使用资源，必须构建依赖(构建关系)<br>3、一个顶级工程是可以由多个不同的子工程共同组合而成。这就构成了一个可以运行的项目。</p>
+    <title>利用通用mapper进行数据库查询操作</title>
+    <url>/2020/11/19/%E5%88%A9%E7%94%A8%E9%80%9A%E7%94%A8mapper%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<p>案例：使用example创建查询条件进行相关查询。<br>例如查询数据库中是否存在某个用户名。<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/864beb5a1c714781878bcba260d006b5~tplv-k3u1fbpfcp-watermark.image"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7dd41d13edca4c98bd97b1861c9d66d6~tplv-k3u1fbpfcp-watermark.image"></p>
 ]]></content>
       <categories>
-        <category>Maven</category>
+        <category>Mybatis</category>
       </categories>
       <tags>
         <tag>SpringBoot</tag>
         <tag>Maven</tag>
+        <tag>MyBatis</tag>
+        <tag>Restful</tag>
       </tags>
   </entry>
   <entry>
@@ -413,6 +413,460 @@ public interface StuService &#123;
         <tag>Maven</tag>
         <tag>MyBatis</tag>
         <tag>Restful</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用户信息的cookie存放代码实现</title>
+    <url>/2020/11/10/%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AFcooike%E5%AD%98%E6%94%BE/</url>
+    <content><![CDATA[<p>我们在这里不用session，只用cookie来存放相关用户信息。cookie及json相关工具类如下：</p>
+<h2 id="1、CookieUtils工具类"><a href="#1、CookieUtils工具类" class="headerlink" title="1、CookieUtils工具类"></a>1、CookieUtils工具类</h2><pre><code>import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
+/**
+ * @Title: CookieUtils.java
+ * @Description: Cookie 工具类
+ * Copyright: Copyright (c)
+ */
+public final class CookieUtils &#123;
+
+    final static Logger logger = LoggerFactory.getLogger(CookieUtils.class);
+
+    /**
+     * 
+     * @Description: 得到Cookie的值, 不编码
+     * @param request
+     * @param cookieName
+     * @return
+     */
+    public static String getCookieValue(HttpServletRequest request, String cookieName) &#123;
+        return getCookieValue(request, cookieName, false);
+    &#125;
+
+    /**
+     * 
+     * @Description: 得到Cookie的值
+     * @param request
+     * @param cookieName
+     * @param isDecoder
+     * @return
+     */
+    public static String getCookieValue(HttpServletRequest request, String cookieName, boolean isDecoder) &#123;
+        Cookie[] cookieList = request.getCookies();
+        if (cookieList == null || cookieName == null) &#123;
+            return null;
+        &#125;
+        String retValue = null;
+        try &#123;
+            for (int i = 0; i &lt; cookieList.length; i++) &#123;
+                if (cookieList[i].getName().equals(cookieName)) &#123;
+                    if (isDecoder) &#123;
+                        retValue = URLDecoder.decode(cookieList[i].getValue(), &quot;UTF-8&quot;);
+                    &#125; else &#123;
+                        retValue = cookieList[i].getValue();
+                    &#125;
+                    break;
+                &#125;
+            &#125;
+        &#125; catch (UnsupportedEncodingException e) &#123;
+            e.printStackTrace();
+        &#125;
+        return retValue;
+    &#125;
+
+    /**
+     * 
+     * @Description: 得到Cookie的值
+     * @param request
+     * @param cookieName
+     * @param encodeString
+     * @return
+     */
+    public static String getCookieValue(HttpServletRequest request, String cookieName, String encodeString) &#123;
+        Cookie[] cookieList = request.getCookies();
+        if (cookieList == null || cookieName == null) &#123;
+            return null;
+        &#125;
+        String retValue = null;
+        try &#123;
+            for (int i = 0; i &lt; cookieList.length; i++) &#123;
+                if (cookieList[i].getName().equals(cookieName)) &#123;
+                    retValue = URLDecoder.decode(cookieList[i].getValue(), encodeString);
+                    break;
+                &#125;
+            &#125;
+        &#125; catch (UnsupportedEncodingException e) &#123;
+             e.printStackTrace();
+        &#125;
+        return retValue;
+    &#125;
+
+    /**
+     * 
+     * @Description: 设置Cookie的值 不设置生效时间默认浏览器关闭即失效,也不编码
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     */
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
+                                 String cookieValue) &#123;
+        setCookie(request, response, cookieName, cookieValue, -1);
+    &#125;
+
+    /**
+     * 
+     * @Description: 设置Cookie的值 在指定时间内生效,但不编码
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param cookieMaxage
+     */
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
+                                 String cookieValue, int cookieMaxage) &#123;
+        setCookie(request, response, cookieName, cookieValue, cookieMaxage, false);
+    &#125;
+
+    /**
+     * 
+     * @Description: 设置Cookie的值 不设置生效时间,但编码
+     * 在服务器被创建，返回给客户端，并且保存客户端
+     * 如果设置了SETMAXAGE(int seconds)，会把cookie保存在客户端的硬盘中
+     * 如果没有设置，会默认把cookie保存在浏览器的内存中
+     * 一旦设置setPath()：只能通过设置的路径才能获取到当前的cookie信息
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param isEncode
+     */
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
+                                 String cookieValue, boolean isEncode) &#123;
+        setCookie(request, response, cookieName, cookieValue, -1, isEncode);
+    &#125;
+
+   /**
+    * 
+    * @Description: 设置Cookie的值 在指定时间内生效, 编码参数
+    * @param request
+    * @param response
+    * @param cookieName
+    * @param cookieValue
+    * @param cookieMaxage
+    * @param isEncode
+    */
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
+                                 String cookieValue, int cookieMaxage, boolean isEncode) &#123;
+        doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, isEncode);
+    &#125;
+
+    /**
+     * 
+     * @Description: 设置Cookie的值 在指定时间内生效, 编码参数(指定编码)
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param cookieMaxage
+     * @param encodeString
+     */
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
+                                 String cookieValue, int cookieMaxage, String encodeString) &#123;
+        doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, encodeString);
+    &#125;
+
+    /**
+     * 
+     * @Description: 删除Cookie带cookie域名
+     * @param request
+     * @param response
+     * @param cookieName
+     */
+    public static void deleteCookie(HttpServletRequest request, HttpServletResponse response,
+                                    String cookieName) &#123;
+        doSetCookie(request, response, cookieName, null, -1, false);
+//        doSetCookie(request, response, cookieName, &quot;&quot;, -1, false);
+    &#125;
+
+
+    /**
+     * 
+     * @Description: 设置Cookie的值，并使其在指定时间内生效
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param cookieMaxage    cookie生效的最大秒数
+     * @param isEncode
+     */
+    private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response,
+                                          String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) &#123;
+        try &#123;
+            if (cookieValue == null) &#123;
+                cookieValue = &quot;&quot;;
+            &#125; else if (isEncode) &#123;
+                cookieValue = URLEncoder.encode(cookieValue, &quot;utf-8&quot;);
+            &#125;
+            Cookie cookie = new Cookie(cookieName, cookieValue);
+            if (cookieMaxage &gt; 0)
+                cookie.setMaxAge(cookieMaxage);
+            if (null != request) &#123;// 设置域名的cookie
+                String domainName = getDomainName(request);
+                logger.info(&quot;========== domainName: &#123;&#125; ==========&quot;, domainName);
+                if (!&quot;localhost&quot;.equals(domainName)) &#123;
+                    cookie.setDomain(domainName);
+                &#125;
+            &#125;
+            cookie.setPath(&quot;/&quot;);
+            response.addCookie(cookie);
+        &#125; catch (Exception e) &#123;
+             e.printStackTrace();
+        &#125;
+    &#125;
+
+    /**
+     * 
+     * @Description: 设置Cookie的值，并使其在指定时间内生效
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param cookieMaxage    cookie生效的最大秒数
+     * @param encodeString
+     */
+    private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response,
+                                          String cookieName, String cookieValue, int cookieMaxage, String encodeString) &#123;
+        try &#123;
+            if (cookieValue == null) &#123;
+                cookieValue = &quot;&quot;;
+            &#125; else &#123;
+                cookieValue = URLEncoder.encode(cookieValue, encodeString);
+            &#125;
+            Cookie cookie = new Cookie(cookieName, cookieValue);
+            if (cookieMaxage &gt; 0)
+                cookie.setMaxAge(cookieMaxage);
+            if (null != request) &#123;// 设置域名的cookie
+                String domainName = getDomainName(request);
+                logger.info(&quot;========== domainName: &#123;&#125; ==========&quot;, domainName);
+                if (!&quot;localhost&quot;.equals(domainName)) &#123;
+                    cookie.setDomain(domainName);
+                &#125;
+            &#125;
+            cookie.setPath(&quot;/&quot;);
+            response.addCookie(cookie);
+        &#125; catch (Exception e) &#123;
+             e.printStackTrace();
+        &#125;
+    &#125;
+
+    /**
+     * 
+     * @Description: 得到cookie的域名
+     * @return
+     */
+    private static final String getDomainName(HttpServletRequest request) &#123;
+        String domainName = null;
+
+        String serverName = request.getRequestURL().toString();
+        if (serverName == null || serverName.equals(&quot;&quot;)) &#123;
+            domainName = &quot;&quot;;
+        &#125; else &#123;
+            serverName = serverName.toLowerCase();
+            serverName = serverName.substring(7);
+            final int end = serverName.indexOf(&quot;/&quot;);
+            serverName = serverName.substring(0, end);
+            if (serverName.indexOf(&quot;:&quot;) &gt; 0) &#123;
+                String[] ary = serverName.split(&quot;\\:&quot;);
+                serverName = ary[0];
+            &#125;
+
+            final String[] domains = serverName.split(&quot;\\.&quot;);
+            int len = domains.length;
+            if (len &gt; 3 &amp;&amp; !isIp(serverName)) &#123;
+                // www.xxx.com.cn
+                domainName = &quot;.&quot; + domains[len - 3] + &quot;.&quot; + domains[len - 2] + &quot;.&quot; + domains[len - 1];
+            &#125; else if (len &lt;= 3 &amp;&amp; len &gt; 1) &#123;
+                // xxx.com or xxx.cn
+                domainName = &quot;.&quot; + domains[len - 2] + &quot;.&quot; + domains[len - 1];
+            &#125; else &#123;
+                domainName = serverName;
+            &#125;
+        &#125;
+        return domainName;
+    &#125;
+
+    public static String trimSpaces(String IP)&#123;//去掉IP字符串前后所有的空格  
+        while(IP.startsWith(&quot; &quot;))&#123;  
+               IP= IP.substring(1,IP.length()).trim();  
+            &#125;  
+        while(IP.endsWith(&quot; &quot;))&#123;  
+               IP= IP.substring(0,IP.length()-1).trim();  
+            &#125;  
+        return IP;  
+    &#125;  
+
+    public static boolean isIp(String IP)&#123;//判断是否是一个IP  
+        boolean b = false;  
+        IP = trimSpaces(IP);  
+        if(IP.matches(&quot;\\d&#123;1,3&#125;\\.\\d&#123;1,3&#125;\\.\\d&#123;1,3&#125;\\.\\d&#123;1,3&#125;&quot;))&#123;  
+            String s[] = IP.split(&quot;\\.&quot;);  
+            if(Integer.parseInt(s[0])&lt;255)  
+                if(Integer.parseInt(s[1])&lt;255)  
+                    if(Integer.parseInt(s[2])&lt;255)  
+                        if(Integer.parseInt(s[3])&lt;255)  
+                            b = true;  
+        &#125;  
+        return b;  
+    &#125;  
+
+&#125;
+</code></pre>
+<h2 id="2、JsonUtils工具类"><a href="#2、JsonUtils工具类" class="headerlink" title="2、JsonUtils工具类"></a>2、JsonUtils工具类</h2><pre><code>import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
+
+/**
+ * 
+ * @Title: JsonUtils.java
+ * @Description: json转换类
+ * Copyright: Copyright (c)
+ */
+public class JsonUtils &#123;
+
+    // 定义jackson对象
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    /**
+     * 将对象转换成json字符串。
+     * @param data
+     * @return
+     */
+    public static String objectToJson(Object data) &#123;
+        try &#123;
+            String string = MAPPER.writeValueAsString(data);
+            return string;
+        &#125; catch (JsonProcessingException e) &#123;
+            e.printStackTrace();
+        &#125;
+        return null;
+    &#125;
+
+    /**
+     * 将json结果集转化为对象
+     * 
+     * @param jsonData json数据
+     * @param beanType 对象中的object类型
+     * @return
+     */
+    public static &lt;T&gt; T jsonToPojo(String jsonData, Class&lt;T&gt; beanType) &#123;
+        try &#123;
+            T t = MAPPER.readValue(jsonData, beanType);
+            return t;
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125;
+        return null;
+    &#125;
+
+    /**
+     * 将json数据转换成pojo对象list
+     * @param jsonData
+     * @param beanType
+     * @return
+     */
+    public static &lt;T&gt;List&lt;T&gt; jsonToList(String jsonData, Class&lt;T&gt; beanType) &#123;
+        JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class, beanType);
+        try &#123;
+            List&lt;T&gt; list = MAPPER.readValue(jsonData, javaType);
+            return list;
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125;
+
+        return null;
+    &#125;
+
+&#125;</code></pre>
+<h2 id="3、用户登录，注册及注销相关代码"><a href="#3、用户登录，注册及注销相关代码" class="headerlink" title="3、用户登录，注册及注销相关代码"></a>3、用户登录，注册及注销相关代码</h2><pre><code>    @ApiOperation(value = &quot;用户注册&quot;, notes = &quot;用户注册&quot;, httpMethod = &quot;POST&quot;)
+    @PostMapping(&quot;/regist&quot;)
+    public IMOOCJSONResult regist(@RequestBody UserBo userBo,HttpServletRequest request,
+                                  HttpServletResponse response) &#123;
+        String userName = userBo.getUsername();
+        String password = userBo.getPassword();
+        String comfirmPwd = userBo.getConfirmPassword();
+        if (StringUtils.isBlank(userName) || StringUtils.isBlank(password)
+                || StringUtils.isBlank(comfirmPwd)) &#123;
+            return IMOOCJSONResult.errorMsg(&quot;用户名或密码不能为空&quot;);
+        &#125;
+        boolean isExist = userService.queryUserNameIsExist(userName);
+        if (isExist) &#123;
+            return IMOOCJSONResult.errorMsg(&quot;用户名已经存在&quot;);
+        &#125;
+        if (password.length() &lt; 6) &#123;
+            return IMOOCJSONResult.errorMsg(&quot;密码长度不能少于6&quot;);
+        &#125;
+        if (!password.equals(comfirmPwd)) &#123;
+            return IMOOCJSONResult.errorMsg(&quot;两次密码不一致&quot;);
+        &#125;
+        Users users = userService.createUser(userBo);
+        users.setPassword(null);
+        users.setMobile(null);
+        users.setEmail(null);
+        users.setCreatedTime(null);
+        users.setBirthday(null);
+        users.setUpdatedTime(null);
+        CookieUtils.setCookie(request, response, &quot;user&quot;,
+                JsonUtils.objectToJson(users), true);
+        return IMOOCJSONResult.ok();
+    &#125;
+
+    // 用户登录
+    @ApiOperation(value = &quot;用户登录&quot;, notes = &quot;用户登录&quot;, httpMethod = &quot;POST&quot;)
+    @PostMapping(&quot;/login&quot;)
+    public IMOOCJSONResult login(@RequestBody UserBo userBo, HttpServletRequest request,
+                                 HttpServletResponse response) throws Exception &#123;
+        String userName = userBo.getUsername();
+        String password = userBo.getPassword();
+        if (StringUtils.isBlank(userName) || StringUtils.isBlank(password)) &#123;
+            return IMOOCJSONResult.errorMsg(&quot;用户名或密码不能为空&quot;);
+        &#125;
+        Users users = userService.queryUserForLogin(userName, MD5Utils.getMD5Str(password));
+        if (users == null) &#123;
+            return IMOOCJSONResult.errorMsg(&quot;用户名或密码错误&quot;);
+        &#125;
+        users.setPassword(null);
+        users.setMobile(null);
+        users.setEmail(null);
+        users.setCreatedTime(null);
+        users.setBirthday(null);
+        users.setUpdatedTime(null);
+        CookieUtils.setCookie(request, response, &quot;user&quot;,
+                JsonUtils.objectToJson(users), true);
+        return IMOOCJSONResult.ok(users);
+    &#125;
+
+    // 用户退出登录
+    @ApiOperation(value = &quot;用户退出登录&quot;, notes = &quot;用户退出登录&quot;, httpMethod = &quot;POST&quot;)
+    @PostMapping(&quot;/logout&quot;)
+    public IMOOCJSONResult logout(@RequestParam String userId, HttpServletRequest request,
+                                  HttpServletResponse response) &#123;
+        CookieUtils.deleteCookie(request, response, &quot;user&quot;);
+        return IMOOCJSONResult.ok();
+    &#125;</code></pre>
+]]></content>
+      <categories>
+        <category>cookie</category>
+      </categories>
+      <tags>
+        <tag>cookie</tag>
+        <tag>JavaEE</tag>
       </tags>
   </entry>
   <entry>

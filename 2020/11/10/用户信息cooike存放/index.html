@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="利用通用mapper进行数据库查询操作, Java,Spring,Mybatis,SpringBoot,HTML,CSS,数据结构与算法">
+    <meta name="keywords" content="用户信息的cookie存放代码实现, Java,Spring,Mybatis,SpringBoot,HTML,CSS,数据结构与算法">
     <meta name="description" content="Whatever you do, do it as professional">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>利用通用mapper进行数据库查询操作 | 陈少</title>
+    <title>用户信息的cookie存放代码实现 | 陈少</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Yafine/cdn@2.6/source/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -203,12 +203,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/../featureimages/49.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/../featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">利用通用mapper进行数据库查询操作</h1>
+                    <h1 class="description center-align post-title">用户信息的cookie存放代码实现</h1>
                 </div>
             </div>
         </div>
@@ -325,20 +325,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/SpringBoot/">
-                                <span class="chip bg-color">SpringBoot</span>
+                            <a href="/tags/cookie/">
+                                <span class="chip bg-color">cookie</span>
                             </a>
                         
-                            <a href="/tags/Maven/">
-                                <span class="chip bg-color">Maven</span>
-                            </a>
-                        
-                            <a href="/tags/MyBatis/">
-                                <span class="chip bg-color">MyBatis</span>
-                            </a>
-                        
-                            <a href="/tags/Restful/">
-                                <span class="chip bg-color">Restful</span>
+                            <a href="/tags/JavaEE/">
+                                <span class="chip bg-color">JavaEE</span>
                             </a>
                         
                     </div>
@@ -349,8 +341,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Mybatis/" class="post-category">
-                                Mybatis
+                            <a href="/categories/cookie/" class="post-category">
+                                cookie
                             </a>
                         
                     </div>
@@ -362,7 +354,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-11-19
+                    2020-11-10
                 </div>
                 
 
@@ -371,14 +363,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    34
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    10 分
                 </div>
                 
 
@@ -393,7 +385,448 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>案例：使用example创建查询条件进行相关查询。<br>例如查询数据库中是否存在某个用户名。<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/864beb5a1c714781878bcba260d006b5~tplv-k3u1fbpfcp-watermark.image"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7dd41d13edca4c98bd97b1861c9d66d6~tplv-k3u1fbpfcp-watermark.image"></p>
+                <p>我们在这里不用session，只用cookie来存放相关用户信息。cookie及json相关工具类如下：</p>
+<h2 id="1、CookieUtils工具类"><a href="#1、CookieUtils工具类" class="headerlink" title="1、CookieUtils工具类"></a>1、CookieUtils工具类</h2><pre><code>import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
+/**
+ * @Title: CookieUtils.java
+ * @Description: Cookie 工具类
+ * Copyright: Copyright (c)
+ */
+public final class CookieUtils &#123;
+
+    final static Logger logger = LoggerFactory.getLogger(CookieUtils.class);
+
+    /**
+     * 
+     * @Description: 得到Cookie的值, 不编码
+     * @param request
+     * @param cookieName
+     * @return
+     */
+    public static String getCookieValue(HttpServletRequest request, String cookieName) &#123;
+        return getCookieValue(request, cookieName, false);
+    &#125;
+
+    /**
+     * 
+     * @Description: 得到Cookie的值
+     * @param request
+     * @param cookieName
+     * @param isDecoder
+     * @return
+     */
+    public static String getCookieValue(HttpServletRequest request, String cookieName, boolean isDecoder) &#123;
+        Cookie[] cookieList = request.getCookies();
+        if (cookieList == null || cookieName == null) &#123;
+            return null;
+        &#125;
+        String retValue = null;
+        try &#123;
+            for (int i = 0; i &lt; cookieList.length; i++) &#123;
+                if (cookieList[i].getName().equals(cookieName)) &#123;
+                    if (isDecoder) &#123;
+                        retValue = URLDecoder.decode(cookieList[i].getValue(), &quot;UTF-8&quot;);
+                    &#125; else &#123;
+                        retValue = cookieList[i].getValue();
+                    &#125;
+                    break;
+                &#125;
+            &#125;
+        &#125; catch (UnsupportedEncodingException e) &#123;
+            e.printStackTrace();
+        &#125;
+        return retValue;
+    &#125;
+
+    /**
+     * 
+     * @Description: 得到Cookie的值
+     * @param request
+     * @param cookieName
+     * @param encodeString
+     * @return
+     */
+    public static String getCookieValue(HttpServletRequest request, String cookieName, String encodeString) &#123;
+        Cookie[] cookieList = request.getCookies();
+        if (cookieList == null || cookieName == null) &#123;
+            return null;
+        &#125;
+        String retValue = null;
+        try &#123;
+            for (int i = 0; i &lt; cookieList.length; i++) &#123;
+                if (cookieList[i].getName().equals(cookieName)) &#123;
+                    retValue = URLDecoder.decode(cookieList[i].getValue(), encodeString);
+                    break;
+                &#125;
+            &#125;
+        &#125; catch (UnsupportedEncodingException e) &#123;
+             e.printStackTrace();
+        &#125;
+        return retValue;
+    &#125;
+
+    /**
+     * 
+     * @Description: 设置Cookie的值 不设置生效时间默认浏览器关闭即失效,也不编码
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     */
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
+                                 String cookieValue) &#123;
+        setCookie(request, response, cookieName, cookieValue, -1);
+    &#125;
+
+    /**
+     * 
+     * @Description: 设置Cookie的值 在指定时间内生效,但不编码
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param cookieMaxage
+     */
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
+                                 String cookieValue, int cookieMaxage) &#123;
+        setCookie(request, response, cookieName, cookieValue, cookieMaxage, false);
+    &#125;
+
+    /**
+     * 
+     * @Description: 设置Cookie的值 不设置生效时间,但编码
+     * 在服务器被创建，返回给客户端，并且保存客户端
+     * 如果设置了SETMAXAGE(int seconds)，会把cookie保存在客户端的硬盘中
+     * 如果没有设置，会默认把cookie保存在浏览器的内存中
+     * 一旦设置setPath()：只能通过设置的路径才能获取到当前的cookie信息
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param isEncode
+     */
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
+                                 String cookieValue, boolean isEncode) &#123;
+        setCookie(request, response, cookieName, cookieValue, -1, isEncode);
+    &#125;
+
+   /**
+    * 
+    * @Description: 设置Cookie的值 在指定时间内生效, 编码参数
+    * @param request
+    * @param response
+    * @param cookieName
+    * @param cookieValue
+    * @param cookieMaxage
+    * @param isEncode
+    */
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
+                                 String cookieValue, int cookieMaxage, boolean isEncode) &#123;
+        doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, isEncode);
+    &#125;
+
+    /**
+     * 
+     * @Description: 设置Cookie的值 在指定时间内生效, 编码参数(指定编码)
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param cookieMaxage
+     * @param encodeString
+     */
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName,
+                                 String cookieValue, int cookieMaxage, String encodeString) &#123;
+        doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, encodeString);
+    &#125;
+
+    /**
+     * 
+     * @Description: 删除Cookie带cookie域名
+     * @param request
+     * @param response
+     * @param cookieName
+     */
+    public static void deleteCookie(HttpServletRequest request, HttpServletResponse response,
+                                    String cookieName) &#123;
+        doSetCookie(request, response, cookieName, null, -1, false);
+//        doSetCookie(request, response, cookieName, &quot;&quot;, -1, false);
+    &#125;
+
+
+    /**
+     * 
+     * @Description: 设置Cookie的值，并使其在指定时间内生效
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param cookieMaxage    cookie生效的最大秒数
+     * @param isEncode
+     */
+    private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response,
+                                          String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) &#123;
+        try &#123;
+            if (cookieValue == null) &#123;
+                cookieValue = &quot;&quot;;
+            &#125; else if (isEncode) &#123;
+                cookieValue = URLEncoder.encode(cookieValue, &quot;utf-8&quot;);
+            &#125;
+            Cookie cookie = new Cookie(cookieName, cookieValue);
+            if (cookieMaxage &gt; 0)
+                cookie.setMaxAge(cookieMaxage);
+            if (null != request) &#123;// 设置域名的cookie
+                String domainName = getDomainName(request);
+                logger.info(&quot;========== domainName: &#123;&#125; ==========&quot;, domainName);
+                if (!&quot;localhost&quot;.equals(domainName)) &#123;
+                    cookie.setDomain(domainName);
+                &#125;
+            &#125;
+            cookie.setPath(&quot;/&quot;);
+            response.addCookie(cookie);
+        &#125; catch (Exception e) &#123;
+             e.printStackTrace();
+        &#125;
+    &#125;
+
+    /**
+     * 
+     * @Description: 设置Cookie的值，并使其在指定时间内生效
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param cookieMaxage    cookie生效的最大秒数
+     * @param encodeString
+     */
+    private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response,
+                                          String cookieName, String cookieValue, int cookieMaxage, String encodeString) &#123;
+        try &#123;
+            if (cookieValue == null) &#123;
+                cookieValue = &quot;&quot;;
+            &#125; else &#123;
+                cookieValue = URLEncoder.encode(cookieValue, encodeString);
+            &#125;
+            Cookie cookie = new Cookie(cookieName, cookieValue);
+            if (cookieMaxage &gt; 0)
+                cookie.setMaxAge(cookieMaxage);
+            if (null != request) &#123;// 设置域名的cookie
+                String domainName = getDomainName(request);
+                logger.info(&quot;========== domainName: &#123;&#125; ==========&quot;, domainName);
+                if (!&quot;localhost&quot;.equals(domainName)) &#123;
+                    cookie.setDomain(domainName);
+                &#125;
+            &#125;
+            cookie.setPath(&quot;/&quot;);
+            response.addCookie(cookie);
+        &#125; catch (Exception e) &#123;
+             e.printStackTrace();
+        &#125;
+    &#125;
+
+    /**
+     * 
+     * @Description: 得到cookie的域名
+     * @return
+     */
+    private static final String getDomainName(HttpServletRequest request) &#123;
+        String domainName = null;
+
+        String serverName = request.getRequestURL().toString();
+        if (serverName == null || serverName.equals(&quot;&quot;)) &#123;
+            domainName = &quot;&quot;;
+        &#125; else &#123;
+            serverName = serverName.toLowerCase();
+            serverName = serverName.substring(7);
+            final int end = serverName.indexOf(&quot;/&quot;);
+            serverName = serverName.substring(0, end);
+            if (serverName.indexOf(&quot;:&quot;) &gt; 0) &#123;
+                String[] ary = serverName.split(&quot;\\:&quot;);
+                serverName = ary[0];
+            &#125;
+
+            final String[] domains = serverName.split(&quot;\\.&quot;);
+            int len = domains.length;
+            if (len &gt; 3 &amp;&amp; !isIp(serverName)) &#123;
+                // www.xxx.com.cn
+                domainName = &quot;.&quot; + domains[len - 3] + &quot;.&quot; + domains[len - 2] + &quot;.&quot; + domains[len - 1];
+            &#125; else if (len &lt;= 3 &amp;&amp; len &gt; 1) &#123;
+                // xxx.com or xxx.cn
+                domainName = &quot;.&quot; + domains[len - 2] + &quot;.&quot; + domains[len - 1];
+            &#125; else &#123;
+                domainName = serverName;
+            &#125;
+        &#125;
+        return domainName;
+    &#125;
+
+    public static String trimSpaces(String IP)&#123;//去掉IP字符串前后所有的空格  
+        while(IP.startsWith(&quot; &quot;))&#123;  
+               IP= IP.substring(1,IP.length()).trim();  
+            &#125;  
+        while(IP.endsWith(&quot; &quot;))&#123;  
+               IP= IP.substring(0,IP.length()-1).trim();  
+            &#125;  
+        return IP;  
+    &#125;  
+
+    public static boolean isIp(String IP)&#123;//判断是否是一个IP  
+        boolean b = false;  
+        IP = trimSpaces(IP);  
+        if(IP.matches(&quot;\\d&#123;1,3&#125;\\.\\d&#123;1,3&#125;\\.\\d&#123;1,3&#125;\\.\\d&#123;1,3&#125;&quot;))&#123;  
+            String s[] = IP.split(&quot;\\.&quot;);  
+            if(Integer.parseInt(s[0])&lt;255)  
+                if(Integer.parseInt(s[1])&lt;255)  
+                    if(Integer.parseInt(s[2])&lt;255)  
+                        if(Integer.parseInt(s[3])&lt;255)  
+                            b = true;  
+        &#125;  
+        return b;  
+    &#125;  
+
+&#125;
+</code></pre>
+<h2 id="2、JsonUtils工具类"><a href="#2、JsonUtils工具类" class="headerlink" title="2、JsonUtils工具类"></a>2、JsonUtils工具类</h2><pre><code>import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
+
+/**
+ * 
+ * @Title: JsonUtils.java
+ * @Description: json转换类
+ * Copyright: Copyright (c)
+ */
+public class JsonUtils &#123;
+
+    // 定义jackson对象
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    /**
+     * 将对象转换成json字符串。
+     * @param data
+     * @return
+     */
+    public static String objectToJson(Object data) &#123;
+        try &#123;
+            String string = MAPPER.writeValueAsString(data);
+            return string;
+        &#125; catch (JsonProcessingException e) &#123;
+            e.printStackTrace();
+        &#125;
+        return null;
+    &#125;
+
+    /**
+     * 将json结果集转化为对象
+     * 
+     * @param jsonData json数据
+     * @param beanType 对象中的object类型
+     * @return
+     */
+    public static &lt;T&gt; T jsonToPojo(String jsonData, Class&lt;T&gt; beanType) &#123;
+        try &#123;
+            T t = MAPPER.readValue(jsonData, beanType);
+            return t;
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125;
+        return null;
+    &#125;
+
+    /**
+     * 将json数据转换成pojo对象list
+     * @param jsonData
+     * @param beanType
+     * @return
+     */
+    public static &lt;T&gt;List&lt;T&gt; jsonToList(String jsonData, Class&lt;T&gt; beanType) &#123;
+        JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class, beanType);
+        try &#123;
+            List&lt;T&gt; list = MAPPER.readValue(jsonData, javaType);
+            return list;
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125;
+
+        return null;
+    &#125;
+
+&#125;</code></pre>
+<h2 id="3、用户登录，注册及注销相关代码"><a href="#3、用户登录，注册及注销相关代码" class="headerlink" title="3、用户登录，注册及注销相关代码"></a>3、用户登录，注册及注销相关代码</h2><pre><code>    @ApiOperation(value = &quot;用户注册&quot;, notes = &quot;用户注册&quot;, httpMethod = &quot;POST&quot;)
+    @PostMapping(&quot;/regist&quot;)
+    public IMOOCJSONResult regist(@RequestBody UserBo userBo,HttpServletRequest request,
+                                  HttpServletResponse response) &#123;
+        String userName = userBo.getUsername();
+        String password = userBo.getPassword();
+        String comfirmPwd = userBo.getConfirmPassword();
+        if (StringUtils.isBlank(userName) || StringUtils.isBlank(password)
+                || StringUtils.isBlank(comfirmPwd)) &#123;
+            return IMOOCJSONResult.errorMsg(&quot;用户名或密码不能为空&quot;);
+        &#125;
+        boolean isExist = userService.queryUserNameIsExist(userName);
+        if (isExist) &#123;
+            return IMOOCJSONResult.errorMsg(&quot;用户名已经存在&quot;);
+        &#125;
+        if (password.length() &lt; 6) &#123;
+            return IMOOCJSONResult.errorMsg(&quot;密码长度不能少于6&quot;);
+        &#125;
+        if (!password.equals(comfirmPwd)) &#123;
+            return IMOOCJSONResult.errorMsg(&quot;两次密码不一致&quot;);
+        &#125;
+        Users users = userService.createUser(userBo);
+        users.setPassword(null);
+        users.setMobile(null);
+        users.setEmail(null);
+        users.setCreatedTime(null);
+        users.setBirthday(null);
+        users.setUpdatedTime(null);
+        CookieUtils.setCookie(request, response, &quot;user&quot;,
+                JsonUtils.objectToJson(users), true);
+        return IMOOCJSONResult.ok();
+    &#125;
+
+    // 用户登录
+    @ApiOperation(value = &quot;用户登录&quot;, notes = &quot;用户登录&quot;, httpMethod = &quot;POST&quot;)
+    @PostMapping(&quot;/login&quot;)
+    public IMOOCJSONResult login(@RequestBody UserBo userBo, HttpServletRequest request,
+                                 HttpServletResponse response) throws Exception &#123;
+        String userName = userBo.getUsername();
+        String password = userBo.getPassword();
+        if (StringUtils.isBlank(userName) || StringUtils.isBlank(password)) &#123;
+            return IMOOCJSONResult.errorMsg(&quot;用户名或密码不能为空&quot;);
+        &#125;
+        Users users = userService.queryUserForLogin(userName, MD5Utils.getMD5Str(password));
+        if (users == null) &#123;
+            return IMOOCJSONResult.errorMsg(&quot;用户名或密码错误&quot;);
+        &#125;
+        users.setPassword(null);
+        users.setMobile(null);
+        users.setEmail(null);
+        users.setCreatedTime(null);
+        users.setBirthday(null);
+        users.setUpdatedTime(null);
+        CookieUtils.setCookie(request, response, &quot;user&quot;,
+                JsonUtils.objectToJson(users), true);
+        return IMOOCJSONResult.ok(users);
+    &#125;
+
+    // 用户退出登录
+    @ApiOperation(value = &quot;用户退出登录&quot;, notes = &quot;用户退出登录&quot;, httpMethod = &quot;POST&quot;)
+    @PostMapping(&quot;/logout&quot;)
+    public IMOOCJSONResult logout(@RequestParam String userId, HttpServletRequest request,
+                                  HttpServletResponse response) &#123;
+        CookieUtils.deleteCookie(request, response, &quot;user&quot;);
+        return IMOOCJSONResult.ok();
+    &#125;</code></pre>
 
             </div>
             <hr/>
@@ -419,7 +852,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jtchen-study.github.io/2020/11/19/%E5%88%A9%E7%94%A8%E9%80%9A%E7%94%A8mapper%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C/">https://jtchen-study.github.io/2020/11/19/%E5%88%A9%E7%94%A8%E9%80%9A%E7%94%A8mapper%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C/</a>
+                    <a href="https://jtchen-study.github.io/2020/11/10/%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AFcooike%E5%AD%98%E6%94%BE/">https://jtchen-study.github.io/2020/11/10/%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AFcooike%E5%AD%98%E6%94%BE/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -457,20 +890,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/SpringBoot/">
-                                    <span class="chip bg-color">SpringBoot</span>
+                                <a href="/tags/cookie/">
+                                    <span class="chip bg-color">cookie</span>
                                 </a>
                             
-                                <a href="/tags/Maven/">
-                                    <span class="chip bg-color">Maven</span>
-                                </a>
-                            
-                                <a href="/tags/MyBatis/">
-                                    <span class="chip bg-color">MyBatis</span>
-                                </a>
-                            
-                                <a href="/tags/Restful/">
-                                    <span class="chip bg-color">Restful</span>
+                                <a href="/tags/JavaEE/">
+                                    <span class="chip bg-color">JavaEE</span>
                                 </a>
                             
                         </div>
@@ -907,78 +1332,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/11/19/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+                <a href="/2020/11/17/MyBatis%E9%80%86%E5%90%91%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/">
                     <div class="card-image">
                         
-                        <img src="/../featureimages/31.jpg" class="responsive-img" alt="使用SpringBoot进行单元测试">
+                        <img src="/../featureimages/32.jpg" class="responsive-img" alt="MyBatis逆向生成工具">
                         
-                        <span class="card-title">使用SpringBoot进行单元测试</span>
+                        <span class="card-title">MyBatis逆向生成工具</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            使用SpringBoot进行单元测试
+                            MyBatis逆向生成工具
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-19
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-17
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/SpringBoot/" class="post-category">
-                                    SpringBoot
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/SpringBoot/">
-                        <span class="chip bg-color">SpringBoot</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/11/19/%E5%9F%BA%E4%BA%8E%E9%80%9A%E7%94%A8mapper%E5%92%8Crestful%E9%A3%8E%E6%A0%BC%E6%92%B0%E5%86%99api/">
-                    <div class="card-image">
-                        
-                        <img src="/../featureimages/50.jpg" class="responsive-img" alt="基于通用mapper和restful风格撰写api">
-                        
-                        <span class="card-title">基于通用mapper和restful风格撰写api</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            基于通用mapper和restful风格撰写api
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-19
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Restful/" class="post-category">
-                                    Restful
+                            <a href="/categories/MyBatis/" class="post-category">
+                                    MyBatis
                                 </a>
                             
                             
@@ -1000,8 +1377,52 @@
                         <span class="chip bg-color">MyBatis</span>
                     </a>
                     
-                    <a href="/tags/Restful/">
-                        <span class="chip bg-color">Restful</span>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/11/10/%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98/">
+                    <div class="card-image">
+                        
+                        <img src="/../featureimages/48.jpg" class="responsive-img" alt="跳台阶问题的几种变形">
+                        
+                        <span class="card-title">跳台阶问题的几种变形</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            leetcode若干相关题解
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
+                                    数据结构与算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+                        <span class="chip bg-color">动态规划</span>
                     </a>
                     
                 </div>
