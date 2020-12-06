@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>HDFS的常用命令行</title>
+    <url>/2020/12/09/HDFS%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C/</url>
+    <content><![CDATA[<p><strong>通过hadoop fs 可以查看相关命令</strong></p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80f4670dfb174ddb8b8fe2c9fd501323~tplv-k3u1fbpfcp-watermark.image"><br><strong>1、列出HDFS文件</strong></p>
+<pre><code>列出根目录下的所有文件
+hadoop fs -ls /</code></pre>
+<p><strong>2、上传文件到HDFS</strong></p>
+<pre><code>将本地根目录下的README.txt上传到hdfs根目录下
+hadoop fs –put /README.txt /</code></pre>
+<p><strong>3、查看HDFS文件</strong></p>
+<pre><code>hadoop fs -text /readme.txt
+hadoop fs -cat /readme.txt</code></pre>
+<p><strong>4、从本地上传文件到hdfs</strong></p>
+<pre><code>hadoop fs -copyFromLocal /readme1.txt / // 保留本地文件
+hadoop fs -moveFromLocal /readme1.txt / // 不保留本地文件</code></pre>
+<p><strong>5、从hdfs上获取文件到本地</strong></p>
+<pre><code>hadoop fs -get /readme1.txt /</code></pre>
+<p><strong>6、在hdfs上创建文件夹</strong></p>
+<pre><code>hadoop fs -mkdir /hdfs-test</code></pre>
+<p><strong>7、在hdfs内部移动文件</strong></p>
+<pre><code>hadoop fs -mv /readme.txt /hdfs-test</code></pre>
+<p><strong>8、获取hdfs文件并且进行合并</strong><br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80317b0f80e441089d75fe9fa571a45f~tplv-k3u1fbpfcp-watermark.image"></p>
+<pre><code>hadoop fs -getmerge /hdfs-test ./txt
+将hdfs-test文件夹内部的文件合并并且获取到本地的当前文件夹下命名为txt</code></pre>
+<p><strong>9、删除文件及文件夹</strong></p>
+<pre><code>hadoop fs -rm /readme1.txt // 删除文件
+hadoop fs -rmr /hdfs-test  // 删除文件夹(包含内容)</code></pre>
+]]></content>
+      <categories>
+        <category>Hadoop</category>
+      </categories>
+      <tags>
+        <tag>Hadoop</tag>
+        <tag>HDFS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hadoop入门</title>
+    <url>/2020/12/18/Hadoop%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="1-Hadoop发行版介绍"><a href="#1-Hadoop发行版介绍" class="headerlink" title="1 Hadoop发行版介绍"></a>1 Hadoop发行版介绍</h2><p>Hadoop三大发行版本：Apache、Cloudera、Hortonworks。<br>Apache版本最原始（最基础）的版本，适合基础学习。<br>Cloudera内部集成了很多大数据框架，对应产品CDH。<br>Hortonworks文档较好，对应产品HDP。<br>目前使用最多的是后两种。</p>
+<h3 id="1-1-Apache-Hadoop"><a href="#1-1-Apache-Hadoop" class="headerlink" title="1.1 Apache Hadoop"></a>1.1 Apache Hadoop</h3><p>官网地址：<a href="http://hadoop.apache.org/releases.html">http://hadoop.apache.org/releases.html</a><br>下载地址：<a href="https://archive.apache.org/dist/hadoop/common/">https://archive.apache.org/dist/hadoop/common/</a>  </p>
+<h3 id="1-2-Cloudera-Hadoop"><a href="#1-2-Cloudera-Hadoop" class="headerlink" title="1.2 Cloudera Hadoop"></a>1.2 Cloudera Hadoop</h3><p>官网地址：<a href="https://www.cloudera.com/downloads/cdh/5-10-0.html">https://www.cloudera.com/downloads/cdh/5-10-0.html</a><br>下载地址：<a href="http://archive.cloudera.com/cdh5/cdh/5/">http://archive.cloudera.com/cdh5/cdh/5/</a></p>
+<h3 id="1-3-Hortonworks-Hadoop"><a href="#1-3-Hortonworks-Hadoop" class="headerlink" title="1.3 Hortonworks Hadoop"></a>1.3 Hortonworks Hadoop</h3><p>官网地址：<a href="https://hortonworks.com/products/data-center/hdp/">https://hortonworks.com/products/data-center/hdp/</a><br>下载地址：<a href="https://hortonworks.com/downloads/#data-platform">https://hortonworks.com/downloads/#data-platform</a>  </p>
+<h2 id="2-Hadoop的优势"><a href="#2-Hadoop的优势" class="headerlink" title="2 Hadoop的优势"></a>2 Hadoop的优势</h2><p>1、高可靠性：Hadoop底层维护多个数据副本，所以即使Hadoop某个元素或存储出现故障，也不会导致数据的丢失<br>2、高扩展性：在集群间分配任务数据，可方便地扩展数以千计的节点。<br>3、高效性：在MapReduce的思想下，Hadoop是并行工作的，以加快任务处理速度。<br>4、高容错性：能够自动将失败的任务重新分配。</p>
+<h2 id="3-Hadoop组成"><a href="#3-Hadoop组成" class="headerlink" title="3 Hadoop组成"></a>3 Hadoop组成</h2><h3 id="3-1-Hadoop1-x和Hadoop2-x区别："><a href="#3-1-Hadoop1-x和Hadoop2-x区别：" class="headerlink" title="3.1 Hadoop1.x和Hadoop2.x区别："></a>3.1 Hadoop1.x和Hadoop2.x区别：</h3><p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/607cdb08937846e795c58ec06cd6a9e7~tplv-k3u1fbpfcp-watermark.image"><br>注：Hadoop3.X与Hadoop2.X架构没有大变化</p>
+<h3 id="3-2-HDFS架构概述"><a href="#3-2-HDFS架构概述" class="headerlink" title="3.2 HDFS架构概述"></a>3.2 HDFS架构概述</h3><p><strong>对磁盘进行调度</strong><br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fc4515ead5b141de8983fce22821c635~tplv-k3u1fbpfcp-watermark.image"></p>
+<h3 id="3-3-YARN架构概述"><a href="#3-3-YARN架构概述" class="headerlink" title="3.3 YARN架构概述"></a>3.3 YARN架构概述</h3><p><strong>对CPU和内存进行调度</strong><br>Yarn支持主从架构，主节点最多可以有两个，从节点可以有多个。<br>主节点(Resource Manager)进程主要负责集群资源的分配和管理，从节点(Node Manager)主要负责单节点资源管理。</p>
+<h4 id="3-3-1-Resource-Manager"><a href="#3-3-1-Resource-Manager" class="headerlink" title="3.3.1 Resource Manager"></a>3.3.1 Resource Manager</h4><p>主要作用：<br>1、处理客户端请求<br>2、监控NodeManager<br>3、启动或监控ApplicationMaster<br>4、资源的分配与调度  </p>
+<h4 id="3-3-2-Node-Manager"><a href="#3-3-2-Node-Manager" class="headerlink" title="3.3.2 Node Manager"></a>3.3.2 Node Manager</h4><p>主要作用：<br>1、管理单个节点上的资源<br>2、处理来自ResourceManager的命令<br>3、处理来自ApplicationMaster的命令</p>
+<h4 id="3-3-3-Application-Master"><a href="#3-3-3-Application-Master" class="headerlink" title="3.3.3 Application Master"></a>3.3.3 Application Master</h4><p>1、负责数据的切分<br>2、为应用程序申请资源并分配给内部的任务<br>3、任务的监控与容错</p>
+<h4 id="3-3-4-Container"><a href="#3-3-4-Container" class="headerlink" title="3.3.4 Container"></a>3.3.4 Container</h4><p>Container是中的资源抽象，它封装了某个节点上的多维度资源。<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ada3889e70a74e2a96b71a199b6fdc9e~tplv-k3u1fbpfcp-watermark.image"></p>
+<h3 id="3-4-MapReduce概述"><a href="#3-4-MapReduce概述" class="headerlink" title="3.4 MapReduce概述"></a>3.4 MapReduce概述</h3><p>MapReduce是一个编程模型，计算框架，主要负责海量数据的计算。<br>MapReduce将计算过程分为两个阶段：Map和Reduce<br>Map阶段是一个独立的程序，会在很多节点上同时执行，每个节点处理一部分数据。<br>Reduce阶段也是一个独立程序，Reduce可以理解为一个单独的聚合程序。<br>1）Map阶段并行处理输入数据<br>2）Reduce阶段对Map结果进行汇总<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8915679fc1af49b7afb1ba70eb97ac3b~tplv-k3u1fbpfcp-watermark.image"></p>
+<h2 id="4-大数据生态区介绍"><a href="#4-大数据生态区介绍" class="headerlink" title="4 大数据生态区介绍"></a>4 大数据生态区介绍</h2><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2baf6579783a4694a0f31cae10ba9fac~tplv-k3u1fbpfcp-watermark.image"></p>
+]]></content>
+      <categories>
+        <category>Hadoop</category>
+      </categories>
+      <tags>
+        <tag>Hadoop</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HiKaricp数据库连接池的使用</title>
     <url>/2020/11/18/HiKaricp%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<p>最近学习到除druid外，一种网上评论更快的数据库连接池，hikaricp,以下是SpringBoot集成HiKaricp</p>
@@ -55,6 +117,123 @@ mybatis:
       <tags>
         <tag>HiKaricp</tag>
         <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hadoop-HDFS之Api编程</title>
+    <url>/2020/12/05/Hadoop-HDFS%E4%B9%8BApi%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<h2 id="一、开发环境搭建"><a href="#一、开发环境搭建" class="headerlink" title="一、开发环境搭建"></a>一、开发环境搭建</h2><p>这里使用Maven项目构建开发环境,相关配置如下。</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://maven.apache.org/POM/4.0.0<span class="token punctuation">"</span></span>
+         <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span>
+         <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modelVersion</span><span class="token punctuation">></span></span>4.0.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modelVersion</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.imooc.bigdata<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>hadoop-train<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+    <span class="token comment" spellcheck="true">&lt;!--版本管理--></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>hadoop.version</span><span class="token punctuation">></span></span>2.6.0-cdh5.15.1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>hadoop.version</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>repositories</span><span class="token punctuation">></span></span>
+    <span class="token comment" spellcheck="true">&lt;!-- cloudera 的仓库 --></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>repository</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>cloudera<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">></span></span>https://repository.cloudera.com/artifactory/cloudera-repos/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>repository</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>repositories</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>4.13<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.apache.hadoop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>hadoop-client<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>$<span class="token entity" title="&#123;">&amp;#123;</span>hadoop.version<span class="token entity" title="&#125;">&amp;#125;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="二、编写相关API"><a href="#二、编写相关API" class="headerlink" title="二、编写相关API"></a>二、编写相关API</h2><pre class=" language-txt"><code class="language-txt">import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataInputStream;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IOUtils;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import java.net.URI;
+
+/**
+ * 使用java API操作HDFS文件系统
+ */
+public class HDFSApp &#123;
+    public static final String HDFS_PATH = "hdfs://121.**.***.81:8020/";
+    FileSystem fileSystem = null;
+    Configuration conf = null;
+
+    @Before //测试前的相关代码
+    public void setUp() throws Exception &#123;
+        conf = new Configuration();
+        /**
+         * 构造一个访问指定HDFS系统的客户端对象
+         * 第一个参数：HDFS的URI
+         * 第二个参数：客户端的配置参数
+         * 第三个参数：客户端的身份,说白了就是用户名
+         */
+        conf.set("dfs.client.use.datanode.hostname", "true");
+        fileSystem = FileSystem.get(new URI(HDFS_PATH), conf,"root");
+    &#125;
+
+    /**
+     * 创建HDFS文件夹
+     */
+    @Test
+    public void test() throws Exception &#123;
+        Path path = new Path("/hdfsapi/test");
+        boolean res = fileSystem.mkdirs(path);
+        System.out.println(res);
+    &#125;
+
+    /**
+     * 查看HDFS内容
+     */
+    @Test
+    public void test1() throws Exception&#123;
+        FSDataInputStream in = fileSystem.open(new Path("/test.txt"));
+        IOUtils.copyBytes(in,System.out,1024);
+    &#125;
+    @After
+    public void tearDown()&#123;
+        conf = null;
+        fileSystem = null;
+    &#125;
+&#125;</code></pre>
+<p>这里需要注意的是hadoop部署在阿里云上，在测试open方法读取文件的时候出现了错误，但是创建文件及文件夹都没有错误，读取文件的具体错误如下：  </p>
+<pre class=" language-java"><code class="language-java">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>hadoop<span class="token punctuation">.</span>hdfs<span class="token punctuation">.</span>BlockMissingException<span class="token operator">:</span> Could not obtain block<span class="token operator">:</span> BP<span class="token operator">-</span><span class="token number">613411839</span><span class="token operator">-</span>  
+<span class="token number">172.26</span><span class="token punctuation">.</span><span class="token number">224.239</span><span class="token operator">-</span><span class="token number">1606657223979</span><span class="token operator">:</span>blk_1073741829_1005 file<span class="token operator">=</span><span class="token operator">/</span>test<span class="token punctuation">.</span>txt</code></pre>
+<p>原因:</p>
+<p>查阅资料发现 HDFS 中的文件夹和文件名都是存放在 NameNode 上，操作不需要和 DataNode 通信，因此可以正常创建文件夹和创建文件说明本地和远程 NameNode 通信没有问题。</p>
+<p>文件夹和文件名都是存放在 NameNode 上的，我本地可以通过公网访问 NameNode，所以创建文件夹和文件都可以，但是当我写数据的时候，NameNode 和DataNode 是通过内网通信的，NameNode 会返回给我 DataNode 的内网 IP，我本地就访问不了了。</p>
+<p>还有一种可能，云服务器没有开放 DataNode 用于数据传输服务端口 默认是 50010。</p>
+<p>解决方案：<br>1、添加一句配置，使 NameNode 返回 DataNode 的主机名而不是 IP：</p>
+<pre class=" language-java"><code class="language-java">configuration<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">"dfs.client.use.datanode.hostname"</span><span class="token punctuation">,</span> <span class="token string">"true"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>另外也可以配置 hdfs-site.xml 文件内容如下：</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>dfs.client.use.datanode.hostname<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span></code></pre>
+<p>2、本地可以拿到了 DataNode 的主机名，要访问还需要配置本地 Hosts 映射。</p>
+<pre><code>121.89.195.**  ch**j***</code></pre>
+<pre><code>windows 下 hosts 文件地址：C:\Windows\System32\drivers\etc\hosts</code></pre>
+<p>3、云服务器打开 50010 端口</p>
+]]></content>
+      <categories>
+        <category>Hadoop</category>
+      </categories>
+      <tags>
+        <tag>Hadoop</tag>
       </tags>
   </entry>
   <entry>
@@ -136,6 +315,27 @@ mybatis:
       </tags>
   </entry>
   <entry>
+    <title>使用SpringBoot进行单元测试</title>
+    <url>/2020/11/19/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h2 id="1、添加依赖"><a href="#1、添加依赖" class="headerlink" title="1、添加依赖"></a>1、添加依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="2、编写相关测试用例"><a href="#2、编写相关测试用例" class="headerlink" title="2、编写相关测试用例"></a>2、编写相关测试用例</h2><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c999a60091524928b871b5e42dea587d~tplv-k3u1fbpfcp-zoom-1.image" alt="avatar"></p>
+<p>注意，单元测试需要添加如下注解:</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span>SpringRunner<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@SpringBootTest</span><span class="token punctuation">(</span>classes <span class="token operator">=</span> Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类</span>
+</code></pre>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SpringBoot整合log4j输出日志</title>
     <url>/2020/11/22/SpringBoot%E6%95%B4%E5%90%88%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/</url>
     <content><![CDATA[<h2 id="1、首先剔除springboot自带的logging日志，因为其内容包含的太多。"><a href="#1、首先剔除springboot自带的logging日志，因为其内容包含的太多。" class="headerlink" title="1、首先剔除springboot自带的logging日志，因为其内容包含的太多。"></a>1、首先剔除springboot自带的logging日志，因为其内容包含的太多。</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/50f1b4d49f0c450b887bbb2df050c88a~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
@@ -191,24 +391,110 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
       </tags>
   </entry>
   <entry>
-    <title>使用SpringBoot进行单元测试</title>
-    <url>/2020/11/19/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h2 id="1、添加依赖"><a href="#1、添加依赖" class="headerlink" title="1、添加依赖"></a>1、添加依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <title>SpringBoot项目打war包流程</title>
+    <url>/2020/12/18/SpringBoot%E9%A1%B9%E7%9B%AE%E6%89%93war%E5%8C%85%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<p>目前，前后端分离的架构已成主流，因此使用springboot构建应用是非常快速的，项目发布到服务器上的时候，只需要打成一个jar包，然后通过命令 : java -jar jar包名称即可启动服务了；</p>
+<p>但在有些场景下，比如部署到外部的服务器的时候，客户方指定要以tomcat的形式启动服务的时候，即需要由服务提供方提供一个war包的时候，该怎么办呢？</p>
+<p>一开始没有查找资料，自己差点准备使用传统的ssm框架改造服务的，后来思考和参考相关资料后，发现只需要挤出简单的配置和改造就可以做到，下面是记载将springboot项目改造打包成war的流程，算是一个简单的参考：</p>
+<h2 id="1、将pom中打包的配置从jar改成war"><a href="#1、将pom中打包的配置从jar改成war" class="headerlink" title="1、将pom中打包的配置从jar改成war"></a>1、将pom中打包的配置从jar改成war</h2><pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.example<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>application<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>0.0.1-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token comment" spellcheck="true">&lt;!--默认为jar方式--></span>
+<span class="token comment" spellcheck="true">&lt;!--&lt;packaging>jar&lt;/packaging>--></span>
+<span class="token comment" spellcheck="true">&lt;!--改为war方式--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>packaging</span><span class="token punctuation">></span></span>war<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>packaging</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="2、排除springboot内置的tomcat干扰"><a href="#2、排除springboot内置的tomcat干扰" class="headerlink" title="2、排除springboot内置的tomcat干扰"></a>2、排除springboot内置的tomcat干扰</h2><pre class=" language-xml"><code class="language-xml"> <span class="token comment" spellcheck="true">&lt;!--最终打成war包，排除内置的tomcat--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-web<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusions</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusion</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-tomcat<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusion</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusions</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<p>有人说也可以添加一个tomcat的依赖，这种方式也许是可以的，但是我没有尝试，大多数推荐的还是上面一种，即排除掉内置的tomcat。</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-tomcat<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>provided<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="3、pom文件添加如些依赖"><a href="#3、pom文件添加如些依赖" class="headerlink" title="3、pom文件添加如些依赖"></a>3、pom文件添加如些依赖</h2><pre class=" language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!--添加servlet-api的依赖,用来打war包  --></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>javax.servlet<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>javax.servlet-api<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>provided<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<h2 id="2、编写相关测试用例"><a href="#2、编写相关测试用例" class="headerlink" title="2、编写相关测试用例"></a>2、编写相关测试用例</h2><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c999a60091524928b871b5e42dea587d~tplv-k3u1fbpfcp-zoom-1.image" alt="avatar"></p>
-<p>注意，单元测试需要添加如下注解:</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span>SpringRunner<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@SpringBootTest</span><span class="token punctuation">(</span>classes <span class="token operator">=</span> Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类</span>
-</code></pre>
+<p>这个依赖主要是用于在和jsp进行整合的使用，可酌情添加。</p>
+<h2 id="4、改造启动类"><a href="#4、改造启动类" class="headerlink" title="4、改造启动类"></a>4、改造启动类</h2><p>1.方式一，启动类继承SpringBootServletInitializer实现configure：</p>
+<pre class=" language-txt"><code class="language-txt">@SpringBootApplication
+public class Application extends SpringBootServletInitializer &#123;
+
+    public static void main(String[] args) &#123;
+        SpringApplication.run(Application.class, args);
+    &#125;
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) &#123;
+        return builder.sources(Application.class);
+    &#125;
+&#125;</code></pre>
+<p>2.方式二，新增加一个类继承SpringBootServletInitializer实现configure：</p>
+<pre class=" language-txt"><code class="language-txt">public class ServletInitializer extends SpringBootServletInitializer &#123;
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) &#123;
+        //此处的Application.class为带有@SpringBootApplication注解的启动类
+        return builder.sources(Application.class);
+    &#125;
+&#125;</code></pre>
+<h2 id="5、打包"><a href="#5、打包" class="headerlink" title="5、打包"></a>5、打包</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f69cb06327c491aac37b13a2043a87d~tplv-k3u1fbpfcp-watermark.image"></p>
+<p>参考链接：  </p>
+<pre><code>https://blog.csdn.net/qq_33512843/article/details/80951741  
+https://blog.csdn.net/zhangcongyi420/article/details/100065407?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1.control
+https://blog.csdn.net/pengweismile/article/details/95897988</code></pre>
 ]]></content>
       <categories>
         <category>SpringBoot</category>
       </categories>
       <tags>
         <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IDEA自动重置language level和java compiler的解决</title>
+    <url>/2020/12/05/idea%E8%87%AA%E5%8A%A8%E9%87%8D%E7%BD%AElanguage%20level%E5%92%8Cjava%20compiler%E7%9A%84%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<h2 id="1-需求分析"><a href="#1-需求分析" class="headerlink" title="1.需求分析"></a>1.需求分析</h2><p>  很多同学可能会遇到这种情况，某次加载多模块的工程时，会报java compiler不合理的错误，这是要重新配置language level和java compiler的节奏；今天笔者跟大伙就这个问题唠唠嗑</p>
+<h2 id="2-场景还原"><a href="#2-场景还原" class="headerlink" title="2.场景还原"></a>2.场景还原</h2><p>①加载新工程，一般会抛错</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2c3b03676de34458a364c97acf5d1ac5~tplv-k3u1fbpfcp-watermark.image"><br>②根据该问题，配置如下</p>
+<p>配置java compiler</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0b2fb80979b744bfb078a02f6d639ac4~tplv-k3u1fbpfcp-watermark.image"><br>配置language level</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2bcf7fa5de2b44e48166b74942444363~tplv-k3u1fbpfcp-watermark.image"></p>
+<p>这样配置后，基本上okl了，但是重新加载后，这种情况可能还会出现</p>
+<h2 id="3-杀手锏"><a href="#3-杀手锏" class="headerlink" title="3.杀手锏"></a>3.杀手锏</h2><p>在父工程的pom中添加如下配置</p>
+<pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plugins</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plugin</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.apache.maven.plugins<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>maven-compiler-plugin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>3.6.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>configuration</span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span><span class="token punctuation">></span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>source</span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>target</span><span class="token punctuation">></span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>target</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>configuration</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plugin</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plugins</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build</span><span class="token punctuation">></span></span></code></pre>
+<p><strong>亲测有用</strong>  </p>
+<p>参考链接：</p>
+<pre><code>https://blog.csdn.net/zhangxing52077/article/details/78728040</code></pre>
+]]></content>
+      <categories>
+        <category>IDEA</category>
+      </categories>
+      <tags>
+        <tag>IDEA</tag>
       </tags>
   </entry>
   <entry>
@@ -259,114 +545,6 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
       <tags>
         <tag>SpringBoot</tag>
         <tag>Maven</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于通用mapper和restful风格撰写api</title>
-    <url>/2020/11/19/%E5%9F%BA%E4%BA%8E%E9%80%9A%E7%94%A8mapper%E5%92%8Crestful%E9%A3%8E%E6%A0%BC%E6%92%B0%E5%86%99api/</url>
-    <content><![CDATA[<p>现数据库有一张名为Stu的表<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32558fc8b8ee4c269afd061c6fcc1060~tplv-k3u1fbpfcp-zoom-1.image"><br>基于上一个博客提到的mybatis逆向工程生成<em>mapper.java、</em>mapper.xml以及pojo实体类，编写案例StuService,以及相应的实现类StuServiceImpl，<strong>注意到的是StuServiceImpl上面需要打上@Service注解以便可以被扫描到。</strong></p>
-<pre><code>import com.imooc.pojo.Stu;
-
-public interface StuService &#123;
-    public Stu getStuInfo(int id);
-    public void saveStu();
-    public void updateStu(int id);
-    public void deleteStu(int id);
-&#125;</code></pre>
-<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7b448e6f375a4f5684e908972a63dfaf~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c19e06c8e0148ac90ca898303a6d29e~tplv-k3u1fbpfcp-zoom-1.image"><br>编写controller层<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3349a49f574047b5833330c40ee87b6d~tplv-k3u1fbpfcp-zoom-1.image"><br>最后要注意启动类需要加一个@MapperScan注解用于扫描mapper,这里是mybatis来扫描mapper文件</p>
-<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebb7118fe29d4ccd9387c5c5f9c6f33c~tplv-k3u1fbpfcp-zoom-1.image"></p>
-]]></content>
-      <categories>
-        <category>Restful</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-        <tag>Maven</tag>
-        <tag>MyBatis</tag>
-        <tag>Restful</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于Spring aop通过日志监控service执行时间</title>
-    <url>/2020/11/10/%E5%9F%BA%E4%BA%8ESpring%20aop%E9%80%9A%E8%BF%87%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7service%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4/</url>
-    <content><![CDATA[<h2 id="1、导入依赖"><a href="#1、导入依赖" class="headerlink" title="1、导入依赖"></a>1、导入依赖</h2><pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-aop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<h2 id="2-编写aspect切面类"><a href="#2-编写aspect切面类" class="headerlink" title="2.编写aspect切面类"></a>2.编写aspect切面类</h2><pre><code>package com.imooc.aspect;
-
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
-@Component
-@Aspect
-public class ServiceAspect &#123;
-    public static final Logger logger = LoggerFactory.getLogger(ServiceAspect.class);
-
-    /**
-     * Aop通知：
-     * 1. 前置通知：在方法调用之前执行
-     * 2. 后置通知：在方法调用之后执行
-     * 3. 环绕通知：在方法调用之前和之后，都分别可以执行通知
-     * 4. 异常通知：如果在方法调用过程中发生异常，则通知
-     * 5. 最终通知，在方法调用之后执行
-     */
-    /**
-     *
-     * 切面表达式
-     * execution 代表所要执行的表达式主体
-     * 第一处 *代表方法返回类型 *代表所有类型
-     * 第二处 包名代表aop监控的类所在的包
-     * 第三处 .. 代表该包以及其子包下的所有类方法
-     * 第四处 * 代表类名，*代表所有类
-     * 第五处 *(..) *代表类中的方法名，(..)表示方法中的任何参数
-     */
-    @Around(&quot;execution(* com.imooc.service.impl..*.*(..))&quot;)
-    public Object recordTimeLog(ProceedingJoinPoint joinPoint) throws Throwable &#123;
-        logger.info(&quot;===== 开始执行&#123;&#125;.&#123;&#125; =====&quot;,
-                joinPoint.getTarget().getClass(),
-                joinPoint.getSignature().getName());
-        long begin = System.currentTimeMillis();
-        Object result = joinPoint.proceed();
-        long end = System.currentTimeMillis();
-        long takeTime = end - begin;
-      if (takeTime &gt; 3000) &#123;
-            logger.error(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
-        &#125;else if(takeTime &gt; 2000)&#123;
-            logger.warn(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
-        &#125;else &#123;
-            logger.info(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
-        &#125;
-        return result;
-&#125;
-</code></pre>
-<p>执行效果<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fa56bde956d24d9c91a82e134763eb27~tplv-k3u1fbpfcp-watermark.webp"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/14f0a8c7f2d743f29e8a24311748330c~tplv-k3u1fbpfcp-watermark.webp"></p>
-]]></content>
-      <categories>
-        <category>Spring</category>
-      </categories>
-      <tags>
-        <tag>Spring Aop</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用通用mapper进行数据库查询操作</title>
-    <url>/2020/11/19/%E5%88%A9%E7%94%A8%E9%80%9A%E7%94%A8mapper%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<p>案例：使用example创建查询条件进行相关查询。<br>例如查询数据库中是否存在某个用户名。<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/864beb5a1c714781878bcba260d006b5~tplv-k3u1fbpfcp-watermark.image"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7dd41d13edca4c98bd97b1861c9d66d6~tplv-k3u1fbpfcp-watermark.image"></p>
-]]></content>
-      <categories>
-        <category>Mybatis</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-        <tag>Maven</tag>
-        <tag>MyBatis</tag>
-        <tag>Restful</tag>
       </tags>
   </entry>
   <entry>
@@ -479,6 +657,154 @@ public class MainConfig &#123;
       </categories>
       <tags>
         <tag>SpringBoot</tag>
+        <tag>Maven</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用通用mapper进行数据库查询操作</title>
+    <url>/2020/11/19/%E5%88%A9%E7%94%A8%E9%80%9A%E7%94%A8mapper%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<p>案例：使用example创建查询条件进行相关查询。<br>例如查询数据库中是否存在某个用户名。<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/864beb5a1c714781878bcba260d006b5~tplv-k3u1fbpfcp-watermark.image"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7dd41d13edca4c98bd97b1861c9d66d6~tplv-k3u1fbpfcp-watermark.image"></p>
+]]></content>
+      <categories>
+        <category>Mybatis</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+        <tag>Maven</tag>
+        <tag>MyBatis</tag>
+        <tag>Restful</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于通用mapper和restful风格撰写api</title>
+    <url>/2020/11/19/%E5%9F%BA%E4%BA%8E%E9%80%9A%E7%94%A8mapper%E5%92%8Crestful%E9%A3%8E%E6%A0%BC%E6%92%B0%E5%86%99api/</url>
+    <content><![CDATA[<p>现数据库有一张名为Stu的表<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32558fc8b8ee4c269afd061c6fcc1060~tplv-k3u1fbpfcp-zoom-1.image"><br>基于上一个博客提到的mybatis逆向工程生成<em>mapper.java、</em>mapper.xml以及pojo实体类，编写案例StuService,以及相应的实现类StuServiceImpl，<strong>注意到的是StuServiceImpl上面需要打上@Service注解以便可以被扫描到。</strong></p>
+<pre><code>import com.imooc.pojo.Stu;
+
+public interface StuService &#123;
+    public Stu getStuInfo(int id);
+    public void saveStu();
+    public void updateStu(int id);
+    public void deleteStu(int id);
+&#125;</code></pre>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7b448e6f375a4f5684e908972a63dfaf~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c19e06c8e0148ac90ca898303a6d29e~tplv-k3u1fbpfcp-zoom-1.image"><br>编写controller层<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3349a49f574047b5833330c40ee87b6d~tplv-k3u1fbpfcp-zoom-1.image"><br>最后要注意启动类需要加一个@MapperScan注解用于扫描mapper,这里是mybatis来扫描mapper文件</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebb7118fe29d4ccd9387c5c5f9c6f33c~tplv-k3u1fbpfcp-zoom-1.image"></p>
+]]></content>
+      <categories>
+        <category>Restful</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+        <tag>Maven</tag>
+        <tag>MyBatis</tag>
+        <tag>Restful</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于Spring aop通过日志监控service执行时间</title>
+    <url>/2020/11/10/%E5%9F%BA%E4%BA%8ESpring%20aop%E9%80%9A%E8%BF%87%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7service%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4/</url>
+    <content><![CDATA[<h2 id="1、导入依赖"><a href="#1、导入依赖" class="headerlink" title="1、导入依赖"></a>1、导入依赖</h2><pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-aop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="2-编写aspect切面类"><a href="#2-编写aspect切面类" class="headerlink" title="2.编写aspect切面类"></a>2.编写aspect切面类</h2><pre><code>package com.imooc.aspect;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+@Component
+@Aspect
+public class ServiceAspect &#123;
+    public static final Logger logger = LoggerFactory.getLogger(ServiceAspect.class);
+
+    /**
+     * Aop通知：
+     * 1. 前置通知：在方法调用之前执行
+     * 2. 后置通知：在方法调用之后执行
+     * 3. 环绕通知：在方法调用之前和之后，都分别可以执行通知
+     * 4. 异常通知：如果在方法调用过程中发生异常，则通知
+     * 5. 最终通知，在方法调用之后执行
+     */
+    /**
+     *
+     * 切面表达式
+     * execution 代表所要执行的表达式主体
+     * 第一处 *代表方法返回类型 *代表所有类型
+     * 第二处 包名代表aop监控的类所在的包
+     * 第三处 .. 代表该包以及其子包下的所有类方法
+     * 第四处 * 代表类名，*代表所有类
+     * 第五处 *(..) *代表类中的方法名，(..)表示方法中的任何参数
+     */
+    @Around(&quot;execution(* com.imooc.service.impl..*.*(..))&quot;)
+    public Object recordTimeLog(ProceedingJoinPoint joinPoint) throws Throwable &#123;
+        logger.info(&quot;===== 开始执行&#123;&#125;.&#123;&#125; =====&quot;,
+                joinPoint.getTarget().getClass(),
+                joinPoint.getSignature().getName());
+        long begin = System.currentTimeMillis();
+        Object result = joinPoint.proceed();
+        long end = System.currentTimeMillis();
+        long takeTime = end - begin;
+      if (takeTime &gt; 3000) &#123;
+            logger.error(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
+        &#125;else if(takeTime &gt; 2000)&#123;
+            logger.warn(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
+        &#125;else &#123;
+            logger.info(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
+        &#125;
+        return result;
+&#125;
+</code></pre>
+<p>执行效果<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fa56bde956d24d9c91a82e134763eb27~tplv-k3u1fbpfcp-watermark.webp"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/14f0a8c7f2d743f29e8a24311748330c~tplv-k3u1fbpfcp-watermark.webp"></p>
+]]></content>
+      <categories>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring Aop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>普通Maven项目进行单元测试</title>
+    <url>/2020/12/05/%E6%99%AE%E9%80%9AMaven%E9%A1%B9%E7%9B%AE%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<p>1.利用Junit进行单元测试</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>4.13<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<p>2、编写待测试类</p>
+<pre class=" language-txt"><code class="language-txt">public class Caculate &#123;
+    public int plus(int a,int b)&#123;
+        return a + b;
+    &#125;
+    public int minus(int a,int b)&#123;
+        return a - b;
+    &#125;
+&#125;</code></pre>
+<p>3、编写单元测试</p>
+<pre class=" language-txt"><code class="language-txt">public class CaculateTest &#123;
+
+    @Test
+    public void plusTest()&#123;
+        Caculate caculate = new Caculate();
+        System.out.println(caculate.plus(3,2));
+    &#125;
+    @Test
+    public void minusTest()&#123;
+        Caculate caculate = new Caculate();
+        System.out.println(caculate.minus(3,2));
+    &#125;
+&#125;</code></pre>
+]]></content>
+      <categories>
+        <category>Hadoop</category>
+      </categories>
+      <tags>
         <tag>Maven</tag>
       </tags>
   </entry>
@@ -1231,6 +1557,169 @@ public class IMOOCJSONResult &#123;
       </categories>
       <tags>
         <tag>JavaEE</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记一次使用MapReduce做WordCount遇到的坑</title>
+    <url>/2020/12/05/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8MapReduce%E5%81%9AWordCount%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/</url>
+    <content><![CDATA[<p>首先介绍下开发环境，Hadoop部署在阿里云上，本地用IDEA开发，目的是使用MR做一个简单的WC。</p>
+<h2 id="1、Mapper、Reducer及Driver相关代码"><a href="#1、Mapper、Reducer及Driver相关代码" class="headerlink" title="1、Mapper、Reducer及Driver相关代码"></a>1、Mapper、Reducer及Driver相关代码</h2><h3 id="1-1-Mapper业务代码"><a href="#1-1-Mapper业务代码" class="headerlink" title="1.1 Mapper业务代码"></a>1.1 Mapper业务代码</h3><pre class=" language-txt"><code class="language-txt">import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Mapper;
+
+import java.io.IOException;
+
+/**
+ * keyin Map任务读取数据的key类型，offset，是每行数据起始位置的偏移量，Long
+ * Valuein Map任务读数据的value类型，其实就是一行行的字符串，String类型
+ * hello world welcome
+ * hello welcome
+ * keyout map方法自定义实现输出的key类型，String
+ * valueout map方法自定义实现的value类型，Integer类型
+ */
+public class WordCountMapper extends Mapper<LongWritable,Text,Text,IntWritable>&#123;
+
+    @Override
+    protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException &#123;
+        // 把value对应的行数据按照指定的分隔符拆开
+        String[] words = value.toString().split("\t");
+        for(String word : words)&#123;
+            context.write(new Text(word),new IntWritable(1));
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="1-2-Reducer业务代码"><a href="#1-2-Reducer业务代码" class="headerlink" title="1.2 Reducer业务代码"></a>1.2 Reducer业务代码</h3><pre class=" language-txt"><code class="language-txt">import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Reducer;
+
+import java.io.IOException;
+import java.util.Iterator;
+
+
+public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> &#123;
+    /**
+     * (hello,1) (world,1)
+     * (hello,1) (world,1)
+     * (welcome,1)
+     * <p>
+     * map的输出到reduce端，是按照相同的key分发到一个reduce上去执行的
+     * <p>
+     * reduce1: (hello,1) (hello,1) (hello,1) --> (hello,<1,1,1>)
+     * reduce2: (world,1) (world,1) (world,1) --> (world, <1,1,1>)
+     * reduce3: (welcome,1) --> (welcome,<1>)
+     *
+     * @param key
+     * @param values
+     * @param context
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    @Override
+    protected void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException &#123;
+        int count = 0;
+        Iterator<IntWritable> iterator = values.iterator();
+        while (iterator.hasNext()) &#123;
+            IntWritable value = iterator.next();
+            count += value.get();
+        &#125;
+        context.write(key,new IntWritable(count));
+    &#125;
+&#125;</code></pre>
+<h3 id="1-3-Driver业务代码"><a href="#1-3-Driver业务代码" class="headerlink" title="1.3 Driver业务代码"></a>1.3 Driver业务代码</h3><pre class=" language-txt"><code class="language-txt">import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import java.io.IOException;
+
+/**
+ * 使用MR统计HDFS上的文件对应的词频
+ */
+public class WordCountApp &#123;
+    public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException &#123;
+        // System.setProperty("HADOOP_USER_NAME","root");
+        Configuration configuration = new Configuration();
+        configuration.set("fs.defaultFS", "hdfs://121.**.***.81:8020/");
+        // configuration.set("dfs.client.use.datanode.hostname", "true");
+
+        // 创建一个job
+        Job job = Job.getInstance(configuration);
+        // 设置job对应的参数：主类
+        job.setJarByClass(WordCountApp.class);
+        // 设置job对应的参数：自定义Mapper和Reducer类
+        job.setMapperClass(WordCountMapper.class);
+        job.setReducerClass(WordCountReducer.class);
+        // 设置Job对应的参数：Mapper输出key和value的类型
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(IntWritable.class);
+        // 设置Job对应的参数：Reducer输出key和value的类型
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(IntWritable.class);
+        // 设置Job对应的参数：Mapper输出key和value的类型，作业输入和输出的路径
+        FileInputFormat.setInputPaths(job, new Path("/wordcount/input"));
+        FileOutputFormat.setOutputPath(job, new Path("/wordcount/output"));
+        // 提交job
+        boolean res = job.waitForCompletion(true);
+        System.exit(res ? 0 : -1);
+    &#125;
+&#125;</code></pre>
+<h2 id="2、相关错误汇总及解决办法"><a href="#2、相关错误汇总及解决办法" class="headerlink" title="2、相关错误汇总及解决办法"></a>2、相关错误汇总及解决办法</h2><h3 id="2-1-第一个错误"><a href="#2-1-第一个错误" class="headerlink" title="2.1 第一个错误"></a>2.1 第一个错误</h3><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8da05832944c470e9e2264a4f000a793~tplv-k3u1fbpfcp-watermark.image"><br>解决办法下载<br>解决办法：<br>(1) 下载winutils，注意需要与hadoop的版本相对应。<br>hadoop2.2版本可以在这里下载 <a href="https://github.com/srccodes/hadoop-common-2.2.0-bin">https://github.com/srccodes/hadoop-common-2.2.0-bin</a><br>hadoop2.6版本可以在这里下载 <a href="https://github.com/amihalik/hadoop-common-2.6.0-bin">https://github.com/amihalik/hadoop-common-2.6.0-bin</a><br>由于配置的测试集群是hadoop2.6.0，所以我在这里下载的是2.6.0版本的。下载后，将其解压。  </p>
+<p>(2) 配置环境变量<br>增加系统变量HADOOP_HOME，值是下载的zip包解压的目录，我这里解压后将其重命名为hadoop-common-2.6.0<br>在系统变量path里增加%HADOOP_HOME%\bin<br>重启电脑，使环境变量配置生效，上述问题即可解决。  　　</p>
+<h3 id="2-2-第二个错误"><a href="#2-2-第二个错误" class="headerlink" title="2.2 第二个错误"></a>2.2 第二个错误</h3><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dacec1c3305b4c618070ac8113c4ccfe~tplv-k3u1fbpfcp-watermark.image"></p>
+<p>解决办法，在上一个基础上删除所有文件夹内部的hadoop.dll文件</p>
+<h3 id="2-3-第三个错误"><a href="#2-3-第三个错误" class="headerlink" title="2.3 第三个错误"></a>2.3 第三个错误</h3><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eff79bbe5f5c4092ae5170c5430b7de3~tplv-k3u1fbpfcp-watermark.image"><br>解决办法，自定义NativeIO类，在access方法处之间返回true<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/90508c22389b41a4b43f918e56afe85a~tplv-k3u1fbpfcp-watermark.image"></p>
+<h3 id="2-4-第四个错误"><a href="#2-4-第四个错误" class="headerlink" title="2.4 第四个错误"></a>2.4 第四个错误</h3><p>提示Windows用户权限不足。<br>加一行代码，用Linux内部操作Hadoop的用户来操作</p>
+<pre><code>System.setProperty(&quot;HADOOP_USER_NAME&quot;,&quot;root&quot;);</code></pre>
+<h3 id="2-4-第五个错误"><a href="#2-4-第五个错误" class="headerlink" title="2.4 第五个错误"></a>2.4 第五个错误</h3><p>连接超时<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/de932018249a4583bef4f6a70a7a4159~tplv-k3u1fbpfcp-watermark.image"><br>解决方法：</p>
+<pre><code> configuration.set(&quot;dfs.client.use.datanode.hostname&quot;, &quot;true&quot;);</code></pre>
+]]></content>
+      <categories>
+        <category>Hadoop</category>
+      </categories>
+      <tags>
+        <tag>Hadoop</tag>
+        <tag>MapReduce</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>阿里云服务器相关软件安装</title>
+    <url>/2020/12/05/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h2 id="一、JDK的安装"><a href="#一、JDK的安装" class="headerlink" title="一、JDK的安装"></a>一、JDK的安装</h2><p>服务器安装JDK之前，先确保有没有默认安装的JDK,执行如下命令检查:</p>
+<pre class=" language-shell"><code class="language-shell">java -version</code></pre>
+<p>如果是自己在虚拟机上安装的centos7.x或者centos6.x，则会默认帮你安装好OpenJDK，如下截图<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/05141ce65ae0494eb15282aa05507f2e~tplv-k3u1fbpfcp-watermark.image"></p>
+<p>需要卸载，卸载步骤如下：</p>
+<h3 id="1-检查系统安装的OpenJDK"><a href="#1-检查系统安装的OpenJDK" class="headerlink" title="1. 检查系统安装的OpenJDK"></a>1. 检查系统安装的OpenJDK</h3><pre class=" language-shell"><code class="language-shell">rpm -qa|grep openjdk -i</code></pre>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba88b7993cab4b08979048b82e224e42~tplv-k3u1fbpfcp-watermark.image"></p>
+<h3 id="2-删除以上四项openjdk-的安装包并且检查后显示删除完毕"><a href="#2-删除以上四项openjdk-的安装包并且检查后显示删除完毕" class="headerlink" title="2. 删除以上四项openjdk 的安装包并且检查后显示删除完毕"></a>2. 删除以上四项openjdk 的安装包并且检查后显示删除完毕</h3><pre class=" language-shell"><code class="language-shell">rpm -e --nodeps 需要删除的软件</code></pre>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7560f08e6b2b4787b8b2f2df1ce1d07a~tplv-k3u1fbpfcp-watermark.image"><br>如果是在阿里云或者腾讯云上的centos系统，一般不会自带jdk，但是以上步骤还是建议检查一下，如若发现自带jdk，建议删除后重新安装。</p>
+<h3 id="3-具体安装步骤如下"><a href="#3-具体安装步骤如下" class="headerlink" title="3. 具体安装步骤如下"></a>3. 具体安装步骤如下</h3><h4 id="3-1-新建jdk安装目录"><a href="#3-1-新建jdk安装目录" class="headerlink" title="3.1 新建jdk安装目录"></a>3.1 新建jdk安装目录</h4><pre class=" language-shell"><code class="language-shell">mkdir /usr/java
+mkdir /home/software</code></pre>
+<h4 id="3-2-上传及解压缩安装文件"><a href="#3-2-上传及解压缩安装文件" class="headerlink" title="3.2 上传及解压缩安装文件"></a>3.2 上传及解压缩安装文件</h4><p>将本地安装文件<code>jdk-8u261-linux-i586.tar.gz </code>上传到/home/software下<br>执行解压命令<code> tar -zxvf jdk-8u261-linux-i586.tar.gz</code><br>解压后的样子如下：<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a7315f863e443dd96c0504cc539b2af~tplv-k3u1fbpfcp-watermark.image"></p>
+<p>将解压后的文件夹移动到<code> /usr/java</code> 目录下</p>
+<pre class=" language-shell"><code class="language-shell">mv jdk1.8.0_191/ /usr/java/</code></pre>
+<h4 id="3-3-配置环境变量"><a href="#3-3-配置环境变量" class="headerlink" title="3.3 配置环境变量"></a>3.3 配置环境变量</h4><pre><code>vim /etc/profile</code></pre>
+<pre class=" language-shell"><code class="language-shell">export JAVA_HOME=/usr/java/jdk1.8.0_191
+export CLASSPATH=.:%JAVA_HOME%/lib/dt.java:%JAVA_HOME%/lib/tools.jar
+export PATH=$PATH:$JAVA_HOME/bin</code></pre>
+<pre><code>source /etc/profile</code></pre>
+<pre><code>java -version</code></pre>
+<p>总结图片如下：<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/449b47bebde745d9b812058565e72f9d~tplv-k3u1fbpfcp-watermark.image"></p>
+<h2 id="二、Tomcat的安装"><a href="#二、Tomcat的安装" class="headerlink" title="二、Tomcat的安装"></a>二、Tomcat的安装</h2><p>上传文件到指定文件夹，这里我们上传到 <code>/home/software</code>下面<br>然后解压文件<code>tar -zxvf apache-tomcat-9.0.24.tar.gz </code></p>
+<p>将解压后的文件夹移动到指定目录下，这里我们将其移动到<code> /usr/local</code>目录下。</p>
+<p>进入bin目录下，运行<code>./startup.sh</code> 启动tomcat</p>
+<p>如果需要部署多台tomcat，就需要修改默认的端口号，具体需要修改三个相关的端口号<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4ce218033aea4dbb915fb5e8187cec7f~tplv-k3u1fbpfcp-watermark.image"><br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c5451485d5d44cc7aa08e32346b8ce53~tplv-k3u1fbpfcp-watermark.image"><br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b054427e89884f02b4765e04161024ba~tplv-k3u1fbpfcp-watermark.image"></p>
+<h2 id="三、MariDB的安装"><a href="#三、MariDB的安装" class="headerlink" title="三、MariDB的安装"></a>三、MariDB的安装</h2><p>参考链接：<br><a href="https://blog.csdn.net/lx678111/article/details/104660852/">https://blog.csdn.net/lx678111/article/details/104660852/</a><br>这里提供离线安装的手段<br>网址：<br><a href="https://mariadb.com/kb/en/mariadb-installation-version-10121-via-rpms-on-centos-7/">https://mariadb.com/kb/en/mariadb-installation-version-10121-via-rpms-on-centos-7/</a><br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f106f351e9a342ba84069b4dc59935eb~tplv-k3u1fbpfcp-watermark.image"></p>
+<h2 id="四、阿里云系统快照恢复"><a href="#四、阿里云系统快照恢复" class="headerlink" title="四、阿里云系统快照恢复"></a>四、阿里云系统快照恢复</h2><p>恢复服务器，需要使用命令 sudo systemctl start mariadb.service重启数据库服务。</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>阿里云</tag>
       </tags>
   </entry>
   <entry>
