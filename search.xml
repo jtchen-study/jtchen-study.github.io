@@ -1,43 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>HDFS的常用命令行</title>
-    <url>/2020/12/09/HDFS%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C/</url>
-    <content><![CDATA[<p><strong>通过hadoop fs 可以查看相关命令</strong></p>
-<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80f4670dfb174ddb8b8fe2c9fd501323~tplv-k3u1fbpfcp-watermark.image"><br><strong>1、列出HDFS文件</strong></p>
-<pre><code>列出根目录下的所有文件
-hadoop fs -ls /</code></pre>
-<p><strong>2、上传文件到HDFS</strong></p>
-<pre><code>将本地根目录下的README.txt上传到hdfs根目录下
-hadoop fs –put /README.txt /</code></pre>
-<p><strong>3、查看HDFS文件</strong></p>
-<pre><code>hadoop fs -text /readme.txt
-hadoop fs -cat /readme.txt</code></pre>
-<p><strong>4、从本地上传文件到hdfs</strong></p>
-<pre><code>hadoop fs -copyFromLocal /readme1.txt / // 保留本地文件
-hadoop fs -moveFromLocal /readme1.txt / // 不保留本地文件</code></pre>
-<p><strong>5、从hdfs上获取文件到本地</strong></p>
-<pre><code>hadoop fs -get /readme1.txt /</code></pre>
-<p><strong>6、在hdfs上创建文件夹</strong></p>
-<pre><code>hadoop fs -mkdir /hdfs-test</code></pre>
-<p><strong>7、在hdfs内部移动文件</strong></p>
-<pre><code>hadoop fs -mv /readme.txt /hdfs-test</code></pre>
-<p><strong>8、获取hdfs文件并且进行合并</strong><br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80317b0f80e441089d75fe9fa571a45f~tplv-k3u1fbpfcp-watermark.image"></p>
-<pre><code>hadoop fs -getmerge /hdfs-test ./txt
-将hdfs-test文件夹内部的文件合并并且获取到本地的当前文件夹下命名为txt</code></pre>
-<p><strong>9、删除文件及文件夹</strong></p>
-<pre><code>hadoop fs -rm /readme1.txt // 删除文件
-hadoop fs -rmr /hdfs-test  // 删除文件夹(包含内容)</code></pre>
-]]></content>
-      <categories>
-        <category>Hadoop</category>
-      </categories>
-      <tags>
-        <tag>Hadoop</tag>
-        <tag>HDFS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hadoop-HDFS之Api编程</title>
     <url>/2020/12/05/Hadoop-HDFS%E4%B9%8BApi%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<h2 id="一、开发环境搭建"><a href="#一、开发环境搭建" class="headerlink" title="一、开发环境搭建"></a>一、开发环境搭建</h2><p>这里使用Maven项目构建开发环境,相关配置如下。</p>
@@ -155,6 +118,43 @@ public class HDFSApp &#123;
       </tags>
   </entry>
   <entry>
+    <title>HDFS的常用命令行</title>
+    <url>/2020/12/09/HDFS%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C/</url>
+    <content><![CDATA[<p><strong>通过hadoop fs 可以查看相关命令</strong></p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80f4670dfb174ddb8b8fe2c9fd501323~tplv-k3u1fbpfcp-watermark.image"><br><strong>1、列出HDFS文件</strong></p>
+<pre><code>列出根目录下的所有文件
+hadoop fs -ls /</code></pre>
+<p><strong>2、上传文件到HDFS</strong></p>
+<pre><code>将本地根目录下的README.txt上传到hdfs根目录下
+hadoop fs –put /README.txt /</code></pre>
+<p><strong>3、查看HDFS文件</strong></p>
+<pre><code>hadoop fs -text /readme.txt
+hadoop fs -cat /readme.txt</code></pre>
+<p><strong>4、从本地上传文件到hdfs</strong></p>
+<pre><code>hadoop fs -copyFromLocal /readme1.txt / // 保留本地文件
+hadoop fs -moveFromLocal /readme1.txt / // 不保留本地文件</code></pre>
+<p><strong>5、从hdfs上获取文件到本地</strong></p>
+<pre><code>hadoop fs -get /readme1.txt /</code></pre>
+<p><strong>6、在hdfs上创建文件夹</strong></p>
+<pre><code>hadoop fs -mkdir /hdfs-test</code></pre>
+<p><strong>7、在hdfs内部移动文件</strong></p>
+<pre><code>hadoop fs -mv /readme.txt /hdfs-test</code></pre>
+<p><strong>8、获取hdfs文件并且进行合并</strong><br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80317b0f80e441089d75fe9fa571a45f~tplv-k3u1fbpfcp-watermark.image"></p>
+<pre><code>hadoop fs -getmerge /hdfs-test ./txt
+将hdfs-test文件夹内部的文件合并并且获取到本地的当前文件夹下命名为txt</code></pre>
+<p><strong>9、删除文件及文件夹</strong></p>
+<pre><code>hadoop fs -rm /readme1.txt // 删除文件
+hadoop fs -rmr /hdfs-test  // 删除文件夹(包含内容)</code></pre>
+]]></content>
+      <categories>
+        <category>Hadoop</category>
+      </categories>
+      <tags>
+        <tag>Hadoop</tag>
+        <tag>HDFS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hadoop入门</title>
     <url>/2020/12/18/Hadoop%E5%85%A5%E9%97%A8/</url>
     <content><![CDATA[<h2 id="1-Hadoop发行版介绍"><a href="#1-Hadoop发行版介绍" class="headerlink" title="1 Hadoop发行版介绍"></a>1 Hadoop发行版介绍</h2><p>Hadoop三大发行版本：Apache、Cloudera、Hortonworks。<br>Apache版本最原始（最基础）的版本，适合基础学习。<br>Cloudera内部集成了很多大数据框架，对应产品CDH。<br>Hortonworks文档较好，对应产品HDP。<br>目前使用最多的是后两种。</p>
@@ -177,6 +177,27 @@ public class HDFSApp &#123;
       </categories>
       <tags>
         <tag>Hadoop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用SpringBoot进行单元测试</title>
+    <url>/2020/11/19/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h2 id="1、添加依赖"><a href="#1、添加依赖" class="headerlink" title="1、添加依赖"></a>1、添加依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="2、编写相关测试用例"><a href="#2、编写相关测试用例" class="headerlink" title="2、编写相关测试用例"></a>2、编写相关测试用例</h2><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c999a60091524928b871b5e42dea587d~tplv-k3u1fbpfcp-zoom-1.image" alt="avatar"></p>
+<p>注意，单元测试需要添加如下注解:</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span>SpringRunner<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@SpringBootTest</span><span class="token punctuation">(</span>classes <span class="token operator">=</span> Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类</span>
+</code></pre>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
       </tags>
   </entry>
   <entry>
@@ -232,8 +253,8 @@ mybatis:
         <category>HiKaricp</category>
       </categories>
       <tags>
-        <tag>HiKaricp</tag>
         <tag>SpringBoot</tag>
+        <tag>HiKaricp</tag>
       </tags>
   </entry>
   <entry>
@@ -315,18 +336,52 @@ mybatis:
       </tags>
   </entry>
   <entry>
-    <title>使用SpringBoot进行单元测试</title>
-    <url>/2020/11/19/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h2 id="1、添加依赖"><a href="#1、添加依赖" class="headerlink" title="1、添加依赖"></a>1、添加依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<h2 id="2、编写相关测试用例"><a href="#2、编写相关测试用例" class="headerlink" title="2、编写相关测试用例"></a>2、编写相关测试用例</h2><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c999a60091524928b871b5e42dea587d~tplv-k3u1fbpfcp-zoom-1.image" alt="avatar"></p>
-<p>注意，单元测试需要添加如下注解:</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span>SpringRunner<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@SpringBootTest</span><span class="token punctuation">(</span>classes <span class="token operator">=</span> Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类</span>
+    <title>SpringBoot整合log4j输出日志</title>
+    <url>/2020/11/22/SpringBoot%E6%95%B4%E5%90%88%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<h2 id="1、首先剔除springboot自带的logging日志，因为其内容包含的太多。"><a href="#1、首先剔除springboot自带的logging日志，因为其内容包含的太多。" class="headerlink" title="1、首先剔除springboot自带的logging日志，因为其内容包含的太多。"></a>1、首先剔除springboot自带的logging日志，因为其内容包含的太多。</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/50f1b4d49f0c450b887bbb2df050c88a~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusions</span><span class="token punctuation">></span></span> // 剔除springboot自带的logging
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusion</span><span class="token punctuation">></span></span>
+           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-logging<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusion</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusions</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<p>剔除后再启动项目，可以发现控制台的输出，缺少日志，并且无端口号之类的信息.<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a7c5054094be45218054a5784ff385fe~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
+<h2 id="2、加入日志相关依赖"><a href="#2、加入日志相关依赖" class="headerlink" title="2、加入日志相关依赖"></a>2、加入日志相关依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token comment" spellcheck="true">&lt;!-- 日志相关 抽象层及实现层 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>slf4j-api<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.7.21<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>slf4j-log4j12<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.7.21<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<p>效果图:<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5ea618ec6f0444e6a60d0ba9ac2914dc~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
+<h2 id="3、编写相关配置文件log4j-properties"><a href="#3、编写相关配置文件log4j-properties" class="headerlink" title="3、编写相关配置文件log4j.properties"></a>3、编写相关配置文件log4j.properties</h2><pre class=" language-xml"><code class="language-xml">log4j.rootLogger=DEBUG,stdout,file
+log4j.additivity.org.apache=true
+
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.threshold=INFO
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%-5p %c<span class="token entity" title="&#123;">&amp;#123;</span>1<span class="token entity" title="&#125;">&amp;#125;</span>:%L - %m%n
+
+log4j.appender.file=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.file.layout=org.apache.log4j.PatternLayout
+log4j.appender.file.DatePattern='.'yyyy-MM-dd-HH-mm
+log4j.appender.file.layout.ConversionPattern=%d<span class="token entity" title="&#123;">&amp;#123;</span>yyyy-MM-dd HH:mm:ss<span class="token entity" title="&#125;">&amp;#125;</span> %-5p %c<span class="token entity" title="&#123;">&amp;#123;</span>1<span class="token entity" title="&#125;">&amp;#125;</span>::%L - %m%n
+log4j.appender.file.Threshold=INFO
+log4j.appender.file.append=true
+log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
 </code></pre>
+<p>效果图:</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/56c1835ece22498ab520fec2904671dd~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
+<h2 id="4、项目中的使用"><a href="#4、项目中的使用" class="headerlink" title="4、项目中的使用"></a>4、项目中的使用</h2><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/152078da697143ce85f031930ee32a5f~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
+<p>注意Logger是 org.slf4j包下的。</p>
 ]]></content>
       <categories>
         <category>SpringBoot</category>
@@ -408,61 +463,6 @@ https://blog.csdn.net/pengweismile/article/details/95897988</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>SpringBoot整合log4j输出日志</title>
-    <url>/2020/11/22/SpringBoot%E6%95%B4%E5%90%88%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/</url>
-    <content><![CDATA[<h2 id="1、首先剔除springboot自带的logging日志，因为其内容包含的太多。"><a href="#1、首先剔除springboot自带的logging日志，因为其内容包含的太多。" class="headerlink" title="1、首先剔除springboot自带的logging日志，因为其内容包含的太多。"></a>1、首先剔除springboot自带的logging日志，因为其内容包含的太多。</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/50f1b4d49f0c450b887bbb2df050c88a~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusions</span><span class="token punctuation">></span></span> // 剔除springboot自带的logging
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusion</span><span class="token punctuation">></span></span>
-           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-logging<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusion</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusions</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<p>剔除后再启动项目，可以发现控制台的输出，缺少日志，并且无端口号之类的信息.<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a7c5054094be45218054a5784ff385fe~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<h2 id="2、加入日志相关依赖"><a href="#2、加入日志相关依赖" class="headerlink" title="2、加入日志相关依赖"></a>2、加入日志相关依赖</h2><pre class=" language-xml"><code class="language-xml"> <span class="token comment" spellcheck="true">&lt;!-- 日志相关 抽象层及实现层 --></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>slf4j-api<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.7.21<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>slf4j-log4j12<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.7.21<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<p>效果图:<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5ea618ec6f0444e6a60d0ba9ac2914dc~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<h2 id="3、编写相关配置文件log4j-properties"><a href="#3、编写相关配置文件log4j-properties" class="headerlink" title="3、编写相关配置文件log4j.properties"></a>3、编写相关配置文件log4j.properties</h2><pre class=" language-xml"><code class="language-xml">log4j.rootLogger=DEBUG,stdout,file
-log4j.additivity.org.apache=true
-
-log4j.appender.stdout=org.apache.log4j.ConsoleAppender
-log4j.appender.stdout.threshold=INFO
-log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
-log4j.appender.stdout.layout.ConversionPattern=%-5p %c<span class="token entity" title="&#123;">&amp;#123;</span>1<span class="token entity" title="&#125;">&amp;#125;</span>:%L - %m%n
-
-log4j.appender.file=org.apache.log4j.DailyRollingFileAppender
-log4j.appender.file.layout=org.apache.log4j.PatternLayout
-log4j.appender.file.DatePattern='.'yyyy-MM-dd-HH-mm
-log4j.appender.file.layout.ConversionPattern=%d<span class="token entity" title="&#123;">&amp;#123;</span>yyyy-MM-dd HH:mm:ss<span class="token entity" title="&#125;">&amp;#125;</span> %-5p %c<span class="token entity" title="&#123;">&amp;#123;</span>1<span class="token entity" title="&#125;">&amp;#125;</span>::%L - %m%n
-log4j.appender.file.Threshold=INFO
-log4j.appender.file.append=true
-log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
-</code></pre>
-<p>效果图:</p>
-<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/56c1835ece22498ab520fec2904671dd~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<h2 id="4、项目中的使用"><a href="#4、项目中的使用" class="headerlink" title="4、项目中的使用"></a>4、项目中的使用</h2><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/152078da697143ce85f031930ee32a5f~tplv-k3u1fbpfcp-watermark.webp" alt="avatar"></p>
-<p>注意Logger是 org.slf4j包下的。</p>
-]]></content>
-      <categories>
-        <category>SpringBoot</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>IDEA自动重置language level和java compiler的解决</title>
     <url>/2020/12/05/idea%E8%87%AA%E5%8A%A8%E9%87%8D%E7%BD%AElanguage%20level%E5%92%8Cjava%20compiler%E7%9A%84%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<h2 id="1-需求分析"><a href="#1-需求分析" class="headerlink" title="1.需求分析"></a>1.需求分析</h2><p>  很多同学可能会遇到这种情况，某次加载多模块的工程时，会报java compiler不合理的错误，这是要重新配置language level和java compiler的节奏；今天笔者跟大伙就这个问题唠唠嗑</p>
@@ -495,21 +495,6 @@ log4j.appender.file.File=/workspaces/logs/foodie-api/mylog.log
       </categories>
       <tags>
         <tag>IDEA</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用通用mapper进行数据库查询操作</title>
-    <url>/2020/11/19/%E5%88%A9%E7%94%A8%E9%80%9A%E7%94%A8mapper%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<p>案例：使用example创建查询条件进行相关查询。<br>例如查询数据库中是否存在某个用户名。<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/864beb5a1c714781878bcba260d006b5~tplv-k3u1fbpfcp-watermark.image"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7dd41d13edca4c98bd97b1861c9d66d6~tplv-k3u1fbpfcp-watermark.image"></p>
-]]></content>
-      <categories>
-        <category>Mybatis</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-        <tag>Maven</tag>
-        <tag>MyBatis</tag>
-        <tag>Restful</tag>
       </tags>
   </entry>
   <entry>
@@ -676,6 +661,88 @@ public class MainConfig &#123;
       </tags>
   </entry>
   <entry>
+    <title>利用通用mapper进行数据库查询操作</title>
+    <url>/2020/11/19/%E5%88%A9%E7%94%A8%E9%80%9A%E7%94%A8mapper%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<p>案例：使用example创建查询条件进行相关查询。<br>例如查询数据库中是否存在某个用户名。<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/864beb5a1c714781878bcba260d006b5~tplv-k3u1fbpfcp-watermark.image"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7dd41d13edca4c98bd97b1861c9d66d6~tplv-k3u1fbpfcp-watermark.image"></p>
+]]></content>
+      <categories>
+        <category>Mybatis</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+        <tag>Maven</tag>
+        <tag>MyBatis</tag>
+        <tag>Restful</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于Spring aop通过日志监控service执行时间</title>
+    <url>/2020/11/10/%E5%9F%BA%E4%BA%8ESpring%20aop%E9%80%9A%E8%BF%87%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7service%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4/</url>
+    <content><![CDATA[<h2 id="1、导入依赖"><a href="#1、导入依赖" class="headerlink" title="1、导入依赖"></a>1、导入依赖</h2><pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-aop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="2-编写aspect切面类"><a href="#2-编写aspect切面类" class="headerlink" title="2.编写aspect切面类"></a>2.编写aspect切面类</h2><pre><code>package com.imooc.aspect;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+@Component
+@Aspect
+public class ServiceAspect &#123;
+    public static final Logger logger = LoggerFactory.getLogger(ServiceAspect.class);
+
+    /**
+     * Aop通知：
+     * 1. 前置通知：在方法调用之前执行
+     * 2. 后置通知：在方法调用之后执行
+     * 3. 环绕通知：在方法调用之前和之后，都分别可以执行通知
+     * 4. 异常通知：如果在方法调用过程中发生异常，则通知
+     * 5. 最终通知，在方法调用之后执行
+     */
+    /**
+     *
+     * 切面表达式
+     * execution 代表所要执行的表达式主体
+     * 第一处 *代表方法返回类型 *代表所有类型
+     * 第二处 包名代表aop监控的类所在的包
+     * 第三处 .. 代表该包以及其子包下的所有类方法
+     * 第四处 * 代表类名，*代表所有类
+     * 第五处 *(..) *代表类中的方法名，(..)表示方法中的任何参数
+     */
+    @Around(&quot;execution(* com.imooc.service.impl..*.*(..))&quot;)
+    public Object recordTimeLog(ProceedingJoinPoint joinPoint) throws Throwable &#123;
+        logger.info(&quot;===== 开始执行&#123;&#125;.&#123;&#125; =====&quot;,
+                joinPoint.getTarget().getClass(),
+                joinPoint.getSignature().getName());
+        long begin = System.currentTimeMillis();
+        Object result = joinPoint.proceed();
+        long end = System.currentTimeMillis();
+        long takeTime = end - begin;
+      if (takeTime &gt; 3000) &#123;
+            logger.error(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
+        &#125;else if(takeTime &gt; 2000)&#123;
+            logger.warn(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
+        &#125;else &#123;
+            logger.info(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
+        &#125;
+        return result;
+&#125;
+</code></pre>
+<p>执行效果<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fa56bde956d24d9c91a82e134763eb27~tplv-k3u1fbpfcp-watermark.webp"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/14f0a8c7f2d743f29e8a24311748330c~tplv-k3u1fbpfcp-watermark.webp"></p>
+]]></content>
+      <categories>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring Aop</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基于通用mapper和restful风格撰写api</title>
     <url>/2020/11/19/%E5%9F%BA%E4%BA%8E%E9%80%9A%E7%94%A8mapper%E5%92%8Crestful%E9%A3%8E%E6%A0%BC%E6%92%B0%E5%86%99api/</url>
     <content><![CDATA[<p>现数据库有一张名为Stu的表<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32558fc8b8ee4c269afd061c6fcc1060~tplv-k3u1fbpfcp-zoom-1.image"><br>基于上一个博客提到的mybatis逆向工程生成<em>mapper.java、</em>mapper.xml以及pojo实体类，编写案例StuService,以及相应的实现类StuServiceImpl，<strong>注意到的是StuServiceImpl上面需要打上@Service注解以便可以被扫描到。</strong></p>
@@ -781,73 +848,6 @@ public class Swagger2 &#123;
       <tags>
         <tag>SpringBoot</tag>
         <tag>Swagger2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于Spring aop通过日志监控service执行时间</title>
-    <url>/2020/11/10/%E5%9F%BA%E4%BA%8ESpring%20aop%E9%80%9A%E8%BF%87%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7service%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4/</url>
-    <content><![CDATA[<h2 id="1、导入依赖"><a href="#1、导入依赖" class="headerlink" title="1、导入依赖"></a>1、导入依赖</h2><pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-aop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-<h2 id="2-编写aspect切面类"><a href="#2-编写aspect切面类" class="headerlink" title="2.编写aspect切面类"></a>2.编写aspect切面类</h2><pre><code>package com.imooc.aspect;
-
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
-@Component
-@Aspect
-public class ServiceAspect &#123;
-    public static final Logger logger = LoggerFactory.getLogger(ServiceAspect.class);
-
-    /**
-     * Aop通知：
-     * 1. 前置通知：在方法调用之前执行
-     * 2. 后置通知：在方法调用之后执行
-     * 3. 环绕通知：在方法调用之前和之后，都分别可以执行通知
-     * 4. 异常通知：如果在方法调用过程中发生异常，则通知
-     * 5. 最终通知，在方法调用之后执行
-     */
-    /**
-     *
-     * 切面表达式
-     * execution 代表所要执行的表达式主体
-     * 第一处 *代表方法返回类型 *代表所有类型
-     * 第二处 包名代表aop监控的类所在的包
-     * 第三处 .. 代表该包以及其子包下的所有类方法
-     * 第四处 * 代表类名，*代表所有类
-     * 第五处 *(..) *代表类中的方法名，(..)表示方法中的任何参数
-     */
-    @Around(&quot;execution(* com.imooc.service.impl..*.*(..))&quot;)
-    public Object recordTimeLog(ProceedingJoinPoint joinPoint) throws Throwable &#123;
-        logger.info(&quot;===== 开始执行&#123;&#125;.&#123;&#125; =====&quot;,
-                joinPoint.getTarget().getClass(),
-                joinPoint.getSignature().getName());
-        long begin = System.currentTimeMillis();
-        Object result = joinPoint.proceed();
-        long end = System.currentTimeMillis();
-        long takeTime = end - begin;
-      if (takeTime &gt; 3000) &#123;
-            logger.error(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
-        &#125;else if(takeTime &gt; 2000)&#123;
-            logger.warn(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
-        &#125;else &#123;
-            logger.info(&quot;==== &#123;&#125;,执行结束，耗时：&#123;&#125; 毫秒====&quot;,joinPoint.getSignature().getName(),takeTime);
-        &#125;
-        return result;
-&#125;
-</code></pre>
-<p>执行效果<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fa56bde956d24d9c91a82e134763eb27~tplv-k3u1fbpfcp-watermark.webp"><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/14f0a8c7f2d743f29e8a24311748330c~tplv-k3u1fbpfcp-watermark.webp"></p>
-]]></content>
-      <categories>
-        <category>Spring</category>
-      </categories>
-      <tags>
-        <tag>Spring Aop</tag>
       </tags>
   </entry>
   <entry>
